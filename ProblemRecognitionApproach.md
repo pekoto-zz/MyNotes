@@ -84,6 +84,11 @@ Suffix array notes
 9. Last part not processed (e.g., imagine calculator app -- it ends in a number and no operator, do you still process this last number?)
 10. Creating a new string every time instead of using `StringBuffer`
 
+## Dynamic Programming
+Dynamic programming is useful when we satisfy the __principle of optimality__. That is, partial solutions can be optimally extended without worrying about the specifics of that partial solution.
+
+For example, when working out edit distance, we care about what the previous min edit distance was, and we don't have some constraint relating to the that previous partial solution, like, you can only make 2 deletes, etc.
+
 ## __TODO__: 
 
 
