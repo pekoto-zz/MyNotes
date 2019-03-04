@@ -35,12 +35,24 @@ If you need to return the next something (.e.g, daily temperatures problem), con
 
 If you have to keep track of the lowest/highest something, and keep the data ordered (e.g., buy/sell stocks, 3-digit increasing substring), consider setting the element as the min/max, and then comparing to the next element. If you need three elements, you can set element 1 to the min, check if the next one is greater than min and less than current second highest, etc.
 
-### 8. Tree problems
-We often recurse when doing tree problems -- e.g., when getting the height. Can we also do something else while in the recursive method? For example, if finding the max diameter, we are finding the height of the left and right subtrees anyway, so we could also check to see if we have a new max diameter (left + right height) at the same time.
+### 8. Think small
+Usually a small example will be enough to prove an algorithm wrong. Also, picking small, simple examples that you can solve by hand will help you spot patterns to crack the algorithm. Likewise, if you're having trouble with a given example, try a simpler example: an array with 1 or 2 elements, etc.
 
-Don't forget inorder, preorder, and postorder traversals. These can often be used to find brute force solutions. E.g., find the highest, get in order, compare if trees are equal, check if contains subtree, etc. (these are rarely optimum solutions though).
+### 9. Think exhaustively
+What possible cases do you have? For example, if looking at overlapping intervals, there are only 3 ways 2 intervals can be:
 
-(Recall an inorder traversal will give us the nodes in ascending order.)
+* Disjoint (one after another)
+* Overlapping (one starts before another ends, but after it start)
+* Nested (one starts after another starts, and ends before it ends)
+
+### 10. Model on existing
+Can you model your problem on some existing algorithm? What does it look like?
+
+### 11. Identify the pain point
+If you are doing some work repeatedly -- choosing the max or min, say -- can you find a data structure to make that more efficient?
+
+### 12. Relax some constraints
+For example, if it's hard to find the closest sum, could you instead try to find the exact sum?
 
 ## Optimization Techniques
 1. Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
@@ -60,11 +72,27 @@ Then you might be able to stick them in a fixed size array or map with counts or
 Suffix trie notes
 Suffix array notes
 
-### Common gotchas
-1. What if the String is null or empty?
-2. Creating a new string every time instead of using `StringBuffer`
+### Common edge cases
+1. Null
+2. Empty.
+3. Length 1
+4. Uppercase/lowercase/mixed?
+5. Special characters (e.g., accented a)
+6. All characters same
+7. Whitespace
+8. If parsing, what if the token is contained as part of the element we wanted to parse out (e.g., string split by spaces, but name has a space in it)
+9. Last part not processed (e.g., imagine calculator app -- it ends in a number and no operator, do you still process this last number?)
+10. Creating a new string every time instead of using `StringBuffer`
 
 ## __TODO__: 
+
+
+### Tree problems
+We often recurse when doing tree problems -- e.g., when getting the height. Can we also do something else while in the recursive method? For example, if finding the max diameter, we are finding the height of the left and right subtrees anyway, so we could also check to see if we have a new max diameter (left + right height) at the same time.
+
+Don't forget inorder, preorder, and postorder traversals. These can often be used to find brute force solutions. E.g., find the highest, get in order, compare if trees are equal, check if contains subtree, etc. (these are rarely optimum solutions though).
+
+(Recall an inorder traversal will give us the nodes in ascending order.)
 _Trees:_
 * (pre-/in/post-/level order)
 * Get dist from root
