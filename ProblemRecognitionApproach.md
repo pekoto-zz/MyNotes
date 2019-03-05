@@ -1,4 +1,4 @@
-# Problem Recognition Patterns
+# Problem Recognition Patterns (in progress)
 
 ## General Techniques
 
@@ -69,6 +69,7 @@ Then you might be able to stick them in a fixed size array or map with counts or
 ## String processing
 
 # __TODO__:
+Trie notes
 Suffix trie notes
 Suffix array notes
 
@@ -88,9 +89,6 @@ Suffix array notes
 Dynamic programming is useful when we satisfy the __principle of optimality__. That is, partial solutions can be optimally extended without worrying about the specifics of that partial solution.
 
 For example, when working out edit distance, we care about what the previous min edit distance was, and we don't have some constraint relating to the that previous partial solution, like, you can only make 2 deletes, etc.
-
-## __TODO__: 
-
 
 ## Tree problems
 
@@ -228,19 +226,98 @@ public int getDistance(Node node, Node target) {
 The total nodes in a complete tree is (2^k)-1, where k is the height of the tree. E.g., a tree with height 3 will have 2^3  = 8-1 = 7 nodes.
 
 ### Tree Tips
-We often recurse when doing tree problems -- e.g., when getting the height. Can we also do something else while in the recursive method? For example, if finding the max diameter, we are finding the height of the left and right subtrees anyway, so we could also check to see if we have a new max diameter (left + right height) at the same time.
+* We often recurse when doing tree problems -- e.g., when getting the height. Can we also do something else while in the recursive method? For example, if finding the max diameter, we are finding the height of the left and right subtrees anyway, so we could also check to see if we have a new max diameter (left + right height) at the same time.
 
-It can often become confusing trying to pass some value (like ```java int max```) around. To make this easier for interview purposes, you can declare this value outside of the function.
+* It can often become confusing trying to pass some value (like ```java int max```) around. To make this easier for interview purposes, you can declare this value outside of the function.
 
-Don't forget inorder, preorder, and postorder traversals. These can often be used to find brute force solutions. E.g., find the highest, get in order, compare if trees are equal, check if contains subtree, etc. (these are rarely optimum solutions though).
+* Don't forget inorder, preorder, and postorder traversals. These can often be used to find brute force solutions. E.g., find the highest, get in order, compare if trees are equal, check if contains subtree, etc. (these are rarely optimum solutions though).
 
+## Permutation, Combination, and Subset Formulas
+
+### Permutations with repeats
+How many ways can you choose k elements from n elements.
+Example: How many 4 digit pin numbers are there?
+``` n^k. ```
+
+Example:
+How many ways can we choose a 4 digit PIN using 0-9?
+10^4 = 10,000
+
+### Permutations without repeats
+How many permutations of k elements are there from a string containing n elements?
+
+``` n!/(n-k)! ```
+
+For example:
+From ABC, how many length 2 permutations are there?
+```
+3!/(3-2)! = 6
+AB
+AC
+BA
+BC
+CA
+CB
+```
+
+__Note:__ This means for any string, where we choose all elements, there are n! permutations of that string.
+3!/(3-3)! = 3!/0! = 6
+
+```
+ABC! = 3! = 6
+
+ABC
+ACB
+BAC
+BCA
+CAB
+CBA
+```
+### Unique permutations from a string with repeats
+Given a string with repeated elements, how many unique permutations are there?
+
+```  n!/(repeat element 1 count)!*(repeat element 2 count)!... ```
+```
+Example:
+For {1, 1, 2, 3}, we have 4 elements, and 1 is repeated twice, so:
+4!/2! = 24/2 = 12 unique permutations
+
+1,1,2,3
+1,1,3,2
+1,2,1,3
+1,2,3,1
+1,3,2,1,
+1,3,1,2
+2,1,1,3
+2,1,3,1
+2,3,1,1
+3,1,2,1
+3,1,1,2
+3,2,1,1
+```
+### Combinations without repeats
+How many ways can you choose k elements from n, if order doesn't matter?
+For example, how many ways can you choose 6 lottery numbers from 49.
+
+``` n!/(n-k)!k! ```
+
+49!/(49-6)!6! = 13,983,816
+
+### Subsets
+The number of subsets given some superset.
+``` 2^n. ```
+
+This is because for each element it can either be in the set or not.
+
+For example, {1, 2, 3} = 2^3 = 8.
+{}, {1}, {2}, {3}, {1, 2}, {1,3}, {2,3}, {1,2,3}
+
+## __TODO__: 
 _General problem solving tips from other docs_
 
 _Generate all permutations (string & array/list)_
 
 _Generate all subsets_
-
-_Choose k formulas_
 
 _Recursion & backtracking reminders_
 
