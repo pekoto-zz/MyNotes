@@ -313,16 +313,127 @@ This is because for each element it can either be in the set or not.
 For example, {1, 2, 3} = 2^3 = 8.
 {}, {1}, {2}, {3}, {1, 2}, {1,3}, {2,3}, {1,2,3}
 
+## Generating Permutations
+This follows the basic recursive pattern:
+1. Pick a thing, add it one set and remove it from the other
+2. Recurse
+3. Unpick the thing
+
+But the "picking" stage is just swapping elements. You can see why this works when you logically generate all permutations:
+
+```java
+{1, 2, 3} // Swap each element with itself
+{1, 3, 2} // Swap 3 with 2
+{2, 1, 3} // Swap 1 with 2
+{2, 3, 1} // Swap 3 with 1
+...
+```
+
+```java
+public void generatePermutations(int[] arr, int index, List<int[]> permutations) {
+    
+    if(index == arr.length) {
+        permutations.add(arr.clone());
+        return;
+    }
+
+    for(int i = index; i < arr.length; i++) {
+       swap(arr, i, index);
+       generationPermutations(arr, index+1, permutations);
+       swap(arr, i, index);
+    }
+}
+```
+
+If we want to generate unique permutations in an array with duplicate elements, we can just check that ``` i != index && arr[i] != arr[index] ```.
+
+What is the running time of this? Well, we have n! permutations. The inner loop takes n time, giving us n * n!. But recall that ``` arr.clone() ``` takes n time. So in total we have: n * (n * n!).
+
+### String permutations
+String permutations (and recursive String functions generally) have a slight tweak. Since creating a new String creates a new object in memory, you don't have to unchoose.
+
+```java
+// Initially called with generationPermutations("", "abc", results);
+
+public void generatePermutations(String prefix, String suffix, List<String> permutations) {
+    if(suffix.length() == 0) {
+        permutations.add(prefix);
+        return;
+    }
+    
+    for(int i = 0; i < suffix.length(); i++) {
+       generatePermutations(prefix + suffix.charAt(i),
+                            suffix.substring(0, i) + suffix.substring(i+1, suffix.length()),
+                            premutations);
+    }
+}
+```
+
+__Tip:__ If you are given the data in some other format, such as 2 arrays -- one containing a count of chars, and the other containing the chars, there are two options:
+
+1. Just modify these 2 lists to be one list. E.g., turn {a, b, c}, {2, 1, 3} into the list {a, a, b, c, c, c} or String aabccc.
+2. Alternatively, just use the same strategy -- to decide what to pick net you scan through the count array until you hit the first non-zero element starting from the current index.
+
+## Generating subsets
+Although inefficient, generating subsets can often be used to find a brute force solution (e.g., find min/max/closest set of things).
+
+Essentially we use a recursive base case and build approach. When generating subsets, we take the empty set, add an element to it, and then add elements to those subsets, etc.
+
+```java
+{1, 2, 3} // Set
+
+{} // Empty set
+{1} // Empty set + 1
+{2} // Empty set + 2
+{1, 2} // Empty set + 1 + 2
+{3} // Empty set + 3
+{1, 3} // Empty set + 1 + 3
+{2, 3} // Empty set + 2 + 3
+{1, 2, 3} // Empty set + 1 + 2 + 3
+```
+
+```java
+
+public List<List<Integer>> generateSubsets(int[] arr, int index) {
+
+    if(index == arr.length) {
+        List<Integer> emptySet = new ArrayList<>();
+        List<List<Integer>> setOfSets = new ArrayList<List<Integer>>();
+        setOfSets.add(emptySet);
+        return setOfSets;
+    }
+
+    List<List<Integer>> subsets = generateSubsets(arr, index+1);
+    
+    int item = arr[index];
+    
+    List<List<Integer>> allSubsetsForThisItem = new ArrayList<List<Integer>>();
+    
+    for(List<Integer> subset : subsets) {
+         List<Integer> subsetForThisItem = new ArrayList<Integer>();
+         subsetForThisItem.addAll(subset);
+         subsetForThisItem.add(item);
+         allSubsetsForThisItem.add(subsetForThisItem);
+    }
+    
+    // Add on the previous subsets
+    allSubsetsForThisItem.addAll(subsets);
+
+    return allSubsetsForThisItem;
+}
+
+```
+
+_Complexity_
+
 ## __TODO__: 
 _General problem solving tips from other docs_
-
-_Generate all permutations (string & array/list)_
 
 _Generate all subsets_
 
 _Recursion & backtracking reminders_
 
-_Sort tips_
+_Sorting tips, summary table_
 
 _Sliding window_
 
