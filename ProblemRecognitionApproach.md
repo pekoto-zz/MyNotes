@@ -92,7 +92,32 @@ For example, when working out edit distance, we care about what the previous min
 ## __TODO__: 
 
 
-### Tree problems
+## Tree problems
+
+```
+         6
+        / \
+       4   7
+      / \   \
+     3   5   8
+```
+
+### Preorder traversal
+```java
+doSomething(node);
+visit(node.left);
+visit(node.right);
+
+// Output: 6, 4, 3, 5, 7, 8
+```
+
+### Inorder traversal
+```java
+visit(node.left);
+doSomething(node);
+visit(node.right);
+```
+
 We often recurse when doing tree problems -- e.g., when getting the height. Can we also do something else while in the recursive method? For example, if finding the max diameter, we are finding the height of the left and right subtrees anyway, so we could also check to see if we have a new max diameter (left + right height) at the same time.
 
 Don't forget inorder, preorder, and postorder traversals. These can often be used to find brute force solutions. E.g., find the highest, get in order, compare if trees are equal, check if contains subtree, etc. (these are rarely optimum solutions though).
