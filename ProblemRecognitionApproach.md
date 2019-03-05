@@ -237,6 +237,7 @@ The total nodes in a complete tree is (2^k)-1, where k is the height of the tree
 ### Permutations with repeats
 How many ways can you choose k elements from n elements.
 Example: How many 4 digit pin numbers are there?
+
 ``` n^k. ```
 
 Example:
@@ -260,7 +261,7 @@ CA
 CB
 ```
 
-__Note:__ This means for any string, where we choose all elements, there are n! permutations of that string.
+__Note:__ This means for any string, where we choose all elements, there are ``` n! ``` permutations of that string.
 3!/(3-3)! = 3!/0! = 6
 
 ```
