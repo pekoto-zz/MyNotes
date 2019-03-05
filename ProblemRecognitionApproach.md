@@ -95,6 +95,8 @@ For example, when working out edit distance, we care about what the previous min
 ## Tree problems
 
 ```
+// Sample tree:
+
          6
         / \
        4   7
@@ -111,23 +113,126 @@ visit(node.right);
 // Output: 6, 4, 3, 5, 7, 8
 ```
 
+__Note:__ Useful for serializing and deserializing a binary tree. Go through the tree adding each node to a queue, and X for null.
+Then go through the queue recursively to rebuild the tree.
+
 ### Inorder traversal
 ```java
 visit(node.left);
 doSomething(node);
 visit(node.right);
+
+// Output: 3, 4, 5, 6, 7, 8
 ```
 
+__Note:__ In a BST, inorder traversal will give you the nodes in sorted order.
+
+### Postorder traversal
+```java
+visit(node.left);
+visit(node.right);
+doSomething(node);
+
+// Output: 3, 5, 4, 8, 7, 6
+```
+
+### Level-order traversal
+Essentially this boils down a BFS.
+1. Put the root on a queue
+2. Get the size of the queue
+3. Set up a loop to iterate _size_ times
+4. On each iteration of the loop, get a node from the tree and add its children to the queue
+5. Go to 1
+6. Break when the queue is empty
+
+This can be used for various things: printing level-order, check if each level is symmetrical, "inverting" the children at each level, etc.
+
+### Bottom-up recursion
+Use an inorder traversal.
+Go down to the bottom of the tree first, and then count on the way back up.
+
+For example, to get the height:
+
+```java
+public int getHeight(Node node) {
+    if(node == null) {
+        return 0;
+    }
+
+    int leftHeight = getHeight(node.left);
+    int rightHeight = getHeight(node.right);
+    
+    return 1 + Math.max(leftHeight, rightHeight);
+}
+```
+
+### Top-down recursion
+Use a preorder traversal.
+Check the value of this node, and then recurse for left and right.
+
+For example, to get the longest increasing sequence:
+
+```java
+
+int max = Integer.MIN_VALUE;
+
+public void getLongest(Node node, int lastValue, int length) {
+
+   if(node == null) {
+       return;
+   }
+   
+   if(lastValue+1 == node.value) {
+      length++;
+      max = Math.max(max, length+1);
+   } else {
+      length = 1;
+   }
+    
+   getLongest(node.left, node.value, length);
+   getLongest(node.right, node.value, length);
+}
+
+```
+
+### Getting distance from the root
+This is useful when trying to find the distance between nodes, all nodes k nodes away, etc.
+
+```java
+public int getDistance(Node node, Node target) {
+   if(node == null) {
+       return -1;
+   }
+   
+   if(node == target) {
+       return 0;
+   }
+   
+   int leftDist = getDistance(node.left, target);
+   
+   if(leftDist >= 0) {
+      return leftDist+1;
+   }
+   
+   int rightDist = getDistance(node.right, target);
+   
+   if(rightDist >= 0) {
+      return rightDist+1;
+   }
+   
+   return -1;
+}
+```
+
+### Total nodes
+The total nodes in a complete tree is (2^k)-1, where k is the height of the tree. E.g., a tree with height 3 will have 2^3  = 8-1 = 7 nodes.
+
+### Tree Tips
 We often recurse when doing tree problems -- e.g., when getting the height. Can we also do something else while in the recursive method? For example, if finding the max diameter, we are finding the height of the left and right subtrees anyway, so we could also check to see if we have a new max diameter (left + right height) at the same time.
 
-Don't forget inorder, preorder, and postorder traversals. These can often be used to find brute force solutions. E.g., find the highest, get in order, compare if trees are equal, check if contains subtree, etc. (these are rarely optimum solutions though).
+It can often become confusing trying to pass some value (like ```java int max```) around. To make this easier for interview purposes, you can declare this value outside of the function.
 
-(Recall an inorder traversal will give us the nodes in ascending order.)
-_Trees:_
-* (pre-/in/post-/level order)
-* Get dist from root
-* DF traversal (e.g., length)
-* Get height
+Don't forget inorder, preorder, and postorder traversals. These can often be used to find brute force solutions. E.g., find the highest, get in order, compare if trees are equal, check if contains subtree, etc. (these are rarely optimum solutions though).
 
 _General problem solving tips from other docs_
 
@@ -140,6 +245,12 @@ _Choose k formulas_
 _Recursion & backtracking reminders_
 
 _Sort tips_
+
+_Sliding window_
+
+_Powers of 2s_
+
+_estimating, important (max, min, GB, TB, etc.), sum of_
 
 (Go through all docs to see what would be useful to summarise)
 
