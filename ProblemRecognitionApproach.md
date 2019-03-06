@@ -428,12 +428,10 @@ Complexity: O(n*2^n)
 
 ## Sorting Summary
 
-| Sort          | Time          | Space         | Stable?       | Notes       |
-| ------------- | ------------- | ------------- | ------------- |
-| Quicksort     | n log n (average, worst: n^2)  | log n  | No  | Worst-case can be made very unlikely by shuffling data
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| Sort          | Time                           | Space         | Stable?       | Notes                                                  |
+| ------------- | ------------------------------ | ------------- | ------------- | ------------------------------------------------------ |
+| Quicksort     | n log n (average, worst: n^2)  | log n         | No            | Worst-case can be made very unlikely by shuffling data |
+
 
 ## __TODO__: 
 _General problem solving tips from other docs_
