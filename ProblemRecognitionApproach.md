@@ -432,7 +432,10 @@ Complexity: O(n*2^n)
 | ------------- | ------------------------------ | ------------- | ------------- | ------------------------------------------------------ |
 | Quicksort     | n log n average, worst: n^2    | log n         | No            | Worst-case can be made very unlikely by shuffling data |
 | Mergesort     | n log n                        |     n         | Yes           |                                                        |
-| Heapsort      | n log n                        |     1         | Yes           | constant extra space if you use existing array, practically usually slower than QS due to operations                                                       |
+| Heapsort      | n log n                        |     1         | No            | constant extra space if you use existing array, practically usually slower than QS due to operations                                                       |
+| Insertion     | n^2                            |     1         | Yes           | Although typically bad, works well if elements are almost sorted, for example if k distance away, time becomes nk                                                       |
+| Counting sort     | n + k                        |     n + k         | Yes           | Good when k is similar to n, giving n total time (k = size of radix -- the range of values)                                                       |
+| Radix sort     | nw                        |     n + w         | Yes           | w = size of words/keys being sorted                                                       |
 
 ## __TODO__: 
 _General problem solving tips from other docs_
