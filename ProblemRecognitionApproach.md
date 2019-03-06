@@ -434,8 +434,8 @@ Complexity: O(n*2^n)
 | Mergesort     | n log n                        |     n         | Yes           |                                                        |
 | Heapsort      | n log n                        |     1         | No            | constant extra space if you use existing array, practically usually slower than QS due to operations                                                       |
 | Insertion     | n^2                            |     1         | Yes           | Although typically bad, works well if elements are almost sorted, for example if k distance away, time becomes nk                                                       |
-| Counting sort     | n + k                        |     n + k         | Yes           | Good when k is similar to n, giving n total time (k = size of radix -- the range of values)                                                       |
-| Radix sort     | nw                        |     n + w         | Yes           | w = size of words/keys being sorted                                                       |
+| Counting sort | n + k                          |     n + k     | Yes           | Good when k is similar to n, giving n total time (k = size of radix -- the range of values)                                                       |
+| Radix sort    | nw                             |     n + w     | Yes           | w = size of words/keys being sorted                                                       |
 
 ## __TODO__: 
 _General problem solving tips from other docs_
@@ -449,6 +449,22 @@ _Sliding window_
 _Powers of 2s_
 
 _estimating, important (max, min, GB, TB, etc.), sum of_
+
+_bitshifting get, set_
+
+_Toposoft, Dijkstra_
+
+_Calculator (stack string parsing)_
+
+_Missing thing in array_
+
+_Union-find_
+
+_Segment tree_
+
+_Binary indexed tree_
+
+
 
 (Go through all docs to see what would be useful to summarise)
 
