@@ -424,12 +424,19 @@ public List<List<Integer>> generateSubsets(int[] arr, int index) {
 
 ```
 
-_Complexity_
+Complexity: O(n*2^n)
+
+## Sorting Summary
+
+| Sort          | Time          | Space         | Stable?       | Notes       |
+| ------------- | ------------- | ------------- | ------------- |
+| Quicksort     | n log n (average, worst: n^2)  | log n  | No  | Worst-case can be made very unlikely by shuffling data
+| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
 
 ## __TODO__: 
 _General problem solving tips from other docs_
-
-_Generate all subsets_
 
 _Recursion & backtracking reminders_
 
