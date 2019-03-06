@@ -430,8 +430,9 @@ Complexity: O(n*2^n)
 
 | Sort          | Time                           | Space         | Stable?       | Notes                                                  |
 | ------------- | ------------------------------ | ------------- | ------------- | ------------------------------------------------------ |
-| Quicksort     | n log n (average, worst: n^2)  | log n         | No            | Worst-case can be made very unlikely by shuffling data |
-
+| Quicksort     | n log n average, worst: n^2    | log n         | No            | Worst-case can be made very unlikely by shuffling data |
+| Mergesort     | n log n                        |     n         | Yes           |                                                        |
+| Heapsort      | n log n                        |     1         | Yes           | constant extra space if you use existing array, practically usually slower than QS due to operations                                                       |
 
 ## __TODO__: 
 _General problem solving tips from other docs_
