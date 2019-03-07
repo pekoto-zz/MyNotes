@@ -415,7 +415,7 @@ public List<List<Integer>> generateSubsets(int[] arr, int index) {
 
 ```
 
-Complexity: O(n*2^n)
+Complexity: ``` O(n*2^n) ```
 
 ## Sorting Summary
 
@@ -445,7 +445,7 @@ Complexity: O(n*2^n)
 2.3.4 Swap left and j, then return j
 ```
 
-(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/QuickSort.java]
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/QuickSort.java)
 __Note__: The partition algorithm can algorithm can also be used for _QuickSelect_ (find the Kth smallest element). It gives n^2 worst case, but n time average case.
 
 ### Mergesort
@@ -463,7 +463,7 @@ __Note__: The partition algorithm can algorithm can also be used for _QuickSelec
 
 ```
 
-(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/MergeSort.java]
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/MergeSort.java)
 
 ### Heapsort
 ```java
@@ -479,7 +479,7 @@ Treat parent as (parentIndex*2)+1
 3.4 Go to 3.1
 ```
 
-(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/HeapSort.java]
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/HeapSort.java)
 
 ### Insertion sort
 
@@ -488,7 +488,7 @@ Go through each element and swap it with preceding element, as long as it is sma
 
 ```
 
-(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/InsertionSort.java]
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/InsertionSort.java)
 
 ### Counting sort
 
@@ -511,7 +511,7 @@ Go through each element and swap it with preceding element, as long as it is sma
 
 ```
 
-(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/KeyIndexCounting.java]
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/KeyIndexCounting.java)
 
 ### Radix sort
 
@@ -521,7 +521,7 @@ Go through each element and swap it with preceding element, as long as it is sma
 
 ```
 
-(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/LsdRadixSort.java]
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/LsdRadixSort.java)
 
 ## Find Missing Element
 Given an array, or two arrays, find the missing element.
