@@ -72,6 +72,7 @@ Then you might be able to stick them in a fixed size array or map with counts or
 Trie notes
 Suffix trie notes
 Suffix array notes
+Substring matching
 
 ### Common edge cases
 1. Null
@@ -253,12 +254,7 @@ For example:
 From ABC, how many length 2 permutations are there?
 ```
 3!/(3-2)! = 6
-AB
-AC
-BA
-BC
-CA
-CB
+AB, AC, BA, BC, CA, CB
 ```
 
 __Note:__ This means for any string, where we choose all elements, there are ``` n! ``` permutations of that string.
@@ -267,12 +263,7 @@ __Note:__ This means for any string, where we choose all elements, there are ```
 ```
 ABC! = 3! = 6
 
-ABC
-ACB
-BAC
-BCA
-CAB
-CBA
+ABC, ACB, BAC, BCA, CAB, CBA
 ```
 ### Unique permutations from a string with repeats
 Given a string with repeated elements, how many unique permutations are there?
@@ -430,33 +421,149 @@ Complexity: O(n*2^n)
 
 | Sort          | Time                           | Space         | Stable?       | Notes                                                  |
 | ------------- | ------------------------------ | ------------- | ------------- | ------------------------------------------------------ |
-| Quicksort     | n log n average, worst: n^2    | log n         | No            | Worst-case can be made very unlikely by shuffling data |
+| Quicksort     | avg: n log n, worst: n^2       | log n         | No            | Worst-case can be made very unlikely by shuffling data |
 | Mergesort     | n log n                        |     n         | Yes           |                                                        |
 | Heapsort      | n log n                        |     1         | No            | constant extra space if you use existing array, practically usually slower than QS due to operations                                                       |
 | Insertion     | n^2                            |     1         | Yes           | Although typically bad, works well if elements are almost sorted, for example if k distance away, time becomes nk                                                       |
 | Counting sort | n + k                          |     n + k     | Yes           | Good when k is similar to n, giving n total time (k = size of radix -- the range of values)                                                       |
 | Radix sort    | nw                             |     n + w     | Yes           | w = size of words/keys being sorted                                                       |
 
+### Quicksort
+```java
+1. If left < right...
+1.1 Partition
+1.2 Sort(left, partitionIndex-1)
+1.3 Sort(partitionIndex+1, right)
+
+2. Partition(arr, left, right)
+2.1 Set pivot val = left (in practice there are better values)
+2.2 Set i = left+1, j = right
+2.3 While true...
+2.3.1 Increment i while < pivotVal && != right
+2.3.2 Decrement j while > pivotVal && != left
+2.3.3 if j > i, swap them, else break
+2.3.4 Swap left and j, then return j
+```
+
+(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/QuickSort.java]
+__Note__: The partition algorithm can algorithm can also be used for _QuickSelect_ (find the Kth smallest element). It gives n^2 worst case, but n time average case.
+
+### Mergesort
+```java
+1. If left < right...
+1.1  Get the mid
+1.2 Sort(left, mid)
+1.3 Sort(mid+1, right)
+1.4 Merge(arr, left, mid, right)
+
+2. Merge(arr, left, mid, right)
+2.1 Copy left and right into arrays
+2.2 Take the smaller elements
+2.3 Tidy up by taking left over elements
+
+```
+
+(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/MergeSort.java]
+
+### Heapsort
+```java
+
+Treat parent as (parentIndex*2)+1
+
+1. Create a max heap: Starting at the bottom of the heap, sink each node down
+2. Sink: swap the parent element with largest child, as long as a child is larger
+3. Now you have a max heap:
+3.1 Swap the last element with the first (largest element) -- the largest is now in the correct position
+3.2 Decrement the last element index
+3.3 Sink the new first element into the correct position
+3.4 Go to 3.1
+```
+
+(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/HeapSort.java]
+
+### Insertion sort
+
+```java
+Go through each element and swap it with preceding element, as long as it is smaller
+
+```
+
+(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/InsertionSort.java]
+
+### Counting sort
+
+```java
+1. Set up a count array the size of the radix + 1
+2. Iterate around value array, and increment count[val+1]
+
+[1, 3, 2, 2]
+-->
+ 0  1  2  3  4
+[0, 0, 1, 2, 1]
+
+3. Get the cumulative counts:
+[0, 0, 1, 3, 4]
+
+4. Copy the values from the original array into an auxiliary array using these counts, incrementing count each time
+[1, 2, 2, 3]
+
+5. Copy the values back into the main array
+
+```
+
+(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/KeyIndexCounting.java]
+
+### Radix sort
+
+```java
+
+(Basically counting sort but go through each letter of the string and use that as the value to count)
+
+```
+
+(Source)[https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/LsdRadixSort.java]
+
+## Find Missing Element
+Given an array, or two arrays, find the missing element.
+
+There are a number of ways to do this:
+
+1. Just sort the arrays and iterate through them with pointers
+2. If the numbers are sum of 1-n, then use ``` (n(n+1))/2 ``` to get the expected value, then substract actual value
+3. Likewise you can add both arrays and take the difference
+4. You can use a HashMap: go through the smaller array adding counts, then go through the larger array decrementing counts. If the count falls below 0, it is a missing element.
+5. You can also XOR everything together:
+
+```java
+a1: 1, 2, 3
+a2: 1, 3
+
+01 ^ 10 = 11 (1^2 = 3)
+11 ^ 11 = 00 (3^3 = 0)
+00 ^ 01 = 01 (0^1 = 1)
+01 ^ 11 = 10 (1^3 = 2)
+
+```
+
+If more than one element is missing, again consider using a HashMap with counts. 
+
+
 ## __TODO__: 
 _General problem solving tips from other docs_
 
 _Recursion & backtracking reminders_
 
-_Sorting tips, summary table_
-
 _Sliding window_
 
 _Powers of 2s_
 
-_estimating, important (max, min, GB, TB, etc.), sum of_
+_estimating, important (max, min, GB, TB, etc.), sum of, sum of 1...n_
 
 _bitshifting get, set_
 
-_Toposoft, Dijkstra_
+_Toposort, Dijkstra_
 
 _Calculator (stack string parsing)_
-
-_Missing thing in array_
 
 _Union-find_
 
@@ -464,7 +571,7 @@ _Segment tree_
 
 _Binary indexed tree_
 
-
+_Edge cases/testing_
 
 (Go through all docs to see what would be useful to summarise)
 
