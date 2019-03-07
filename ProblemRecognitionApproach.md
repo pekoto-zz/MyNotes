@@ -573,5 +573,9 @@ _Binary indexed tree_
 
 _Edge cases/testing_
 
+_index_
+
+_Spoiler dropdown/blackout_
+
 (Go through all docs to see what would be useful to summarise)
 
