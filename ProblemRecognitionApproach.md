@@ -699,12 +699,60 @@ E.g., 1. Banana (3): T (Test case 1, banana, should return 3, true -- does pass)
 ### Decouple Objects
 Test coupled objects individually. For example, if the code uses a random number generator, test the random number generator separately. For example, check that it gives a range of values, doesn't give consecutive sequences.
 
+## Powers of 2
+
+| x  | 2^x  | 
+| -- | ---- |
+| 0  | 1    | 
+| 1  | 2    | 
+| 2  | 4    | 
+| 3  | 8    | 
+| 4  | 16   | 
+| 5  | 32   |
+| 6  | 64   |
+| 7  | 128  |
+| 8  | 256  |
+| 9  | 512  |
+| 10 | 1024 |
+
+
+### Estimating
+Recall (x^n)*(x^m) = x^n+m.
+E.g., 2^2 * 2*3 = 4 * 8 = 32 = 2^5
+
+So, to estimate powers of 2, find the lower numbers and multiple them together.
+
+For example, 2^20 = ?
+2^10 ~= 1000 > 10*2 = 20, so 1000*1000 = 1,000,000 (actual 1,048,576)
+
+### Summing
+The sum of total powers of 2 is 2^(n+1)-1
+
+E.g., Sum of 2^3 = 2 + 4 + 8 = 15 = (2^4)-1.
+
+Note that this is the same as the nodes in a binary tree. Useful for calculating recursion call sizes.
+
+(What if we had 2^31 in an array of 2^31? It would be 2^62, so should fit in long).
+
+### Notable Numbers
+
+| 2^x          | Value              | Comment                               |
+| ------------ | ------------------ | ------------------------------------- |
+| 2^31-1 BITS  | Integer.MAX_VALUE  | About 2 billion                       |
+| 2^63-1 BITS  | Long.MAX_VALUE     | 9 quintillion something...            | 
+| 2^10         | KB                 | ~1,000 bytes)                         |
+| 2^20         | MB                 | ~1,000,000 bytes/~1000KB              |
+| 2^30         | GB                 | ~1,000,000,000 bytes/~1000MB          |
+| 2^40         | TB                 | ~1,000,000,000,000 bytes/~1000GB      |
+
+Using a Bit Array, we could store around 2^31 (about 2 billion values) true/false values in a single int.
+We could use an array of 10 values to store 2 billion * 10 true/false values, etc.
+Useful when tinking about system design.
+
 ## __TODO__: 
 _General problem solving tips from other docs_
 
-_Powers of 2s_
-
-_estimating, important (max, min, GB, TB, etc.), sum of, sum of 1...n_
+_sum of 1...n, logs (add near permutation section)_
 
 _Toposort, Dijkstra_
 
@@ -723,7 +771,6 @@ _Minimum spanning tree_
 _index_
 
 _Spoiler dropdown/blackout_
-
 
 (Go through all docs to see what would be useful to summarise)
 
