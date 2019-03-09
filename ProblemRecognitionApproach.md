@@ -547,19 +547,97 @@ a2: 1, 3
 
 If more than one element is missing, again consider using a HashMap with counts. 
 
+## Bitshifting
+
+__GetBit__
+
+```java
+public boolean getBit(int n, int bit) {
+    return (n & (1 << bit)) != 0;
+}
+
+// E.g., 4 = 0100
+// getBit(4, 1)
+// > 0100 & (0010) = 0000
+
+```
+
+__SetBitZero__
+
+```java
+private int setBitToZero(int n, int bit) {
+    return n & ~(1 << bit);
+}
+// (Same as getBit but inverted)
+
+// E.g., 4 = 0100
+// setBitZero(4, 2)
+// 0100 & ~(0100)
+// > 0100 & 1011
+// > 0000
+
+```
+
+__SetBitOne__
+
+```java
+private int setBitToOne(int n, int bit) {
+    return n | (1 << bit);
+}
+
+// E.g., 4 = 0100
+// setBitOne(4, 1)
+// 0100 | 0010
+// > 0110
+
+```
+
+### Two's Complement
+A way to represent -ve numbers in binary.
+The left-most digit is negative, and the other numbers are positive.
+
+```
+           -8 4 2 1
+E.g., -5 =  1 0 1 1 = -8 + 2 + 1 = -5
+```
+
+To calculate:
+``` 
+~x + 1 
+
+E.g.,
+ 2  = 0010
+-2 =  1110
+
+= ~2+1
+= > 1101 + 0001
+= > 1110
+
+```
+
+(Also useful for Binary Indexed Tree)
+
+### General tips
+* Left shifting will multiply by 2.
+* Right shifting will divide by 2
+
+## Sliding Window
+1. Set up start
+2. Set up a loop with end
+3. Set up a map to store counts
+4. Use end to update your counts
+5. If your condition is violated, update start until it is valid again (e.g., have 0 unique character left, end-start matches len n, etc.)
+6. Now your condition is guaranteed to hold, so check if you have a new max, etc.
+
+## Testing/Edge Cases
+
 
 ## __TODO__: 
 _General problem solving tips from other docs_
 
-_Recursion & backtracking reminders_
-
-_Sliding window_
-
 _Powers of 2s_
 
 _estimating, important (max, min, GB, TB, etc.), sum of, sum of 1...n_
-
-_bitshifting get, set_
 
 _Toposort, Dijkstra_
 
@@ -573,9 +651,14 @@ _Binary indexed tree_
 
 _Edge cases/testing_
 
+_Minimum spanning tree_
+
 _index_
 
 _Spoiler dropdown/blackout_
 
+_Testing/edge cases_
+
 (Go through all docs to see what would be useful to summarise)
 
+_See printed sheets_
