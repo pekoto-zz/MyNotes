@@ -74,18 +74,6 @@ Suffix trie notes
 Suffix array notes
 Substring matching
 
-### Common edge cases
-1. Null
-2. Empty.
-3. Length 1
-4. Uppercase/lowercase/mixed?
-5. Special characters (e.g., accented a)
-6. All characters same
-7. Whitespace
-8. If parsing, what if the token is contained as part of the element we wanted to parse out (e.g., string split by spaces, but name has a space in it)
-9. Last part not processed (e.g., imagine calculator app -- it ends in a number and no operator, do you still process this last number?)
-10. Creating a new string every time instead of using `StringBuffer`
-
 ## Dynamic Programming
 Dynamic programming is useful when we satisfy the __principle of optimality__. That is, partial solutions can be optimally extended without worrying about the specifics of that partial solution.
 
@@ -631,6 +619,85 @@ E.g.,
 
 ## Testing/Edge Cases
 
+### Strings
+1. Null
+2. Empty.
+3. Length 1
+4. Uppercase/lowercase/mixed?
+5. Special characters (e.g., accented a)
+6. All characters same
+7. Whitespace
+8. If parsing, what if the token is contained as part of the element we wanted to parse out (e.g., string split by spaces, but name has a space in it)
+9. Last part not processed (e.g., imagine calculator app -- it ends in a number and no operator, do you still process this last number?)
+10. Creating a new string every time instead of using `StringBuffer`
+
+### Numbers
+1. 0
+2. Negatives
+3. MAX_VALUE (2^31-1 / 2^63-1)
+4. -MIN_VALUE
+5. If we have a max that is not MAX_VALUE, then max-1, max, max+1
+
+### Arrays/Collections or Streams
+1. Null
+2. Empty
+3. Length 1
+4. All duplicates
+5. Some duplicates
+6. (If contains numbers, see numbers edge case)
+7. Check last part of array is processed (e.g., if looping over)
+8. Thing contained in last element of array
+9. Already sorted
+
+### Objects
+1. Null
+
+### Testing Steps
+
+#### 1. Get an understanding
+1.1  Test the most important functionality first, so what is this being used for? By whom?
+1.2 Is the style good? camelCase/descriptive, etc.
+1.3 Does the function exist already, if so why aren’t we using that?
+1.4 What do we know about the input? Is it sorted, not null, etc.? Is it limited in size?
+1.5 If we have errors, are we throwing exceptions, returning an error code, etc.?
+
+#### 2. Check the API
+2.1 Are the parameters correct? What counts as an A? (lowercase, uppercase…)
+2.1 Think about the return type -- is an int big enough to return what we want?
+
+#### 3. Start writing test cases
+(Test case format: No.) Input (expected output): T/F (passes or fails)
+E.g., 1. Banana (3): T (Test case 1, banana, should return 3, true -- does pass)
+
+##### 3.1 Normal/most important cases
+3.1.1 True/false cases (eg., no A’s, 3 A’s)
+3.1.2 Test -ves, 0, +ves
+(Consider testing one thing at a time -- test this param, now test this param, etc.)
+
+#### 3.2 Start & end
+3.2.1 If looking for consecutive numbers/chars, etc., check what happens at the starts and ends. What if the start is 0, etc.
+3.2.2 At the end, do you remember to do a final check to see if you got a sequence at the end of the loop?)
+
+### 3.3 Small extremes 
+3.3.1 null, empty, length 1 (what counts as “small”?)
+
+#### 3.4 Large extremes
+3.4.1 999, 1000, 1001 (what counts as “large”?)
+
+#### 3.5 “Illegal” input
+3.5.1 (nulls, etc.)
+
+#### 3.6 “Strange”/Uncommon input
+3.6.1 Already sorted, sorted in reverse, all duplicates, element is in last index of array of max size, special characters </a> etc.
+
+#### 3.7 Scalability/concurrency
+3.7.1. Spin up tests in a while loop, using different servers
+
+#### 3.8 Security
+3.8.1 Can/should the user be able to modify things after creation? Should we be making this immutable?
+
+### Decouple Objects
+Test coupled objects individually. For example, if the code uses a random number generator, test the random number generator separately. For example, check that it gives a range of values, doesn't give consecutive sequences.
 
 ## __TODO__: 
 _General problem solving tips from other docs_
@@ -657,7 +724,6 @@ _index_
 
 _Spoiler dropdown/blackout_
 
-_Testing/edge cases_
 
 (Go through all docs to see what would be useful to summarise)
 
