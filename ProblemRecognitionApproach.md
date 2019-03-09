@@ -511,6 +511,54 @@ Go through each element and swap it with preceding element, as long as it is sma
 
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/LsdRadixSort.java)
 
+## Graph Algorithms
+
+### Dijkstra
+Finds the shorted path from a vertex to all other vertices.
+
+```java
+1. Set up a distance array
+2. Set the distance to the source verex to 0
+3. Set the distance to the other vertices to +INF
+4. Add the vertex to the PriorityQueue
+5. While the queue isn't empty...
+6. Get the closest vertex (originally source)
+7. Relax every adjacent vertex and put them on the queue
+
+Relax(vertex current, vertex neighbours):
+1. If the distance to current + current's distance to neighbour < current distance to neighbour,
+   update neighbour's distance and update it's key in the queue if it's in the queue already
+2. Set edgeTo[neighbour] = current
+
+```
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/DijkstrasAlgorithm.java)
+
+Time: V+E(log V)
+-- Assuming we use an adjacent list and PQ. We go through each vertex, and then for each edge, we add/remove it to the PQ.
+
+### Topological Sort
+
+Find an ordering in a list of dependencies
+
+```java
+
+1. For each node in the graph...
+2. If it hasn't been visited yet, perform a DFS on it...
+3. Popping the order stack will you give you an ordering
+
+DFS:
+1. Mark vertex visited and put on recursion stack (a set)
+2. For each adjacent vertex...
+3. If it's in the recursion stack, we have a loop -- break
+4. Otherwise, if it's not visited, visit it
+5. Finally, after having visited all adjacent vertices recursively, we remove this node from the recursion stack and add it to the order stack
+
+```
+
+Time: V+E
+
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/TopologicalSort.java)
+
 ## Find Missing Element
 Given an array, or two arrays, find the missing element.
 
@@ -749,12 +797,40 @@ Using a Bit Array, we could store around 2^31 (about 2 billion values) true/fals
 We could use an array of 10 values to store 2 billion * 10 true/false values, etc.
 Useful when tinking about system design.
 
+## Misc
+
+### Sum of 1...n
+
+``` 
+n(n+1)/2
+
+E.g., 1...4 
+= 1 + 2 + 3 + 4 = 10
+= 4(5)/2 = 20/2 = 2
+```
+
+This is useful because it reduces to n^2 when working out runtimes.
+
+```java
+for(int i = 0; i < n; i++) {
+    for(int j = 0; j < i; j++) {
+         ...
+    }
+}
+```
+
+How many times does j run? 0, 1, 2...n times. Therefore the time sums to an n^2 time.
+
+### Log
+The inverse power function.
+
+log(2)8 = 3 because 2^3 = 8
+
+I.e., 2 to the power what makes 8.
+
+
 ## __TODO__: 
-_General problem solving tips from other docs_
-
-_sum of 1...n, logs (add near permutation section)_
-
-_Toposort, Dijkstra_
+_General problem solving tips from other docs & printed sheets_
 
 _Calculator (stack string parsing)_
 
@@ -764,14 +840,12 @@ _Segment tree_
 
 _Binary indexed tree_
 
-_Edge cases/testing_
-
 _Minimum spanning tree_
 
 _index_
 
 _Spoiler dropdown/blackout_
 
-(Go through all docs to see what would be useful to summarise)
+_strings, substr_
 
-_See printed sheets_
+_Java tips_
