@@ -967,7 +967,7 @@ i /= 10;
 ```
 
 ## __TODO__: 
-_General problem solving tips from other docs & printed sheets_
+_Info from printed sheets_
 
 _strings, substr_
 
@@ -979,4 +979,20 @@ _index_
 
 _Spoiler dropdown/blackout_
 
-_Java tips_
+_Java tips, comparator, collection (see Java doc), iterate over chars like ints_
+
+_Misc tips: sort hashmap > read to obj or add/remove keys, _
+
+_Recursive runtimes (misc)_
+
+_Dealing with data that doesn't fit in memory (misc doc tips, testing -- could use stats to estimate our results are correct)_
+
+_SQL (nested queries, wildcards)_
+
+_Misc tip (if missing) -- draw pictures, don't think in your head. Draw up some different test inputs and solve them by hand_
+
+_Misc tip -- rearrange variables to make things easier. For example, make sure var1 always starts to the left of var2, etc. -- if(var1.x > var2.x, foo(var2, var1)_
+
+_Misc tip -- for big O, if the algorithm is do this and then do that, add the runtimes. If the algorithm is do this for every time you do that, multiply the runtimes_
+
+_Check and sort problem solving section -- see Problem Solving doc to see if anything is missing from this section_
