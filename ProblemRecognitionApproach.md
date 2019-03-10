@@ -559,6 +559,58 @@ Time: V+E
 
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/TopologicalSort.java)
 
+## Union-Find (Disjoint Set)
+
+Used to check if two components are connected together.
+
+```java
+
+1. Setup an array of size n, with values 0...n for each vertex.
+2. Union:
+2.1 Find the root of A and B
+2.2 Make the root of B = root of A
+
+3. Find:
+3.1 Check if A's root == B's root
+
+4. Get root:
+Recursively call getRoot with the vertex index, until the vertex index matches the value at that vertex.
+
+```
+
+Time: O(n) -- naive implementation. This turns into n^2 for n union or find operations. But we can be improved to log n (and even inverse Ackermann function) with path compression: e.g., when finding roots, you set the root to be grandparent, etc.
+Space: O(n)
+
+
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/UnionFind.java)
+
+## Minimum Spanning Tree
+The tree with the minimum weight that touches every vertex in a graph.
+If all weights are unique, then there will be 1 MST, otherwise there may be multiple.
+An MST must have vertices-1 edges.
+
+A few ways to build. Lazy Prim may be easiest...
+
+```java
+
+1. Put the initial vertex on a priority queue and visit it
+2. While the queue isn't empty/has vertices-1 edges...
+3. Get the minimum edge
+4. If both vertices have been visited, continue
+5. Else, add this edge to the MST and visit the vertices connected to this edge
+
+Visit:
+1. Mark the vertex as visited
+2. For each adjacent edge, if the vertex attached to this edge hasn't been visited...
+3. Add the edge to the PQ
+
+```
+Time: e log e
+Space e
+
+
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/datastructures/MinimumSpanningTreeLazyPrim.java)
+
 ## Find Missing Element
 Given an array, or two arrays, find the missing element.
 
@@ -882,27 +934,49 @@ public int calculate(String s) {
 
 ```
 
+## String/Int/Char Manipulation
+
+Turn a char to/from its int value:
+
+```java 
+String str = "123";
+
+int n = str.charAt(0) - '0';   // from char to int
+char c = (char)(n+'0');   // from int to char value
+
+// n = 1, c = 1
+
+```
+Turn 'A' into index 0 (for example, to put into a len 26 array for counting):
+
+```java
+String str = "ABC";
+int n = str.charAt(0) - 'A';
+
+// n = 0
+```
+
+Get least significant digit:
+```java
+int i = 123;
+int lsd = i % 10;
+i /= 10;
+
+// lsd = 3, i = 23
+
+```
+
 ## __TODO__: 
 _General problem solving tips from other docs & printed sheets_
 
-_Calculator (stack string parsing)_
-
-_Union-find_
+_strings, substr_
 
 _Segment tree_
 
 _Binary indexed tree_
 
-_Minimum spanning tree_
-
 _index_
 
 _Spoiler dropdown/blackout_
 
-_strings, substr_
-
 _Java tips_
-
-_Get first/last digit of an int_
-
-_Cast int to char, char to int..._
