@@ -68,11 +68,112 @@ Then you might be able to stick them in a fixed size array or map with counts or
 
 ## String processing
 
-# __TODO__:
-Trie notes
-Suffix trie notes
-Suffix array notes
-Substring matching
+### Tries
+
+Build: nw, where n is the number of words, and w is the length of the longest word
+Space: nw
+
+```java
+
+class Trie {
+
+    TrieNode root;
+    
+    public Tree(String [] words) {
+        root = new TreeNode();
+        build(words);
+    }
+
+    private void build(String [] words) {
+        TrieNode node = root;
+        
+        for(String word : words) {
+           for(char c : word.toCharArray()) {
+               if(!node.children.containsKey(c)) {
+                   node.children.put(c, new TreeNode());
+               }
+               
+               node = node.children.get(c);
+           }
+           
+           node.word = word;
+        }
+    }
+
+    private class TrieNode() {
+        String word;
+        HashMap<Character, TreeNode> children = new HashMap<>();
+    }
+
+}
+
+```
+
+Query: w, where w is the length of the query word
+
+```java
+
+public boolean contains(String word) {
+   
+    TreeNode node = root;
+    
+    for(char c : word.toCharArray()) {
+        if(!node.children.contains(c)) {
+            return false;
+        }
+    
+        // Could also do if node.word != null, results.add(node.word) -- return all substrings of this word
+    
+        node = node.children.get(c);
+    }
+    
+    return true;
+}
+
+// If you need to keep track of how far you are through the trie, you could also pass back the root itself and access the nodes in the algorithm (e.g., in a DFS).
+
+```
+
+### Substring matching
+
+
+
+### Suffix tree
+
+### Full-text indexing
+
+1. Break a record into words
+2. Create a map of words to records
+
+| Sort      | Words             | 
+| --------- | ----------------- | 
+| Doc 1     | Apple, Ball, Dog  | 
+| Doc 2     | Dog, Ball, Car    | 
+| Doc 3     | Kite              |
+
+Index -->
+
+| Words      | Docs             | 
+| --------- | ----------------- | 
+| Apple     | Doc 1             | 
+| Ball      | Doc 1, Doc 2      | 
+| Car       | Doc 2             |
+| Dog       | Doc 1, Doc 2      |
+| Kite      | Doc 3             |
+
+(We could do this with chars in words even. E.g., if making an address book, we could create an index of letters > name list, where the name list was sorted by words that started with that letter.)
+
+### Iterating chars
+
+We can iterate chars just like ints. For example, to generate every word one char away:
+
+```java
+for(int i = 0; i < str.length(); i++) {
+    for(char c = 'a'; c <= 'z'; c++) {
+        System.out.println(str.substring(0,i) + c + str.substring(i+1));
+    }
+}
+```
 
 ## Dynamic Programming
 Dynamic programming is useful when we satisfy the __principle of optimality__. That is, partial solutions can be optimally extended without worrying about the specifics of that partial solution.
@@ -611,6 +712,23 @@ Space e
 
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/datastructures/MinimumSpanningTreeLazyPrim.java)
 
+## Segment Tree
+Holds intervals in a tree structure.
+Can use used for range sum queries.
+
+Time: n to build, log n to query
+Space: n (I think it's 2-4n?)
+
+[Source](https://github.com/pekoto/PrincetonA/blob/bb669e55523b73b46f62b003adb196b392385901/PrincetonA/src/com/pekoto/challenges/RangeSumSegmentTree.java)
+
+## Binary Indexed Tree
+Like a segement tree. Used for quick range sum queries.
+
+Time: n log n to build, n to update, log n to query
+Space: n
+
+[Source](https://github.com/pekoto/PrincetonA/blob/57270f330468b49bd0570f911ba3ea0dc96f2aa0/PrincetonA/src/com/pekoto/datastructures/BinaryIndexedTree.java)
+
 ## Find Missing Element
 Given an array, or two arrays, find the missing element.
 
@@ -799,6 +917,10 @@ E.g., 1. Banana (3): T (Test case 1, banana, should return 3, true -- does pass)
 ### Decouple Objects
 Test coupled objects individually. For example, if the code uses a random number generator, test the random number generator separately. For example, check that it gives a range of values, doesn't give consecutive sequences.
 
+### Big Data
+How would you verify test cases that are so large there is no previous known answer? E.g., count all A's in crawled internet index.
+You could use statistics -- estimate how common A's are, get avg. number of A's on a single page, then multiply by the number of pages scanned and see if your answer is close.
+
 ## Powers of 2
 
 | x  | 2^x  | 
@@ -971,10 +1093,6 @@ _Info from printed sheets_
 
 _strings, substr_
 
-_Segment tree_
-
-_Binary indexed tree_
-
 _index_
 
 _Spoiler dropdown/blackout_
@@ -985,7 +1103,7 @@ _Misc tips: sort hashmap > read to obj or add/remove keys, _
 
 _Recursive runtimes (misc)_
 
-_Dealing with data that doesn't fit in memory (misc doc tips, testing -- could use stats to estimate our results are correct)_
+_Dealing with data that doesn't fit in memory (misc doc tips)_
 
 _SQL (nested queries, wildcards)_
 
