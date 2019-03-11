@@ -149,6 +149,18 @@ Worst time: nk (imagine you had a bad hashing function that caused collisions fo
 
 ### Suffix tree
 
+```
+    1 2 3 4 5 6 7 8
+t = C A G T C A G G $
+
+
+
+
+```
+
+#### Suffix arrays
+
+
 ### Full-text indexing
 
 1. Break a record into words
