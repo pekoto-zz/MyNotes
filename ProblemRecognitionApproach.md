@@ -157,11 +157,11 @@ Note: Can construct in O(n) time and O(n) space using Ukkonen’s algorithm.
 
 [Great video](https://www.youtube.com/watch?v=VA9m_l6LpwI)
 
+![Suffix tree](https://raw.githubusercontent.com/pekoto/MyNotes/master/imgs/suffix-tree.jpg)
+
 ```
     1 2 3 4 5 6 7 8
 t = C A G T C A G G $
-
-![Suffix tree](https://raw.githubusercontent.com/pekoto/MyNotes/master/imgs/suffix-tree.jpg)
 
 1. Start with last G, we have nothing, so add G
 2. Then go to GG, we have a G, so add another G after G
