@@ -149,17 +149,45 @@ Worst time: nk (imagine you had a bad hashing function that caused collisions fo
 
 ### Suffix tree
 
+* Check if m is a substring of n in O(m) time
+* Find first occurance in O(m) time
+* Find z occurances of m in O(m+z) time
+
+Note: Can construct in O(n) time and O(n) space using Ukkonen’s algorithm.
+
+[Great video](https://www.youtube.com/watch?v=VA9m_l6LpwI)
+
 ```
     1 2 3 4 5 6 7 8
 t = C A G T C A G G $
 
+![Suffix tree](https://raw.githubusercontent.com/pekoto/MyNotes/master/imgs/suffix-tree.jpg)
 
+1. Start with last G, we have nothing, so add G
+2. Then go to GG, we have a G, so add another G after G
+3. Then add AGG
+…
+4. When we get to AGTCAGG, note we already have AGG, so split this branch -- AG > H & TCAGG
+```
 
+To use the tree:
 
+```
+Find C:
+1. Search to the C branch
+2. Search all of the branches off of this (5 and 1)
+
+Find CG:
+1. Go to C branch
+2. See that this doesn’t exist (need to check chars from every branch)
+
+Find CAGTC:
+2. Go to CAG branch, search all children
 ```
 
 #### Suffix arrays
 
+TODO
 
 ### Full-text indexing
 
