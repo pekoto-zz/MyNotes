@@ -134,9 +134,18 @@ public boolean contains(String word) {
 
 ```
 
-### Substring matching
+### Rabin-Karb
+This is a useful substring matching algorithm because it can be used for several other algorithm problems, such as finding the max subarray of length k, etc.
 
+The idea is:
+1. Take the hash of the pattern you're looking for, say the pattern is length k
+2. Take a length k window of the search string.
+3. If the window has the same hash as the pattern, run through the strings to see if they match
+4. If they won't, update the window by subtracting the first letter from the hashed window value, and adding the next value
 
+Average time: n+k
+Space: k
+Worst time: nk (imagine you had a bad hashing function that caused collisions for every hash window)
 
 ### Suffix tree
 
