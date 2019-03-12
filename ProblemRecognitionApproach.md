@@ -1216,7 +1216,6 @@ FULL OUTER JOIN Orders On Customer.CustomerId = Orders.CustomerId
 | TreeMap       | 1  ```map.put(1, 1); ```                         | log n ```map.remove(1);```                                                                             | log n ```map.get(1);```                                                                                       | log n ```map.containsKey(1);``` | log n ```map.firstKey(), map.lastKey()```                  |                                                      |
 
 
-
 ### Custom Comparator
 
 ```java
@@ -1233,25 +1232,225 @@ PriorityQueue<Integer> maxHeap = new PriorityQueue<>(new MaxComparator());
 
 ```
 
+### Implementing equals()
+
+(There are more thorough ways to implement this...)
+
+```java
+@Override
+public boolean equals(Object o) {
+    if (!(o instanceof Name))
+        return false;
+    Name n = (Name) o;
+    
+    return n.firstName.equals(firstName) && n.lastName.equals(lastName);
+}
+
+public int hashCode() {
+    return 31*firstName.hashCode() + lastName.hashCode();
+}
+
+```
+
+### Implementing Comparable
+
+```java
+public int compareTo(Name n) {
+    int lastCmp = lastName.compareTo(n.lastName);
+    return (lastCmp != 0 ? lastCmp : firstName.compareTo(n.firstName));
+}
+```
+
+### Implementing iterator
+
+Note: Iterators are the only safe way to modify a collection while iterating over it.
+
+```java
+public class StackWithArray<T> implements Iterable<T> {
+
+    private int nextElementIndex = 0;
+    // ...
+
+    // Iterable implementation
+    public Iterator<T> iterator() {
+        return new ArrayIterator();
+    }
+
+    private class ArrayIterator implements Iterator<T> {
+
+        private int nextElement = nextElementIndex;
+
+        public boolean hasNext() {
+            return nextElement > 0;
+        }
+
+        public T next() {
+            nextElement--;
+
+            return arr[nextElement];
+        }
+
+        public void remove() {
+            // Remove during iteration not supported here
+        }
+    }
+}
+
+Iterator iterator = collection.iterator();
+      
+while(iterator.hasNext()) {
+    Object element = iterator.next();
+    
+    if(element.getString().equals("yes") {
+        iterator.remove();
+    }
+}
+
+```
+
+### Common functions
+
+```java
+int i = Integer.parseInt("123");
+
+boolean b = Character.isDigit('5');
+
+// Remember this is exclusive
+String s = "Hello";
+s.substring(1, 4); // prints "ell"
+
+String [] tokens = s.split(" ");
+
+int firstIndex = s.indexOf('e', 0);
+
+int lastIndex = s.lastIndexOf('e', str.length()-1);
+
+treeMap.floorKey(4);    // returns key that is closest to or equal to 4
+
+treeMap.ceilingKey(4);  // returns key that is closest to or equal to 4
+
+```
+
+### Tips
+
+* PriorityQueue allows dupes. If you want a list of unique things sorted by natural ordering, use a TreeSet or TreeMap.
+
+* PriorityQueue is only partially sorted, since it's a heap. If you need a collection that allows duplicates while keeping natural order, you'll just have to use Collections.sort().
+
+## Big O
+
+|         |              |
+| ------- | ------------ |
+| 1       | Constant     |
+| log n   | Logarithmic  |
+| n       | Linear       |
+| n log n | Linearithmic |
+| n^2     | Quadratic    |
+| 2^n     | Exponential  |
+| n!      | Factorial    |
+
+* If the algorithm is do this, and then do that, add the runtimes. If it is do this for every time you do that, multiply the runtimes.
+
+### Recursive runtimes
+
+* Often drawing out the call tree is the only way to confirm, but often reduce to ```O(branches^depth)```. Consider:
+
+```java
+int f(int n) {
+    if(n <=1) {
+        return 1;
+    }
+
+    return f(n-1) + f(n-1)
+}
+
+```
+
+You have a call tree like...
+
+```
+          f(4)
+        /     \
+      f(3)       f(3)
+     /   \       /    \
+    f(2)  f(2) f(2)   f(2)
+    
+    ...etc.
+```
+
+Total calls are 2^0 + 2^1...2^n-1. Recall that the sum of powers of 2 to determine that the total runtime is 2^n.
+
+* Another way to figure it out is to think about how many function calls you have, and how long each one runs for.
+
+```java
+
+void permutation(String str, String prefix) { 
+    if (str.length() == 0) { 
+       System.out.println(prefix); 
+    } else { 
+
+
+    for (int i= 0; i < str.length(); i++) {
+       String rem = str.substring(0, i) + str.substring(i + 1);
+        permutation(rem, prefix + str.charAt(i)); 
+    } 
+} 
+
+```
+
+We know what there will be n! permutations of a string (first we choose character 7, leaving 6 choices, then 5, etc.)
+
+So we know the base case will be called n! times. But how long do we run before we reach the base case? Well, we have to go through every char, so we run n times. We can imagine a call tree with n! nodes, and a length of n to get there. So we have (n*n!) nodes (function calls) in our tree.
+
+But how what about the time complexity at each node? Well, println will take n time. And taking the substring and creatng the new string will take n time. So each node takes n time.
+
+So in total we have n*(n*n!) time, or (n^2*n!) total.
+
+__Word Break__
+Some proofs and ideas:
+
+Let's abbreviate the function call, wordBreak, as wB(s, dict, i) where i is the end of the substring being imagined. Now, imagine a tree of function calls.
+wB(s, dict, 0) spawns wB(s, dict, 1), wB(s, dict, 2), ... wB(s, dict, n)
+wB(s, dict, 1) spawns wB(s, dict, 2), wB(s, dict, 3), ... wB(s, dict, n)
+wB(s, dict, 2) spawns wB(s, dict, 3), wB(s, dict, 4), ... wB(s, dict, n)
+and so on. 
+
+Since wB(s, dict, 0) is the root of our recursive call, we see that it spawns n - 1 + 1 = n subroutines. Each of these subroutines spawns at most n (so O(n) in Big-O notation) subroutines as well. So, wB is called recursively n times for each ending index, and each recursive call in turn is called, in the worst case, n times. Therefore, our running time complexity is n multiplied by itself n times => O(n^n). This is definitely a pessimistic estimate, but recall that Big-O notation is worst-case analysis. Hope this helps!
+
+Or slightly tighter bound:
+
+https://leetcode.com/problems/word-break/discuss/169383/The-Time-Complexity-of-The-Brute-Force-Method-Should-Be-O(2n)-and-Prove-It-Below
+
+__Robot Maze Search__
+Well, at each point the robot has 2 choices. And the total length he can go is the length of an entire row and column. So the runtime is 2^row+col. 
+
+__Word Search__
+When you think about word search, you have m * n cells in the grid, and each cell can make 4 choices for the length of the longest word, so I would guess the running time is m*n*4^L, where L is the length of the longest word.
+
+## Big Data
+
+* If data is too big to fit in memory, well, if we can just read one element at a time it doesn't matter how big the data is
+
+* Use an external sort
+
+* Hash each piece of data (e.g., word in a file), and send it to a different file/serverC depending on the hash
+
+* MapReduce: Map, Shuffle, Reduce
+E.g. To count words in files:
+[!MapReduceImg](https://s3-us-west-2.amazonaws.com/content.edupristine.com/images/blogs/mapreduce-example.jpg)
+
+
 ## __TODO__: 
 
 _index_
 
 _Spoiler dropdown/blackout_
 
-_Java tips, comparator, collections (see Java doc)_
-
 _Misc tips: sort hashmap > read to obj or add/remove keys, _
-
-_Recursive runtimes (misc)_
-
-_Dealing with data that doesn't fit in memory (misc doc tips)_
 
 _Misc tip (if missing) -- draw pictures, don't think in your head. Draw up some different test inputs and solve them by hand_
 
 _Misc tip -- rearrange variables to make things easier. For example, make sure var1 always starts to the left of var2, etc. -- if(var1.x > var2.x, foo(var2, var1)_
-
-_Misc tip -- for big O, if the algorithm is do this and then do that, add the runtimes. If the algorithm is do this for every time you do that, multiply the runtimes_
 
 _Misc tip -- check data structures are not empty before peek/poll_
 
