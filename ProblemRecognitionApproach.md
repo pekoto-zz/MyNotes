@@ -54,6 +54,27 @@ If you are doing some work repeatedly -- choosing the max or min, say -- can you
 ### 12. Relax some constraints
 For example, if it's hard to find the closest sum, could you instead try to find the exact sum?
 
+
+### Sorting HashMaps
+If you need to sort a HashMap, there are two options:
+1. Simply read the key/value to a custom object with a custom comparator, and then use Collections.sort().
+2. Hold two HashMaps: One of keys to counts, and another to counts to keys. When incrementing, remove objects from the previous count:key map, and add it to the new count:key map.
+
+### If stuck, draw pictures
+Don't think in your head. Draw up some different test inputs and solve them by hand.
+
+### Rearrange variables
+Don't be afraid to rearrange variables to make things easier. For example, make sure var1 always starts to the left of var2, etc.
+
+```java
+if(arg2.x < arg1.x) {
+    f(arg2, arg1);
+}
+```
+
+### Don't forget empty checks
+Check data structures are not empty before peek/poll.
+
 ## Optimization Techniques
 1. Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
 2. Do you need to use O(1) space? Does sorting the data help?
@@ -1446,12 +1467,5 @@ _index_
 
 _Spoiler dropdown/blackout_
 
-_Misc tips: sort hashmap > read to obj or add/remove keys, _
-
-_Misc tip (if missing) -- draw pictures, don't think in your head. Draw up some different test inputs and solve them by hand_
-
-_Misc tip -- rearrange variables to make things easier. For example, make sure var1 always starts to the left of var2, etc. -- if(var1.x > var2.x, foo(var2, var1)_
-
-_Misc tip -- check data structures are not empty before peek/poll_
 
 _Check and sort problem solving section -- see Problem Solving doc to see if anything is missing from this section_
