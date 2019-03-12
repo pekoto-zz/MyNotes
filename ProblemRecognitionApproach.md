@@ -1437,7 +1437,7 @@ When you think about word search, you have m * n cells in the grid, and each cel
 
 * MapReduce: Map, Shuffle, Reduce
 E.g. To count words in files:
-[!MapReduceImg](https://s3-us-west-2.amazonaws.com/content.edupristine.com/images/blogs/mapreduce-example.jpg)
+![MapReduceImg](https://s3-us-west-2.amazonaws.com/content.edupristine.com/images/blogs/mapreduce-example.jpg)
 
 
 ## __TODO__: 
