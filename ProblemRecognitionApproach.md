@@ -152,6 +152,7 @@ Worst time: nk (imagine you had a bad hashing function that caused collisions fo
 * Check if m is a substring of n in O(m) time
 * Find first occurance in O(m) time
 * Find z occurances of m in O(m+z) time
+* Space: O(n^2) (but can be reduced to O(n) by turning it into a suffix array in O(n) time)
 
 Note: Can construct in O(n) time and O(n) space using Ukkonen’s algorithm.
 
@@ -184,10 +185,6 @@ Find CG:
 Find CAGTC:
 2. Go to CAG branch, search all children
 ```
-
-#### Suffix arrays
-
-TODO
 
 ### Full-text indexing
 
@@ -1137,16 +1134,92 @@ i /= 10;
 
 ```
 
-## __TODO__: 
-_Info from printed sheets_
+## SQL
 
-_strings, substr_
+### Wildcards
+
+* _ = single character
+* % = wildcard
+
+```sql
+
+# Find customers with "a" in second position
+
+SELECT *
+FROM Customers
+WHERE Name LIKE '_a%'
+
+# Find customers where name does not start with "a"
+
+SELECT *
+FROM Customers
+WHERE Name NOT LIKE 'a%'
+
+```
+
+### Joins
+
+#### Left join
+Returns everything in the left table, and anything that matches in the right table.
+
+```sql
+
+# Get all customers and any orders they might have
+
+SELECT Customers.CustomerID, Orders.OrderId
+FROM Customers
+LEFT JOIN Orders ON Customers.CustomerId = Orders.CustomerID
+ORDER BY Customers.CustomerID
+
+```
+
+#### Inner join
+Returns records that have values in both tables.
+
+```sql
+
+SELECT Orders.OrderId, Customers.CustomerID
+FROM Orders
+INNER JOIN Customers ON Customers.CustomerId = Orders.CustomerId
+
+```
+
+#### Full outer join
+Returns everything in both tables
+
+```sql
+
+SELECT Customer.CustomerId, Orders.OrderId
+FROM Customers
+FULL OUTER JOIN Orders On Customer.CustomerId = Orders.CustomerId
+
+```
+
+## Java
+
+|               | Add                                             | Remove                                                                                                 | Get (n/obj)                                                                                                   | Contains                        | Get min/max                                                | Comment                                              |
+| ------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
+| PriorityQueue | log n  ```minHeap.add(1); ```                   | n ```minHeap.remove(1);```                                                                             | n/a                                                                                                           | n ```minHeap.contains(1);```    | log n/1 ```minHeap.poll()/minHeap.peak()```                |                                                      |
+| HashSet       | 1  ```set.add(1); ```                           | 1 ```set.remove(1);```                                                                                 | n/a                                                                                                           | 1 ```set.contains(1);```        | n/a                                                        |                                                      |
+| LinkedHashSet | 1  ```set.add(1); ```                           | 1 ```set.remove(1);```                                                                                 | n/a                                                                                                           | 1 ```set.contains(1);```        | n/a| Stores objects in the order they were added           |                                                      |
+| TreeSet       | log n  ```set.add(1); ```                       | log n ```set.remove(1);```                                                                             | n/a                                                                                                           | log n ```set.contains(1);```    | log n ```set.first() // min, set.last() // max```          | Stores elements according to natural ordering        |
+| HashMap       | 1  ```map.put(1, 1); ```                        | 1 ```map.remove(1);```                                                                                 | 1 ```map.get(1);```                                                                                           | 1 ```map.containsKey(1);```     | n/a                                                        | Operations could be n in worst case hash collisions  |
+| LinkedHashMap | 1  ```map.put(1, 1); ```                        | 1 ```map.remove(1);```                                                                                 | 1 ```map.get(1);```                                                                                           | 1 ```map.containsKey(1);```     | n/a                                                        | Operations could be n in worst case hash collisions  |
+| TreeMap       | 1  ```map.put(1, 1); ```                        | log n ```map.remove(1);```                                                                             | log n ```map.get(1);```                                                                                       | log n ```map.containsKey(1);``` | log n ```map.firstKey(), map.lastKey()```                  |                                                      |
+| LinkedList    | 1  ```queue.add(1); // adds to end of queue ``` | 1 if first/last node, n is random node ```queue.pollFirst(), queue.pollLast(), queue.remove(1);```     | 1 if first/last node, n if random node ```queue.peekFirst(), queue.peekLast(), queue.get(1);```               | n ```queue.contains(1);```      | n/a                                                        | Can be used as a FIFO or deque                       |
+
+
+### Custom Comparator
+
+
+
+## __TODO__: 
 
 _index_
 
 _Spoiler dropdown/blackout_
 
-_Java tips, comparator, collection (see Java doc), iterate over chars like ints_
+_Java tips, comparator, collections (see Java doc)_
 
 _Misc tips: sort hashmap > read to obj or add/remove keys, _
 
@@ -1154,12 +1227,12 @@ _Recursive runtimes (misc)_
 
 _Dealing with data that doesn't fit in memory (misc doc tips)_
 
-_SQL (nested queries, wildcards)_
-
 _Misc tip (if missing) -- draw pictures, don't think in your head. Draw up some different test inputs and solve them by hand_
 
 _Misc tip -- rearrange variables to make things easier. For example, make sure var1 always starts to the left of var2, etc. -- if(var1.x > var2.x, foo(var2, var1)_
 
 _Misc tip -- for big O, if the algorithm is do this and then do that, add the runtimes. If the algorithm is do this for every time you do that, multiply the runtimes_
+
+_Misc tip -- check data structures are not empty before peek/poll_
 
 _Check and sort problem solving section -- see Problem Solving doc to see if anything is missing from this section_
