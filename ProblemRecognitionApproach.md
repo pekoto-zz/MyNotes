@@ -1,6 +1,51 @@
 # Problem Recognition Patterns (in progress)
 
-## General Techniques
+## Steps
+
+### Pick out key details
+* Is data sorted
+* Is algorithm going to be run many times (so could be precomputed or cached)
+* Is there a memory limitation, etc.
+
+### Draw an example
+* Physically draw what the structure/data looks like
+* Make sure it’s big enough, and realistic enough (e.g., don’t draw a perfectly balanced tree if the data isn’t perfectly balanced, try to avoid special cases)
+
+### Brute force algorithm
+* No matter how bad, it gives you a starting point and shows that you at least understand what needs to be done
+
+#### When stuck
+* Use a fresh example
+* Solve “incorrectly”, and then think about why the incorrect method doesn’t work/can be fixed
+* Make a time/space tradeoff
+* Precompute information (e.g., sort data)
+* Use a hash table
+* Start by solving small examples and build up to larger ones -- can you spot a pattern?
+
+### Optimize
+* Use key details -- is the data sorted, etc.
+
+### Walk through
+* Before implementation, soldify understanding by walking through your algorithm.
+* MAYBE write pseudocode -- but be quick with it (e.g, 1. Search array, 2. find biggest)
+
+### Implementation
+* Avoid boilerplate. E.g., say you’ll call a method called “initIncrementalMatrix” instead of writing out the whole initialization code.
+* If you don’t have time to write error checks, add a TODO: Check for…
+* Use classes where appropriate (you can pretend the class exists, e.g., Point)
+* If you get confused (happens often), go back to your example and work through it again
+
+### Test
+* It will likely be too slow to work through your large example. Instead…
+* “Conceptual” test -- work through and explain what each of code is supposed to do
+* Check weird looking code (for loops starting at 2, etc.)
+* Hot spots: empty strings, null nodes, integer division, recursive base cases, etc.
+* Use a SMALL test case (it will be faster)
+* Test edge cases (null values, single element values, extreme values)
+* Carefully analyze why bugs occur and ensure your fix doesn’t break anything else
+
+
+## General Tips
 
 ### 1. Brute force first
 Go for a brute force solution first, identify the bottleneck (largest big O), then think about how you could get rid of it (see __Optimization Techniques__ below).
@@ -1489,5 +1534,3 @@ _index_
 _Spoiler dropdown/blackout_
 
 _KMP_
-
-_Check and sort problem solving section -- see Problem Solving doc to see if anything is missing from this section_
