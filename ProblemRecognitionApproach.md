@@ -1215,6 +1215,27 @@ FROM Customers
 FULL OUTER JOIN Orders On Customer.CustomerId = Orders.CustomerId
 
 ```
+### Nested queries
+
+```sql
+SELECT {field}
+FROM {table_one}
+INNER JOIN
+(SELECT {field}
+ FROM {table}
+ WHERE {condition}
+ GROUPBY {field}
+ HAVING {condition}) as SomeName
+ON table_one.id = SomeName.id
+
+SELECT TenantName
+FROM Tenants
+INNER JOIN
+ (SELECT TenantID FROM AptTenants GROUPBY TenantID HAVING COUNT(*) > 1) as AptCount
+ON Tenants.TenantID = AptCount.TenantID
+
+
+```
 
 ## Java
 
