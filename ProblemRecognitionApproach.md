@@ -1534,3 +1534,4 @@ _index_
 _Spoiler dropdown/blackout_
 
 _KMP_
+https://www.coursera.org/learn/algorithms-part2/lecture/2Kn5i/brute-force-substring-search
