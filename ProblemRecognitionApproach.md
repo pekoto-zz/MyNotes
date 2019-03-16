@@ -236,6 +236,8 @@ Average time: n+k
 Space: k
 Worst time: nk (imagine you had a bad hashing function that caused collisions for every hash window)
 
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/RabinKarpSubstringMatching.java)
+
 ### Suffix tree
 
 * Check if m is a substring of n in O(m) time
@@ -1552,9 +1554,8 @@ E.g. To count words in files:
 
 ## __TODO__: 
 
+_tidy up_
+
 _index_
 
 _Spoiler dropdown/blackout_
-
-_KMP_
-https://www.coursera.org/learn/algorithms-part2/lecture/2Kn5i/brute-force-substring-search
