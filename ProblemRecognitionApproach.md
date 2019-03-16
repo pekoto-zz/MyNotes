@@ -200,6 +200,27 @@ public boolean contains(String word) {
 
 ```
 
+###
+
+A string matching algorithm that works in O(n+m) time and O(m) space.
+Essentially useful because it doesn't backtrack along the main string -- meaning it can run on an infinite stream of text.
+
+Essentially we build a FSA from the substring, treating it like a pattern, working where we should jump back to if we hit a mismatch.
+
+1. Build FSA:
+1.1 Set index = 0, i = 1
+1.2 If index == i, increment index, set arr[i] = index, i++
+1.3 Else, if index == 0, increment i, else index = arr[index-1] (jump back -- we matched this far, so see if we can restart the pattern from the previous point).
+
+The actual pattern matching is then largely the same.
+
+2. Pattern match:
+2.1 While strIndex < str && ptnIndex < ptn
+2.2 If strIndex == ptnIndex, increment both
+2.3 Else, if ptnIndex == 0, increment strIndex, else, ptnIndex = arr[ptnIndex-1] -- again, we matched this far, so see if we can restart the pattern from the previous point
+
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/KmpSubstringMatching.java)
+
 ### Rabin-Karb
 This is a useful substring matching algorithm because it can be used for several other algorithm problems, such as finding the max subarray of length k, etc.
 
