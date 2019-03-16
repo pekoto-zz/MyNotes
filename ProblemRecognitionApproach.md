@@ -21,6 +21,7 @@
 * Precompute information (e.g., sort data)
 * Use a hash table
 * Start by solving small examples and build up to larger ones -- can you spot a pattern?
+* Mistakes are overlooked if you can recognize where you went wrong and fix it. Again, being present is key because I’m coaching you the whole way. If nerves take hold—pause, deep breath and pay attention to where I’m directing you. Concentrate on solving only the problem posed but be prepared to mentally pivot and sanity check along the way.
 
 ### Optimize
 * Use key details -- is the data sorted, etc.
