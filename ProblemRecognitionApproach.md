@@ -2050,6 +2050,7 @@ If data too big to fit in memory, what do?
 
 <details>
  <summary>
+  MapReduce
  </summary>
 
 * MapReduce: Map, Shuffle, Reduce
