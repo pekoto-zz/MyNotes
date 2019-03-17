@@ -159,123 +159,19 @@ __When stuck__
 * Draw pictures: Don't think in your head. Draw up some different test inputs and solve them by hand.
 </details>
 
-### Misc. Tips
-
-__Brute force first__
-
-Go for a brute force solution first, identify the bottleneck (largest big O), then think about how you could get rid of it.
-
-If you are dealing with a recursive or backtracking problem, solve the problem first, and then think about memoization or dynamic programming.
-
-__Algorithm first, then code.__
-
-Think about the algorithm first, and then think about what this would look like in code. Think about the general algorithm you, a human being, would use to solve the problem, and then think about what this would look like in code. Trying to do both at once can tangle you in knots for complex problems. If you at least demonstrate you understand the algorithm, you demonstrate you can solve problems.
-
-__Data structure brainstorm__
-
-Run through common data structures to see if they would help: maps, heaps, tries, trees, lists.
-
-__Dealing with connected data__
-
-Do you need to count connected data in some way? (E.g., count 1s in a matrix). Use a breadth-first search or depth-first search. Rememeber that DFS is recursive, so could run out of stack memory.
-
-__Dealing with related but unconnected data__
-
-Do you need to count related data in some way, but the data is not fully connected? (E.g., count name frequency given a list of pairs of different name spellings). Try connecting the data as a graph and then doing a depth-first search to count the connected components.
-
-__Find permutations/paths__
-
-If you have to find some permutations, the problem is likely recursive. Remember the general algorithm:
-* Identify the base case (nowhere left to go/nothing left to process/target value found)
-* Pick a thing from your collection
-* Recurse with that thing removed from the collection
-* Put the thing back in your collection
-
-[Best resource: Marty Stepp's videos](https://www.youtube.com/user/martystepp/videos)
-
-After you have come up with the general recursive algorithm, think about how you can cache some values in a map or array (memoization).
-
-__Returning the next something...__
-
-If you need to return the next something (.e.g, daily temperatures problem), consider using a stack since this will return the most recent thing you visited. What happens if you iterate backwards and put on the stack? -- you get the next.
-
-If you have to keep track of the lowest/highest something, and keep the data ordered (e.g., buy/sell stocks, 3-digit increasing substring), consider setting the element as the min/max, and then comparing to the next element. If you need three elements, you can set element 1 to the min, check if the next one is greater than min and less than current second highest, etc.
-
-__Think small__
-
-Usually a small example will be enough to prove an algorithm wrong. Also, picking small, simple examples that you can solve by hand will help you spot patterns to crack the algorithm. Likewise, if you're having trouble with a given example, try a simpler example: an array with 1 or 2 elements, etc.
-
-__Think exhaustively__
-
-What possible cases do you have? For example, if looking at overlapping intervals, there are only 3 ways 2 intervals can be:
-
-* Disjoint (one after another)
-* Overlapping (one starts before another ends, but after it start)
-* Nested (one starts after another starts, and ends before it ends)
-
-__Model on existing__
-
-Can you model your problem on some existing algorithm? What does it look like?
-
-__Identify the pain point__
-
-If you are doing some work repeatedly -- choosing the max or min, say -- can you find a data structure to make that more efficient?
-
-__Relax some constraints__
-
-For example, if it's hard to find the closest sum, could you instead try to find the exact sum?
-
-__Sorting HashMaps__
-
-If you need to sort a HashMap, read the key/value to a custom object with a custom comparator, and then use Collections.sort().
-
-__Rearrange variables__
-
-Don't be afraid to rearrange variables to make things easier. For example, make sure var1 always starts to the left of var2, or is the smaller string, etc.
-
-```java
-if(arg2.x < arg1.x) {
-    f(arg2, arg1);
-}
-```
-
-__Don't forget empty checks__
-
-Check data structures are not empty before peek/poll.
-
-__Mistakes are overlooked if you  spot/fix them__
-
-Again, being present is key because I’m coaching you the whole way. If nerves take hold—pause, deep breath and pay attention to where I’m directing you. Concentrate on solving only the problem posed but be prepared to mentally pivot and sanity check along the way.
-
-__Try backwards__
-
-Does traversing the data backwards make things easier?
-
-__Linked list problems__
-
-What would happen if you used a two pointer approach?
-
-__When dealing with trees...__
-
-...think recursion.
-
-__Tracking min/max__
-
-Do you need to keep a running track of a minimum or maximum value? Think heaps. In Java, `PriorityQueue` doesn't support remove in log n time. Instead you can use a `TreeMap` (Red-black tree implementation), which will keep track of the min or max in log n time, and also allow for log n removals.
-
-__Implementing maths operations__
-
-If you have to reimplement a mathematical operation without using operators, you will probably have to use bit manipulation. Break down the basics of the operation to work out what is going on with the numbers, and then think about how you would replicate that using bitwise operators.
-
-
-### Optimization Techniques
-* Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
-* Do you need to use O(1) space? Does sorting the data help?
-* Do you need an O(n) runtime and O(1) space? Then you probably need to mark the data in the original data structure somehow. For example, by setting it to negative. Remember, you can run through a data structure multiple times.
-* Are you dealing with a limited range of ints -- temperatures, numbers, etc.?
-Then you might be able to stick them in a fixed size array or map with counts or indexes. Then when you iterate that for each element you will still get a fixed-time runtime.
-
 ## Sorting
+
+<details>
+ <summary>
+  
+* Quicksort
+* Mergesort
+* Heapsort
+* Insertion sort
+* Counting sort
+* Radix sort
+
+ </summary>
 
 | Sort          | Time                           | Space         | Stable?       | Notes                                                  |
 | ------------- | ------------------------------ | ------------- | ------------- | ------------------------------------------------------ |
@@ -286,7 +182,14 @@ Then you might be able to stick them in a fixed size array or map with counts or
 | Counting sort | n + k                          |     n + k     | Yes           | Good when k is similar to n, giving n total time (k = size of radix -- the range of values) |
 | Radix sort    | nw                             |     n + w     | Yes           | w = size of words/keys being sorted                                                       |
 
+</details>
+
 ### Quicksort
+
+<details>
+ <summary>
+ </summary>
+  
 ```java
 1. If left < right...
 1.1 Partition
@@ -303,10 +206,17 @@ Then you might be able to stick them in a fixed size array or map with counts or
 2.3.4 Swap left and j, then return j
 ```
 
+</details>
+
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/QuickSort.java)
 __Note__: The partition algorithm can algorithm can also be used for _QuickSelect_ (find the Kth smallest element). It gives n^2 worst case, but n time average case.
 
 ### Mergesort
+
+<details>
+ <summary>
+ </summary>
+
 ```java
 1. If left < right...
 1.1  Get the mid
@@ -321,10 +231,18 @@ __Note__: The partition algorithm can algorithm can also be used for _QuickSelec
 
 ```
 
+</details>
+
 Unlike QuickSort, this is stable, but takes more memory.
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/MergeSort.java)
 
 ### Heapsort
+
+<details>
+ <summary>
+ </summary>
+
+
 ```java
 
 Treat parent as (parentIndex*2)+1
@@ -338,19 +256,32 @@ Treat parent as (parentIndex*2)+1
 3.4 Go to 3.1
 ```
 
+</details>
+
 Given an array, we can sort in-place. In practice, the operations often make this slower than QuickSort.
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/HeapSort.java)
 
 ### Insertion sort
 
+<details>
+ <summary>
+ </summary>
+
 ```java
 Go through each element and swap it with preceding element, as long as it is smaller
 
 ```
+
+</details>
+
 Not usually useful, but can be helpful if data is usually sorted or k-sorted.
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/InsertionSort.java)
 
 ### Counting sort
+
+<details>
+ <summary>
+ </summary>
 
 ```java
 1. Set up a count array the size of the radix + 1
@@ -370,6 +301,9 @@ Not usually useful, but can be helpful if data is usually sorted or k-sorted.
 5. Copy the values back into the main array
 
 ```
+
+</details>
+
 Useful if the radix is the same size as the digits, giving an O(n) algorithm.
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/KeyIndexCounting.java)
 
@@ -387,6 +321,9 @@ RadixSort.java)
 ## String processing
 
 ### Tries
+
+<details>
+ <summary>Build</summary>
 
 Build: nw, where n is the number of words, and w is the length of the longest word
 Space: nw
@@ -427,6 +364,14 @@ class Trie {
 
 ```
 
+</details>
+
+<details>
+ 
+ <summary>
+ Query
+ </summary>
+
 Query: w, where w is the length of the query word
 
 ```java
@@ -452,7 +397,13 @@ public boolean contains(String word) {
 
 ```
 
+</details>
+
 ### KMP (Knuth-Morris-Pratt)
+
+<details>
+ <summary>
+ </summary>
 
 A string matching algorithm that works in O(n+m) time and O(m) space.
 Point: it doesn't backtrack along the main string -- meaning it can run on an infinite stream of text.
@@ -475,9 +426,16 @@ The actual pattern matching is then largely the same.
 2.3 Else, if ptnIndex == 0, increment strIndex, else, ptnIndex = arr[ptnIndex-1] -- again, we matched this far, so see if we can restart the pattern from the previous point
 ```
 
+</details>
+
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/KmpSubstringMatching.java)
 
 ### Rabin-Karb
+<details>
+ 
+ <summary>
+ </summary>
+
 This is a useful substring matching algorithm because it can be used for several other algorithm problems, such as finding the max subarray of length k, etc. It can also be extended to check for several patterns at once (e.g., plagiarism checking).
 
 To check for multiple substrings/patterns, simply put all of the hashes in a set, and then check if the string hash is in that set.
@@ -492,9 +450,15 @@ Average time: n+k
 Space: k
 Worst time: nk (imagine you had a bad hashing function that caused collisions for every hash window)
 
+</details>
+
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/RabinKarpSubstringMatching.java)
 
 ### Suffix tree
+
+<details>
+ <summary>
+ </summary>
 
 * Check if m is a substring of n in O(m) time
 * Find first occurance in O(m) time
@@ -533,7 +497,14 @@ Find CAGTC:
 2. Go to CAG branch, search all children
 ```
 
+</details>
+
 ### Full-text indexing
+
+<details>
+ 
+ <summary>
+ </summary>
 
 1. Break a record into words
 2. Create a map of words to records
@@ -556,9 +527,16 @@ Index -->
 
 (We could do this with chars in words even. E.g., if making an address book, we could create an index of letters > name list, where the name list was sorted by words that started with that letter.)
 
+</details>
+
 ### Iterating chars
 
+<details>
+ <summary>
+
 We can iterate chars just like ints. For example, to generate every word one char away:
+
+</summary>
 
 ```java
 for(int i = 0; i < str.length(); i++) {
@@ -567,6 +545,8 @@ for(int i = 0; i < str.length(); i++) {
     }
 }
 ```
+
+</details>
 
 ## Tree problems
 
@@ -581,6 +561,11 @@ for(int i = 0; i < str.length(); i++) {
 ```
 
 ### Preorder traversal
+
+<details>
+ <summary>
+ </summary>
+
 ```java
 doSomething(node);
 visit(node.left);
@@ -592,7 +577,14 @@ visit(node.right);
 __Note:__ Useful for serializing and deserializing a binary tree. Go through the tree adding each node to a queue, and X for null.
 Then go through the queue recursively to rebuild the tree.
 
+</details>
+
 ### Inorder traversal
+<details>
+
+<summary>
+</summary>
+
 ```java
 visit(node.left);
 doSomething(node);
@@ -603,7 +595,14 @@ visit(node.right);
 
 __Note:__ In a BST, inorder traversal will give you the nodes in sorted order.
 
+</details>
+
 ### Postorder traversal
+
+<details>
+ <summary>
+ </summary>
+
 ```java
 visit(node.left);
 visit(node.right);
@@ -612,7 +611,15 @@ doSomething(node);
 // Output: 3, 5, 4, 8, 7, 6
 ```
 
+</details>
+
 ### Level-order traversal
+
+<details>
+ <summary>
+ </summary>
+ 
+ 
 ```
 Essentially this boils down a BFS.
 1. Put the root on a queue
@@ -624,11 +631,18 @@ Essentially this boils down a BFS.
 ```
 This can be used for various things: printing level-order, check if each level is symmetrical, "inverting" the children at each level, etc.
 
+</details>
+
 ### Bottom-up recursion
+
+<details>
+ <summary>
+  For example, to get the height:
+ </summary>
+
 Use an inorder traversal.
 Go down to the bottom of the tree first, and then count on the way back up.
 
-For example, to get the height:
 
 ```java
 public int getHeight(Node node) {
@@ -643,11 +657,17 @@ public int getHeight(Node node) {
 }
 ```
 
+</details>
+
 ### Top-down recursion
+
+<details>
+ <summary>
+  For example, to get the longest increasing sequence:
+ </summary>
+
 Use a preorder traversal.
 Check the value of this node, and then recurse for left and right.
-
-For example, to get the longest increasing sequence:
 
 ```java
 
@@ -672,7 +692,13 @@ public void getLongest(Node node, int lastValue, int length) {
 
 ```
 
+</details>
+
 ### Getting distance from the root
+
+<details>
+ <summary>
+ </summary>
 This is useful when trying to find the distance between nodes, all nodes k nodes away, etc.
 
 ```java
@@ -701,8 +727,17 @@ public int getDistance(Node node, Node target) {
 }
 ```
 
+</details>
+
 ### Total nodes
+
+<details>
+ <summary>
+ </summary>
+
 The total nodes in a complete tree is (2^k)-1, where k is the height of the tree. E.g., a tree with height 3 will have 2^3  = 8-1 = 7 nodes.
+
+</details>
 
 ### Tree Tips
 * We often recurse when doing tree problems -- e.g., when getting the height. Can we also do something else while in the recursive method? For example, if finding the max diameter, we are finding the height of the left and right subtrees anyway, so we could also check to see if we have a new max diameter (left + right height) at the same time.
@@ -715,6 +750,10 @@ The total nodes in a complete tree is (2^k)-1, where k is the height of the tree
 
 ### Dijkstra
 Finds the shortest path from a vertex to all other vertices.
+
+<details>
+ <summary>
+ </summary>
 
 ```java
 1. Set up a distance array
@@ -736,9 +775,16 @@ Relax(vertex current, vertex neighbours):
 Time: V+E(log V)
 -- Assuming we use an adjacent list and PQ. We go through each vertex, and then for each edge, we add/remove it to the PQ.
 
+</details>
+
 ### Topological Sort
 
 Find an ordering in a list of dependencies
+
+<details>
+ 
+ <summary>
+ </summary>
 
 ```java
 
@@ -759,7 +805,13 @@ Time: V+E
 
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/TopologicalSort.java)
 
+</details>
+
 ### Union-Find (Disjoint Set)
+
+<details>
+ <summary>
+ </summary>
 
 Used to check if two components are connected together.
 
@@ -781,10 +833,16 @@ Recursively call getRoot with the vertex index, until the vertex index matches t
 Time: O(n) -- naive implementation. This turns into n^2 for n union or find operations. But we can be improved to log n (and even inverse Ackermann function) with path compression: e.g., when finding roots, you set the root to be grandparent, etc.
 Space: O(n)
 
+</details>
 
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/UnionFind.java)
 
 ### Minimum Spanning Tree
+
+<details>
+ <summary>
+ </summary>
+
 The tree with the minimum weight that touches every vertex in a graph.
 If all weights are unique, then there will be 1 MST, otherwise there may be multiple.
 An MST must have vertices-1 edges.
@@ -808,29 +866,48 @@ Visit:
 Time: e log e
 Space e
 
+</details>
 
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/datastructures/MinimumSpanningTreeLazyPrim.java)
 
 ### Segment Tree
+
+<details>
+ <summary>
+ </summary>
+
 Holds intervals in a tree structure.
 Can use used for range sum queries.
 
 Time: n to build, log n to query
 Space: n (I think it's 2-4n?)
 
+</details>
+
 [Source](https://github.com/pekoto/PrincetonA/blob/bb669e55523b73b46f62b003adb196b392385901/PrincetonA/src/com/pekoto/challenges/RangeSumSegmentTree.java)
 
 ### Binary Indexed Tree
+
+<details>
+ <summary>
+ </summary>
 Like a segement tree. Used for quick range sum queries.
 
 Time: n log n to build, n to update, log n to query
 Space: n
+
+</details>
 
 [Source](https://github.com/pekoto/PrincetonA/blob/57270f330468b49bd0570f911ba3ea0dc96f2aa0/PrincetonA/src/com/pekoto/datastructures/BinaryIndexedTree.java)
 
 ## Algorithm Patterns
 
 ### Finding a Missing Element
+
+<details>
+ <summary>
+ </summary>
+
 Given an array, or two arrays, find the missing element.
 (Variations of this problem crop up a lot.)
 
@@ -854,7 +931,14 @@ a2: 1, 3
 
 ```
 
+</details>
+
 ### Sliding Window
+
+<details>
+ <summary>
+ </summary>
+
 0. If required, set up a map, etc., that can be used to check if your condition is fulfilled. E.g., number of each char, etc.
 1. Set up start
 2. Set up a loop with end
@@ -863,7 +947,14 @@ a2: 1, 3
 5. If your condition is violated, update start until it is valid again (e.g., have 0 unique character left, end-start matches len n, etc.)
 6. Now your condition is guaranteed to hold, so check if you have a new max, etc.
 
+</details>
+
 ### Calculator/Stack parsing
+
+<details>
+ <summary>
+ </summary>
+
 When we need to parse an expression, we usually use a stack. Dijkstra suggests have a number and operator stack:
 
 1. When we have a number, put it on the number stack
@@ -917,9 +1008,24 @@ public int calculate(String s) {
 
 ```
 
+</details>
 
 
 ## Java
+
+<details>
+ <summary>
+  * PriorityQueue
+  * LinkedList
+  * Stack
+  * HashSet
+  * LinkedHashSet
+  * TreeSet
+  * HashMap
+  * LinkedHashMap
+  * TreeMap
+  
+  </summary>
 
 |               | Add                                              | Remove                                                                                                 | Get (n/obj)                                                                                                   | Contains                        | Get min/max                                                | Comment                                              |
 | ------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
@@ -939,8 +1045,13 @@ public int calculate(String s) {
 | LinkedHashMap | 1  ```map.put(1, 1); ```                         | 1 ```map.remove(1);```                                                                                 | 1 ```map.get(1);```                                                                                           | 1 ```map.containsKey(1);```     | n/a                                                        | Operations could be n in worst case hash collisions  |
 | TreeMap       | 1  ```map.put(1, 1); ```                         | log n ```map.remove(1);```                                                                             | log n ```map.get(1);```                                                                                       | log n ```map.containsKey(1);``` | log n ```map.firstKey(), map.lastKey()```                  |                                                      |
 
+</details>
 
 ### Custom Comparator
+
+<details>
+ <summary>
+ </summary>
 
 ```java
 
@@ -956,9 +1067,16 @@ PriorityQueue<Integer> maxHeap = new PriorityQueue<>(new MaxComparator());
 
 ```
 
+
+ </details>
+
 ### Implementing equals()
 
 (There are more thorough ways to implement this...)
+
+<details>
+ <summary>
+ </summary>
 
 ```java
 @Override
@@ -976,7 +1094,13 @@ public int hashCode() {
 
 ```
 
+</details>
+
 ### Implementing Comparable
+
+<details>
+ <summary>
+ </summary>
 
 ```java
 public int compareTo(Name n) {
@@ -985,7 +1109,13 @@ public int compareTo(Name n) {
 }
 ```
 
+</details>
+
 ### Implementing iterator
+
+<details>
+ <summary>
+ </summary>
 
 Note: Iterators are the only safe way to modify a collection while iterating over it.
 
@@ -1032,9 +1162,14 @@ while(iterator.hasNext()) {
 
 ```
 
+</details>
+
 ### String/Int/Char Manipulation
 
+<details>
+ <summary>
 Turn a char to/from its int value:
+ </summary>
 
 ```java 
 String str = "123";
@@ -1045,7 +1180,13 @@ char c = (char)(n+'0');   // from int to char value
 // n = 1, c = 1
 
 ```
+</details>
+
+
+<details>
+ <summary>
 Turn 'A' into index 0 (for example, to put into a len 26 array for counting):
+ </summary>
 
 ```java
 String str = "ABC";
@@ -1054,15 +1195,24 @@ int n = str.charAt(0) - 'A';
 // n = 0
 ```
 
+</details>
+
+<details>
+ 
+ <summary>
+
 Get least significant digit:
+</summary>
+
 ```java
 int i = 123;
 int lsd = i % 10;
 i /= 10;
 
-// lsd = 3, i = 23
+// lsd = 3, i = 12
 
 ```
+</details>
 
 ### Common functions
 
@@ -1095,6 +1245,12 @@ treeMap.ceilingKey(4);  // returns key that is closest to or equal to 4
 
 ## Big O
 
+<details>
+ 
+ <summary>
+ List of common running times in order.
+ </summary>
+
 |         |              |
 | ------- | ------------ |
 | 1       | Constant     |
@@ -1107,9 +1263,19 @@ treeMap.ceilingKey(4);  // returns key that is closest to or equal to 4
 
 * If the algorithm is do this, and then do that, add the runtimes. If it is do this for every time you do that, multiply the runtimes.
 
+</details>
+
 ### Recursive runtimes
 
-* Often drawing out the call tree is the only way to confirm, but often reduce to ```O(branches^depth)```. Consider:
+
+<details>
+ <summary>
+  
+* Often drawing out the call tree is the only way to confirm, but often reduce to 
+
+</summary>
+```O(branches^depth)```. Consider:
+
 
 ```java
 int f(int n) {
@@ -1135,6 +1301,8 @@ You have a call tree like...
 ```
 
 Total calls are 2^0 + 2^1...2^n-1. Recall that the sum of powers of 2 to determine that the total runtime is 2^n.
+
+</details>
 
 * Another way to figure it out is to think about how many function calls you have, and how long each one runs for.
 
@@ -1191,19 +1359,30 @@ When you think about word search, you have m * n cells in the grid, and each cel
 How many ways can you choose k elements from n elements.
 Example: How many 4 digit pin numbers are there?
 
+<details>
+ <summary>
+ </summary>
+
 ``` n^k. ```
 
 Example:
 How many ways can we choose a 4 digit PIN using 0-9?
 10^4 = 10,000
 
+</details>
+
 #### Permutations without repeats
 How many permutations of k elements are there from a string containing n elements?
 
-``` n!/(n-k)! ```
-
 For example:
 From ABC, how many length 2 permutations are there?
+
+<details>
+ <summary>
+ </summary>
+
+``` n!/(n-k)! ```
+
 ```
 3!/(3-2)! = 6
 AB, AC, BA, BC, CA, CB
@@ -1217,8 +1396,15 @@ ABC! = 3! = 6
 
 ABC, ACB, BAC, BCA, CAB, CBA
 ```
+
+</details>
+
 #### Unique permutations from a string with repeats
 Given a string with repeated elements, how many unique permutations are there?
+
+<details>
+ <summary>
+ </summary>
 
 ```  n!/(repeat element 1 count)!*(repeat element 2 count)!... ```
 ```
@@ -1239,15 +1425,28 @@ For {1, 1, 2, 3}, we have 4 elements, and 1 is repeated twice, so:
 3,1,1,2
 3,2,1,1
 ```
+
+</details>
+
 #### Combinations without repeats
+
+<details>
+ <summary>
 How many ways can you choose k elements from n, if order doesn't matter?
 For example, how many ways can you choose 6 lottery numbers from 49.
+ </summary>
 
 ``` n!/(n-k)!k! ```
 
 49!/(49-6)!6! = 13,983,816
 
+</details>
+
 #### Subsets
+
+<details>
+ <summary>
+ </summary>
 The number of subsets given some superset.
 ``` 2^n. ```
 
@@ -1256,8 +1455,15 @@ This is because for each element it can either be in the set or not.
 For example, {1, 2, 3} = 2^3 = 8.
 {}, {1}, {2}, {3}, {1, 2}, {1,3}, {2,3}, {1,2,3}
 
+</details>
+
 ### Generating Permutations
+
 This follows the basic recursive pattern:
+
+<details>
+ <summary>
+ </summary>
 1. Pick a thing, add it one set and remove it from the other
 2. Recurse
 3. Unpick the thing
@@ -1292,7 +1498,14 @@ If we want to generate unique permutations in an array with duplicate elements, 
 
 What is the running time of this? Well, we have n! permutations. The inner loop takes n time, giving us n * n!. But recall that ``` arr.clone() ``` takes n time. So in total we have: n * (n * n!).
 
+</details>
+
 #### String permutations
+
+<details>
+ <summary>
+ </summary>
+
 String permutations (and recursive String functions generally) have a slight tweak. Since creating a new String creates a new object in memory, you don't have to unchoose.
 
 ```java
@@ -1317,7 +1530,14 @@ __Tip:__ If you are given the data in some other format, such as 2 arrays -- one
 1. Just modify these 2 lists to be one list. E.g., turn {a, b, c}, {2, 1, 3} into the list {a, a, b, c, c, c} or String aabccc.
 2. Alternatively, just use the same strategy -- to decide what to pick net you scan through the count array until you hit the first non-zero element starting from the current index.
 
+</details>
+
 ### Generating subsets
+
+
+<details>
+ <summary>
+ </summary>
 Although inefficient, generating subsets can often be used to find a brute force solution (e.g., find min/max/closest set of things).
 
 Essentially we use a recursive base case and build approach. When generating subsets, we take the empty set, add an element to it, and then add elements to those subsets, etc.
@@ -1369,6 +1589,8 @@ public List<List<Integer>> generateSubsets(int[] arr, int index) {
 
 Complexity: ``` O(n*2^n) ```
 
+</details>
+
 ### Powers of 2
 
 | x  | 2^x  | 
@@ -1387,6 +1609,10 @@ Complexity: ``` O(n*2^n) ```
 
 
 #### Estimating
+
+<details>
+ <summary>
+ </summary>
 Recall (x^n)*(x^m) = x^n+m.
 E.g., 2^2 * 2*3 = 4 * 8 = 32 = 2^5 \[2^(2+3)]
 
@@ -1395,7 +1621,13 @@ So, to estimate powers of 2, find the lower numbers and multiply them together.
 For example, 2^20 = ?
 2^10 ~= 1000 --> 10*2 = 20, so 1000*1000 = 1,000,000 (actual 1,048,576)
 
+</details>
+
 #### Summing
+
+<details>
+ <summary>
+ </summary>
 The sum of total powers of 2 is 2^(n+1)-1
 
 E.g., Sum of 2^3 = 2 + 4 + 8 = 15 = (2^4)-1.
@@ -1403,8 +1635,19 @@ E.g., Sum of 2^3 = 2 + 4 + 8 = 15 = (2^4)-1.
 Note that this is the same as the nodes in a binary tree. Useful for calculating recursion call tree sizes.
 
 (What if we had 2^31 in an array of 2^31? It would be 2^62, so should fit in long).
+</details>
 
 #### Notable Powers
+
+
+<details>
+ <summary>
+  * Max value
+  * KB
+  * MB
+  * GB
+  * TB
+ </summary>
 
 | 2^x          | Value              | Comment                               |
 | ------------ | ------------------ | ------------------------------------- |
@@ -1419,7 +1662,13 @@ Using a Bit Array, we could store around 2^31 (about 2 billion values) true/fals
 We could use an array of 10 values to store 2 billion * 10 true/false values, etc.
 Useful when tinking about system design.
 
+</details>
+
 ### Sum of 1...n
+
+<details>
+ <summary>
+ </summary>
 
 ``` 
 n(n+1)/2
@@ -1441,18 +1690,29 @@ for(int i = 0; i < n; i++) {
 
 How many times does j run? 0, 1, 2...n times. Therefore the time sums to an n^2 time.
 
+</details>
+
 ### Log
+
+<details>
+ <summary>
+ </summary>
 The inverse power function.
 
 log(2)8 = 3 because 2^3 = 8
 
 I.e., 2 to the power what makes 8.
 
+</details>
 
 ## Bit Manipulation
 
 ### GetBit
 
+<details>
+ <summary>
+ </summary>
+ 
 ```java
 public boolean getBit(int n, int bit) {
     return (n & (1 << bit)) != 0;
@@ -1463,8 +1723,14 @@ public boolean getBit(int n, int bit) {
 // > 0100 & (0010) = 0000
 
 ```
+</details>
+
 
 ### SetBitZero
+
+<details>
+ <summary>
+ </summary>
 
 ```java
 private int setBitToZero(int n, int bit) {
@@ -1480,7 +1746,13 @@ private int setBitToZero(int n, int bit) {
 
 ```
 
+</details>
+
 ### SetBitOne
+
+<details>
+ <summary>
+ </summary>
 
 ```java
 private int setBitToOne(int n, int bit) {
@@ -1494,7 +1766,14 @@ private int setBitToOne(int n, int bit) {
 
 ```
 
+</details>
+
 ### Two's Complement
+
+<details>
+ <summary>
+ </summary>
+
 A way to represent -ve numbers in binary.
 The left-most digit is negative, and the other numbers are positive.
 
@@ -1516,6 +1795,7 @@ E.g.,
 = > 1110
 
 ```
+</details>
 
 (Also useful for Binary Indexed Tree)
 
@@ -1526,6 +1806,11 @@ E.g.,
 ## Testing/Edge Cases
 
 ### Strings
+
+<details>
+ <summary>
+ </summary>
+
 1. Null
 2. Empty.
 3. Length 1
@@ -1537,14 +1822,28 @@ E.g.,
 9. Last part not processed (e.g., imagine calculator app -- it ends in a number and no operator, did you remember to process this last number?)
 10. Creating a new string every time instead of using `StringBuffer`
 
+</details>
+
 ### Numbers
+
+<details>
+ <summary>
+ </summary>
+
 1. 0
 2. Negatives
 3. MAX_VALUE (2^31-1 / 2^63-1)
 4. -MIN_VALUE
 5. If we have a max that is not MAX_VALUE, then max-1, max, max+1. E.g, if max = 10, check 9, 10, 11.
 
+</details>
+
 ### Arrays/Collections/Streams
+
+<details>
+ <summary>
+ </summary>
+
 1. Null
 2. Empty
 3. Length 1
@@ -1555,10 +1854,16 @@ E.g.,
 8. Thing contained in last element of array
 9. Already sorted
 
+</details>
+
 ### Objects
 1. Null
 
 ### Testing Steps
+
+<details>
+ <summary>
+ </summary>
 
 #### 1. Get an understanding
 1.1  Test the most important functionality first, so what is this being used for? By whom?
@@ -1608,9 +1913,16 @@ Test coupled objects individually. For example, if the code uses a random number
 ### Testing Big Data
 How would you verify test cases that are so large there is no previous known answer? E.g., count all A's in crawled internet index. Well you could use statistics -- estimate how common A's are, get avg. number of A's on a single page, then multiply by the number of pages scanned and see if your answer is close.
 
+</details>
+
 ## SQL
 
 ### Wildcards
+
+
+<details>
+ <summary>
+ </summary>
 
 * _ = single character
 * % = wildcard
@@ -1631,9 +1943,16 @@ WHERE Name NOT LIKE 'a%'
 
 ```
 
+</details>
+
 ### Joins
 
 #### Left join
+
+<details>
+ <summary>
+ </summary>
+
 Returns everything in the left table, and anything that matches in the right table.
 
 ```sql
@@ -1647,7 +1966,14 @@ ORDER BY Customers.CustomerID
 
 ```
 
+</details>
+
 #### Inner join
+
+<details>
+ <summary>
+ </summary>
+
 Returns records that have values in both tables.
 
 ```sql
@@ -1658,7 +1984,14 @@ INNER JOIN Customers ON Customers.CustomerId = Orders.CustomerId
 
 ```
 
+</details>
+
 #### Full outer join
+
+<details>
+ <summary>
+ </summary>
+
 Returns everything in both tables
 
 ```sql
@@ -1668,7 +2001,13 @@ FROM Customers
 FULL OUTER JOIN Orders On Customer.CustomerId = Orders.CustomerId
 
 ```
+</details>
+
 ### Nested queries
+
+<details>
+ <summary>
+ </summary>
 
 ```sql
 SELECT {field}
@@ -1689,8 +2028,16 @@ ON Tenants.TenantID = AptCount.TenantID
 
 
 ```
+</details>
 
 ## Big Data
+
+
+<details>
+ <summary>
+If data too big to fit in memory, what do?
+</summary>
+
 
 * If data is too big to fit in memory, well, if we can just read one element at a time it doesn't matter how big the data is
 
@@ -1698,7 +2045,15 @@ ON Tenants.TenantID = AptCount.TenantID
 
 * Hash each piece of data (e.g., word in a file), and send it to a different file/serverC depending on the hash
 
+</details>
+
+
+<details>
+ <summary>
+ </summary>
+
 * MapReduce: Map, Shuffle, Reduce
 E.g. To count words in files:
 ![MapReduceImg](https://s3-us-west-2.amazonaws.com/content.edupristine.com/images/blogs/mapreduce-example.jpg)
 
+</details>
