@@ -58,23 +58,29 @@ __When stuck__
 ### Misc. Tips
 
 __Brute force first__
+
 Go for a brute force solution first, identify the bottleneck (largest big O), then think about how you could get rid of it.
 
 If you are dealing with a recursive or backtracking problem, solve the problem first, and then think about memoization or dynamic programming.
 
 __Algorithm first, then code.__
+
 Think about the algorithm first, and then think about what this would look like in code. Think about the general algorithm you, a human being, would use to solve the problem, and then think about what this would look like in code. Trying to do both at once can tangle you in knots for complex problems. If you at least demonstrate you understand the algorithm, you demonstrate you can solve problems.
 
 __Data structure brainstorm__
+
 Run through common data structures to see if they would help: maps, heaps, tries, trees, lists.
 
 __Dealing with connected data__
+
 Do you need to count connected data in some way? (E.g., count 1s in a matrix). Use a breadth-first search or depth-first search. Rememeber that DFS is recursive, so could run out of stack memory.
 
 __Dealing with related but unconnected data__
+
 Do you need to count related data in some way, but the data is not fully connected? (E.g., count name frequency given a list of pairs of different name spellings). Try connecting the data as a graph and then doing a depth-first search to count the connected components.
 
 __Find permutations/paths__
+
 If you have to find some permutations, the problem is likely recursive. Remember the general algorithm:
 * Identify the base case (nowhere left to go/nothing left to process/target value found)
 * Pick a thing from your collection
@@ -86,14 +92,17 @@ If you have to find some permutations, the problem is likely recursive. Remember
 After you have come up with the general recursive algorithm, think about how you can cache some values in a map or array (memoization).
 
 __Returning the next something...__
+
 If you need to return the next something (.e.g, daily temperatures problem), consider using a stack since this will return the most recent thing you visited. What happens if you iterate backwards and put on the stack? -- you get the next.
 
 If you have to keep track of the lowest/highest something, and keep the data ordered (e.g., buy/sell stocks, 3-digit increasing substring), consider setting the element as the min/max, and then comparing to the next element. If you need three elements, you can set element 1 to the min, check if the next one is greater than min and less than current second highest, etc.
 
 __Think small__
+
 Usually a small example will be enough to prove an algorithm wrong. Also, picking small, simple examples that you can solve by hand will help you spot patterns to crack the algorithm. Likewise, if you're having trouble with a given example, try a simpler example: an array with 1 or 2 elements, etc.
 
 __Think exhaustively__
+
 What possible cases do you have? For example, if looking at overlapping intervals, there are only 3 ways 2 intervals can be:
 
 * Disjoint (one after another)
@@ -101,18 +110,23 @@ What possible cases do you have? For example, if looking at overlapping interval
 * Nested (one starts after another starts, and ends before it ends)
 
 __Model on existing__
+
 Can you model your problem on some existing algorithm? What does it look like?
 
 __Identify the pain point__
+
 If you are doing some work repeatedly -- choosing the max or min, say -- can you find a data structure to make that more efficient?
 
 __Relax some constraints__
+
 For example, if it's hard to find the closest sum, could you instead try to find the exact sum?
 
 __Sorting HashMaps__
+
 If you need to sort a HashMap, read the key/value to a custom object with a custom comparator, and then use Collections.sort().
 
 __Rearrange variables__
+
 Don't be afraid to rearrange variables to make things easier. For example, make sure var1 always starts to the left of var2, or is the smaller string, etc.
 
 ```java
@@ -122,24 +136,31 @@ if(arg2.x < arg1.x) {
 ```
 
 __Don't forget empty checks__
+
 Check data structures are not empty before peek/poll.
 
 __Mistakes are overlooked if you  spot/fix them__
+
 Again, being present is key because I’m coaching you the whole way. If nerves take hold—pause, deep breath and pay attention to where I’m directing you. Concentrate on solving only the problem posed but be prepared to mentally pivot and sanity check along the way.
 
 __Try backwards__
+
 Does traversing the data backwards make things easier?
 
 __Linked list problems__
+
 What would happen if you used a two pointer approach?
 
 __When dealing with trees...__
+
 ...think recursion.
 
 __Tracking min/max__
+
 Do you need to keep a running track of a minimum or maximum value? Think heaps. In Java, `PriorityQueue` doesn't support remove in log n time. Instead you can use a `TreeMap` (Red-black tree implementation), which will keep track of the min or max in log n time, and also allow for log n removals.
 
 __Implementing maths operations__
+
 If you have to reimplement a mathematical operation without using operators, you will probably have to use bit manipulation. Break down the basics of the operation to work out what is going on with the numbers, and then think about how you would replicate that using bitwise operators.
 
 
