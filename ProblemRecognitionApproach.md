@@ -1,14 +1,16 @@
 # Problem Recognition Patterns (in progress)
 
-## Basic Steps
+## 1. Approaching the Problem
 
-### Pick out key details
+### Basic Steps
+
+__Pick out key details__
 * Is data sorted
 * Is algorithm going to be run many times (so could be precomputed or cached)
 * Is there a memory limitation
 * Etc.
 
-### Draw an example
+__Draw an example__
 * Physically draw what the structure/data looks like
 * Make sure it’s big enough, and realistic enough (e.g., don’t draw a perfectly balanced tree if the data isn’t perfectly balanced, try to avoid special cases)
 * Work through the example by hand, determining what it should output
