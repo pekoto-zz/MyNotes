@@ -1699,11 +1699,3 @@ ON Tenants.TenantID = AptCount.TenantID
 E.g. To count words in files:
 ![MapReduceImg](https://s3-us-west-2.amazonaws.com/content.edupristine.com/images/blogs/mapreduce-example.jpg)
 
-
-## __TODO__: 
-
-_tidy up_
-
-_index_
-
-_Spoiler dropdown/blackout_
