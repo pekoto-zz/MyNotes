@@ -1,6 +1,6 @@
 # Problem Recognition Patterns (in progress)
 
-## 1. Approaching the Problem
+## Approaching Problems
 
 ### Basic Steps
 
@@ -15,29 +15,29 @@ __Draw an example__
 * Make sure it’s big enough, and realistic enough (e.g., don’t draw a perfectly balanced tree if the data isn’t perfectly balanced, try to avoid special cases)
 * Work through the example by hand, determining what it should output
 
-### Think of cases
+__Think of cases__
 * Think of the main possibilities. E.g., Checking for 1 edit distance part -- consider what happens for an edit, insertion, or deletion. For overlapping intervals, think of how they could overlap, etc.
 * If the problem seems to complex to reason about for the typical case, start reasoning from small cases
 * Can consider edge cases, but don't wase too much time on them -- want to get the main algorithm down
 
-### Brute force algorithm
+__Brute force algorithm__
 * No matter how bad, it gives you a starting point and shows that you at least understand what needs to be done
 
-### Optimize
+__Optimize__
 * Use key details -- is the data sorted, etc.
 
-### Walk through
+__Walk through__
 * Before implementation, soldify understanding by walking through your algorithm.
 * MAYBE write pseudocode
 
-### Implementation
+__Implementation__
 * Make a TODO: Edge cases, bad input, etc. You'll fill this in later
 * Put in template methods for things you'll fill in later. E.g., MaxComparator, parseLine, etc.
 * Again, if you don’t have time to write error checks, add a TODO: Check for…. Confirm what you want to do in case of error (Exception, error code, null, etc.)
 * Use classes where appropriate (you can pretend the class exists, e.g., Point)
 * If you get confused (happens often), go back to your example and work through it again
 
-### Test
+__Test__
 * It will likely be too slow to work through your large example. Instead…
 * “Conceptual” test -- work through and explain what each of code is supposed to do
 * Check weird looking code (for loops starting at 2, etc.)
@@ -46,7 +46,7 @@ __Draw an example__
 * Test edge cases (null values, single element values, extreme values)
 * Carefully analyze why bugs occur and ensure your fix doesn’t break anything else
 
-### When stuck
+__When stuck__
 * Use a fresh example
 * Solve “incorrectly”, and then think about why the incorrect method doesn’t work/can be fixed
 * Make a time/space tradeoff
@@ -55,26 +55,26 @@ __Draw an example__
 * Start by solving small examples and build up to larger ones -- can you spot a pattern?
 * Draw pictures: Don't think in your head. Draw up some different test inputs and solve them by hand.
 
-## General Tips
+### Misc. Tips
 
-### Brute force first
+__Brute force first__
 Go for a brute force solution first, identify the bottleneck (largest big O), then think about how you could get rid of it.
 
 If you are dealing with a recursive or backtracking problem, solve the problem first, and then think about memoization or dynamic programming.
 
-### Algorithm first, then code.
+__Algorithm first, then code.__
 Think about the algorithm first, and then think about what this would look like in code. Think about the general algorithm you, a human being, would use to solve the problem, and then think about what this would look like in code. Trying to do both at once can tangle you in knots for complex problems. If you at least demonstrate you understand the algorithm, you demonstrate you can solve problems.
 
-### Data structure brainstorm
+__Data structure brainstorm__
 Run through common data structures to see if they would help: maps, heaps, tries, trees, lists.
 
-### Dealing with connected data
+__Dealing with connected data__
 Do you need to count connected data in some way? (E.g., count 1s in a matrix). Use a breadth-first search or depth-first search. Rememeber that DFS is recursive, so could run out of stack memory.
 
-### Dealing with related but unconnected data
+__Dealing with related but unconnected data__
 Do you need to count related data in some way, but the data is not fully connected? (E.g., count name frequency given a list of pairs of different name spellings). Try connecting the data as a graph and then doing a depth-first search to count the connected components.
 
-### Find permutations/paths
+__Find permutations/paths__
 If you have to find some permutations, the problem is likely recursive. Remember the general algorithm:
 * Identify the base case (nowhere left to go/nothing left to process/target value found)
 * Pick a thing from your collection
@@ -85,34 +85,34 @@ If you have to find some permutations, the problem is likely recursive. Remember
 
 After you have come up with the general recursive algorithm, think about how you can cache some values in a map or array (memoization).
 
-### Returning the next something...
+__Returning the next something...__
 If you need to return the next something (.e.g, daily temperatures problem), consider using a stack since this will return the most recent thing you visited. What happens if you iterate backwards and put on the stack? -- you get the next.
 
 If you have to keep track of the lowest/highest something, and keep the data ordered (e.g., buy/sell stocks, 3-digit increasing substring), consider setting the element as the min/max, and then comparing to the next element. If you need three elements, you can set element 1 to the min, check if the next one is greater than min and less than current second highest, etc.
 
-### Think small
+__Think small__
 Usually a small example will be enough to prove an algorithm wrong. Also, picking small, simple examples that you can solve by hand will help you spot patterns to crack the algorithm. Likewise, if you're having trouble with a given example, try a simpler example: an array with 1 or 2 elements, etc.
 
-### Think exhaustively
+__Think exhaustively__
 What possible cases do you have? For example, if looking at overlapping intervals, there are only 3 ways 2 intervals can be:
 
 * Disjoint (one after another)
 * Overlapping (one starts before another ends, but after it start)
 * Nested (one starts after another starts, and ends before it ends)
 
-### Model on existing
+__Model on existing__
 Can you model your problem on some existing algorithm? What does it look like?
 
-### Identify the pain point
+__Identify the pain point__
 If you are doing some work repeatedly -- choosing the max or min, say -- can you find a data structure to make that more efficient?
 
-### Relax some constraints
+__Relax some constraints__
 For example, if it's hard to find the closest sum, could you instead try to find the exact sum?
 
-### Sorting HashMaps
+__Sorting HashMaps__
 If you need to sort a HashMap, read the key/value to a custom object with a custom comparator, and then use Collections.sort().
 
-### Rearrange variables
+__Rearrange variables__
 Don't be afraid to rearrange variables to make things easier. For example, make sure var1 always starts to the left of var2, or is the smaller string, etc.
 
 ```java
@@ -121,34 +121,143 @@ if(arg2.x < arg1.x) {
 }
 ```
 
-### Don't forget empty checks
+__Don't forget empty checks__
 Check data structures are not empty before peek/poll.
 
-### Mistakes are overlooked if you  spot/fix them
+__Mistakes are overlooked if you  spot/fix them__
 Again, being present is key because I’m coaching you the whole way. If nerves take hold—pause, deep breath and pay attention to where I’m directing you. Concentrate on solving only the problem posed but be prepared to mentally pivot and sanity check along the way.
 
-### Try backwards
+__Try backwards__
 Does traversing the data backwards make things easier?
 
-### Linked list problems
+__Linked list problems__
 What would happen if you used a two pointer approach?
 
-### When dealing with trees...
+__When dealing with trees...__
 ...think recursion.
 
-### Tracking min/max
+__Tracking min/max__
 Do you need to keep a running track of a minimum or maximum value? Think heaps. In Java, `PriorityQueue` doesn't support remove in log n time. Instead you can use a `TreeMap` (Red-black tree implementation), which will keep track of the min or max in log n time, and also allow for log n removals.
 
-### Implementing maths operations
+__Implementing maths operations__
 If you have to reimplement a mathematical operation without using operators, you will probably have to use bit manipulation. Break down the basics of the operation to work out what is going on with the numbers, and then think about how you would replicate that using bitwise operators.
 
 
-## Optimization Techniques
+### Optimization Techniques
 * Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
 * Do you need to use O(1) space? Does sorting the data help?
 * Do you need an O(n) runtime and O(1) space? Then you probably need to mark the data in the original data structure somehow. For example, by setting it to negative. Remember, you can run through a data structure multiple times.
 * Are you dealing with a limited range of ints -- temperatures, numbers, etc.?
 Then you might be able to stick them in a fixed size array or map with counts or indexes. Then when you iterate that for each element you will still get a fixed-time runtime.
+
+## Sorting
+
+| Sort          | Time                           | Space         | Stable?       | Notes                                                  |
+| ------------- | ------------------------------ | ------------- | ------------- | ------------------------------------------------------ |
+| Quicksort     | avg: n log n, worst: n^2       |     log n     | No            | Worst-case can be made very unlikely by shuffling data |
+| Mergesort     | n log n                        |     n         | Yes           |                                                        |
+| Heapsort      | n log n                        |     1         | No            | constant extra space if you use existing array, practically usually slower than QS due to operations  |
+| Insertion     | n^2                            |     1         | Yes           | Although typically bad, works well if elements are almost sorted, for example if k distance away, time becomes nk |
+| Counting sort | n + k                          |     n + k     | Yes           | Good when k is similar to n, giving n total time (k = size of radix -- the range of values) |
+| Radix sort    | nw                             |     n + w     | Yes           | w = size of words/keys being sorted                                                       |
+
+### Quicksort
+```java
+1. If left < right...
+1.1 Partition
+1.2 Sort(left, partitionIndex-1)
+1.3 Sort(partitionIndex+1, right)
+
+2. Partition(arr, left, right)
+2.1 Set pivot val = left (in practice there are better values)
+2.2 Set i = left+1, j = right
+2.3 While true...
+2.3.1 Increment i while < pivotVal && != right
+2.3.2 Decrement j while > pivotVal && != left
+2.3.3 if j > i, swap them, else break
+2.3.4 Swap left and j, then return j
+```
+
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/QuickSort.java)
+__Note__: The partition algorithm can algorithm can also be used for _QuickSelect_ (find the Kth smallest element). It gives n^2 worst case, but n time average case.
+
+### Mergesort
+```java
+1. If left < right...
+1.1  Get the mid
+1.2 Sort(left, mid)
+1.3 Sort(mid+1, right)
+1.4 Merge(arr, left, mid, right)
+
+2. Merge(arr, left, mid, right)
+2.1 Copy left and right into arrays
+2.2 Take the smaller elements
+2.3 Tidy up by taking left over elements
+
+```
+
+Unlike QuickSort, this is stable, but takes more memory.
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/MergeSort.java)
+
+### Heapsort
+```java
+
+Treat parent as (parentIndex*2)+1
+
+1. Create a max heap: Starting at the bottom of the heap, sink each node down
+2. Sink: swap the parent element with largest child, as long as a child is larger
+3. Now you have a max heap:
+3.1 Swap the last element with the first (largest element) -- the largest is now in the correct position
+3.2 Decrement the last element index
+3.3 Sink the new first element into the correct position
+3.4 Go to 3.1
+```
+
+Given an array, we can sort in-place. In practice, the operations often make this slower than QuickSort.
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/HeapSort.java)
+
+### Insertion sort
+
+```java
+Go through each element and swap it with preceding element, as long as it is smaller
+
+```
+Not usually useful, but can be helpful if data is usually sorted or k-sorted.
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/InsertionSort.java)
+
+### Counting sort
+
+```java
+1. Set up a count array the size of the radix + 1
+2. Iterate around value array, and increment count[val+1]
+
+[1, 3, 2, 2]
+-->
+ 0  1  2  3  4
+[0, 0, 1, 2, 1]
+
+3. Get the cumulative counts:
+[0, 0, 1, 3, 4]
+
+4. Copy the values from the original array into an auxiliary array using these counts, incrementing count each time
+[1, 2, 2, 3]
+
+5. Copy the values back into the main array
+
+```
+Useful if the radix is the same size as the digits, giving an O(n) algorithm.
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/KeyIndexCounting.java)
+
+### Radix sort
+
+```java
+
+(Basically counting sort but go through each letter of the string and use that as the value to count)
+
+```
+
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/
+RadixSort.java)
 
 ## String processing
 
@@ -334,11 +443,6 @@ for(int i = 0; i < str.length(); i++) {
 }
 ```
 
-## Dynamic Programming
-Dynamic programming is useful when we satisfy the __principle of optimality__. That is, partial solutions can be optimally extended without worrying about the specifics of that partial solution.
-
-For example, when working out edit distance, we care about what the previous min edit distance was, and we don't have some constraint relating to the that previous partial solution, like, you can only make 2 deletes, etc.
-
 ## Tree problems
 
 ```
@@ -481,6 +585,478 @@ The total nodes in a complete tree is (2^k)-1, where k is the height of the tree
 * It can often become confusing trying to pass some value (like ```java int max```) around in a recursive manner for both children. To make this easier for interview purposes, you can declare this value outside of the function.
 
 * Don't forget inorder, preorder, and postorder traversals. These can often be used to find brute force solutions. E.g., find the highest, get in order, compare if trees are equal, check if contains subtree, etc. Just do a traversal and read the results into a list: now you have a list problem (though rarely an optimum solution though).
+
+## Graph Algorithms
+
+### Dijkstra
+Finds the shortest path from a vertex to all other vertices.
+
+```java
+1. Set up a distance array
+2. Set the distance to the source verex to 0
+3. Set the distance to the other vertices to +INF
+4. Add the vertex to the PriorityQueue
+5. While the queue isn't empty...
+6. Get the closest vertex (originally source)
+7. Relax every adjacent vertex and put them on the queue
+
+Relax(vertex current, vertex neighbours):
+1. If the distance to current + current's distance to neighbour < current distance to neighbour,
+   update neighbour's distance and update it's key in the queue if it's in the queue already
+2. Set edgeTo[neighbour] = current
+
+```
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/DijkstrasAlgorithm.java)
+
+Time: V+E(log V)
+-- Assuming we use an adjacent list and PQ. We go through each vertex, and then for each edge, we add/remove it to the PQ.
+
+### Topological Sort
+
+Find an ordering in a list of dependencies
+
+```java
+
+1. For each node in the graph...
+2. If it hasn't been visited yet, perform a DFS on it...
+3. Popping the order stack will you give you an ordering
+
+DFS:
+1. Mark vertex visited and put on recursion stack (a set)
+2. For each adjacent vertex...
+3. If it's in the recursion stack, we have a loop -- break
+4. Otherwise, if it's not visited, visit it
+5. Finally, after having visited all adjacent vertices recursively, we remove this node from the recursion stack and add it to the order stack
+
+```
+
+Time: V+E
+
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/TopologicalSort.java)
+
+## Union-Find (Disjoint Set)
+
+Used to check if two components are connected together.
+
+```java
+
+1. Setup an array of size n, with values 0...n for each vertex.
+2. Union:
+2.1 Find the root of A and B
+2.2 Make the root of B = root of A
+
+3. Find:
+3.1 Check if A's root == B's root
+
+4. Get root:
+Recursively call getRoot with the vertex index, until the vertex index matches the value at that vertex.
+
+```
+
+Time: O(n) -- naive implementation. This turns into n^2 for n union or find operations. But we can be improved to log n (and even inverse Ackermann function) with path compression: e.g., when finding roots, you set the root to be grandparent, etc.
+Space: O(n)
+
+
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/UnionFind.java)
+
+## Minimum Spanning Tree
+The tree with the minimum weight that touches every vertex in a graph.
+If all weights are unique, then there will be 1 MST, otherwise there may be multiple.
+An MST must have vertices-1 edges.
+
+A few ways to build. Lazy Prim may be easiest...
+
+```java
+
+1. Put the initial vertex on a priority queue and visit it
+2. While the queue isn't empty/has vertices-1 edges...
+3. Get the minimum edge
+4. If both vertices have been visited, continue
+5. Else, add this edge to the MST and visit the vertices connected to this edge
+
+Visit:
+1. Mark the vertex as visited
+2. For each adjacent edge, if the vertex attached to this edge hasn't been visited...
+3. Add the edge to the PQ
+
+```
+Time: e log e
+Space e
+
+
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/datastructures/MinimumSpanningTreeLazyPrim.java)
+
+## Segment Tree
+Holds intervals in a tree structure.
+Can use used for range sum queries.
+
+Time: n to build, log n to query
+Space: n (I think it's 2-4n?)
+
+[Source](https://github.com/pekoto/PrincetonA/blob/bb669e55523b73b46f62b003adb196b392385901/PrincetonA/src/com/pekoto/challenges/RangeSumSegmentTree.java)
+
+## Binary Indexed Tree
+Like a segement tree. Used for quick range sum queries.
+
+Time: n log n to build, n to update, log n to query
+Space: n
+
+[Source](https://github.com/pekoto/PrincetonA/blob/57270f330468b49bd0570f911ba3ea0dc96f2aa0/PrincetonA/src/com/pekoto/datastructures/BinaryIndexedTree.java)
+
+## Algorithm Patterns
+
+### Finding a Missing Element
+Given an array, or two arrays, find the missing element.
+(Variations of this problem crop up a lot.)
+
+There are a number of ways to do this:
+
+1. Just sort the arrays and iterate through them with pointers
+2. If the numbers are sum of 1-n, then use ``` (n(n+1))/2 ``` to get the expected value, then substract actual value
+3. Likewise you can add both arrays and take the difference
+4. You can use a HashMap: go through the smaller array adding counts, then go through the larger array decrementing counts. If the count falls below 0, it is a missing element. (Useful when more than 1 element is missing.)
+5. You can also XOR everything together:
+
+```java
+// Using XOR to find missing:
+a1: 1, 2, 3
+a2: 1, 3
+
+01 ^ 10 = 11 (1^2 = 3)
+11 ^ 11 = 00 (3^3 = 0)
+00 ^ 01 = 01 (0^1 = 1)
+01 ^ 11 = 10 (1^3 = 2)
+
+```
+
+### Sliding Window
+0. If required, set up a map, etc., that can be used to check if your condition is fulfilled. E.g., number of each char, etc.
+1. Set up start
+2. Set up a loop with end
+3. Set up a map to store counts
+4. Use end to update your count
+5. If your condition is violated, update start until it is valid again (e.g., have 0 unique character left, end-start matches len n, etc.)
+6. Now your condition is guaranteed to hold, so check if you have a new max, etc.
+
+### Calculator/Stack parsing
+When we need to parse an expression, we usually use a stack. Dijkstra suggests have a number and operator stack:
+
+1. When we have a number, put it on the number stack
+2. When we have an operator, put it on the operator stack
+3. When we hit a right parenthesis, pop 2 numbers and and operator, and put them back on the number stack.
+
+We can actually do this with only 1 stack:
+
+```java
+
+public int calculate(String s) {
+    int len;
+    if (s == null || (len = s.length()) == 0) {
+        return 0;
+     }
+ 
+     Stack<Integer> stack = new Stack<Integer>();
+     int num = 0;
+     char sign = '+';
+ 
+     for (int i = 0; i < len; i++) {
+     
+         if (Character.isDigit(s.charAt(i))) {
+             num = num * 10 + s.charAt(i) - '0';
+         }
+ 
+         if ((!Character.isDigit(s.charAt(i)) && ' ' != s.charAt(i)) || i == len - 1) {
+              if (sign == '-') {
+                  stack.push(-num);
+              } else if (sign == '+') {
+                  stack.push(num);
+              } else if (sign == '*') {
+                  stack.push(stack.pop() * num);
+              } else if (sign == '/') {
+                  stack.push(stack.pop() / num);
+              }
+              sign = s.charAt(i);
+              num = 0;
+         }
+     }
+
+    int result = 0;
+ 
+    // Add up all the numbers in the stack
+    for (int i : stack) {
+        result += i;
+     }
+ 
+     return result;
+}
+
+```
+
+
+
+## Java
+
+|               | Add                                              | Remove                                                                                                 | Get (n/obj)                                                                                                   | Contains                        | Get min/max                                                | Comment                                              |
+| ------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
+| PriorityQueue | log n  ```minHeap.add(1); ```                    | n ```minHeap.remove(1);```                                                                             | n/a                                                                                                           | n ```minHeap.contains(1);```    | log n/1 ```minHeap.poll()/minHeap.peak()```                |                                                      |
+| LinkedList    | 1  ```queue.add(1); // adds to end of queue ```  | 1 if first/last node, n is random node ```queue.pollFirst(), queue.pollLast(), queue.remove(1);```     | 1 if first/last node, n if random node ```queue.peekFirst(), queue.peekLast(), queue.get(1);```               | n ```queue.contains(1);```      | n/a                                                        | Can be used as a FIFO or deque                       |
+| Stack         | 1  ```stack.push(1); // adds to end of queue ``` | 1 if top node, n is random node ```stack.pop(), stack.remove(1);```                                    | n gets at index ```stack.get(1);```                                                                           | n ```stack.contains(1);```      | n/a                                                        |                                                      |
+
+|               | Add                                              | Remove                                                                                                 | Get (n/obj)                                                                                                   | Contains                        | Get min/max                                                | Comment                                              |
+| ------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
+| HashSet       | 1  ```set.add(1); ```                            | 1 ```set.remove(1);```                                                                                 | n/a                                                                                                           | 1 ```set.contains(1);```        | n/a                                                        |                                                      |
+| LinkedHashSet | 1  ```set.add(1); ```                            | 1 ```set.remove(1);```                                                                                 | n/a                                                                                                           | 1 ```set.contains(1);```        | n/a| Stores objects in the order they were added           |                                                      |
+| TreeSet       | log n  ```set.add(1); ```                        | log n ```set.remove(1);```                                                                             | n/a                                                                                                           | log n ```set.contains(1);```    | log n ```set.first() // min, set.last() // max```          | Stores elements according to natural ordering        |
+
+|               | Add                                              | Remove                                                                                                 | Get (n/obj)                                                                                                   | Contains                        | Get min/max                                                | Comment                                              |
+| ------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
+| HashMap       | 1  ```map.put(1, 1); ```                         | 1 ```map.remove(1);```                                                                                 | 1 ```map.get(1);```                                                                                           | 1 ```map.containsKey(1);```     | n/a                                                        | Operations could be n in worst case hash collisions  |
+| LinkedHashMap | 1  ```map.put(1, 1); ```                         | 1 ```map.remove(1);```                                                                                 | 1 ```map.get(1);```                                                                                           | 1 ```map.containsKey(1);```     | n/a                                                        | Operations could be n in worst case hash collisions  |
+| TreeMap       | 1  ```map.put(1, 1); ```                         | log n ```map.remove(1);```                                                                             | log n ```map.get(1);```                                                                                       | log n ```map.containsKey(1);``` | log n ```map.firstKey(), map.lastKey()```                  |                                                      |
+
+
+### Custom Comparator
+
+```java
+
+class MaxComparator implements Comparator<Integer> {
+
+    @Override
+    public int compare(Integer arg0, Integer arg1) {
+        return arg1-arg0;
+    }
+}
+
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(new MaxComparator());
+
+```
+
+### Implementing equals()
+
+(There are more thorough ways to implement this...)
+
+```java
+@Override
+public boolean equals(Object o) {
+    if (!(o instanceof Name))
+        return false;
+    Name n = (Name) o;
+    
+    return n.firstName.equals(firstName) && n.lastName.equals(lastName);
+}
+
+public int hashCode() {
+    return 31*firstName.hashCode() + lastName.hashCode();
+}
+
+```
+
+### Implementing Comparable
+
+```java
+public int compareTo(Name n) {
+    int lastCmp = lastName.compareTo(n.lastName);
+    return (lastCmp != 0 ? lastCmp : firstName.compareTo(n.firstName));
+}
+```
+
+### Implementing iterator
+
+Note: Iterators are the only safe way to modify a collection while iterating over it.
+
+```java
+public class StackWithArray<T> implements Iterable<T> {
+
+    private int nextElementIndex = 0;
+    // ...
+
+    // Iterable implementation
+    public Iterator<T> iterator() {
+        return new ArrayIterator();
+    }
+
+    private class ArrayIterator implements Iterator<T> {
+
+        private int nextElement = nextElementIndex;
+
+        public boolean hasNext() {
+            return nextElement > 0;
+        }
+
+        public T next() {
+            nextElement--;
+
+            return arr[nextElement];
+        }
+
+        public void remove() {
+            // Remove during iteration not supported here
+        }
+    }
+}
+
+Iterator iterator = collection.iterator();
+      
+while(iterator.hasNext()) {
+    Object element = iterator.next();
+    
+    if(element.getString().equals("yes") {
+        iterator.remove();
+    }
+}
+
+```
+
+### String/Int/Char Manipulation
+
+Turn a char to/from its int value:
+
+```java 
+String str = "123";
+
+int n = str.charAt(0) - '0';   // from char to int
+char c = (char)(n+'0');   // from int to char value
+
+// n = 1, c = 1
+
+```
+Turn 'A' into index 0 (for example, to put into a len 26 array for counting):
+
+```java
+String str = "ABC";
+int n = str.charAt(0) - 'A';
+
+// n = 0
+```
+
+Get least significant digit:
+```java
+int i = 123;
+int lsd = i % 10;
+i /= 10;
+
+// lsd = 3, i = 23
+
+```
+
+### Common functions
+
+```java
+int i = Integer.parseInt("123");
+
+boolean b = Character.isDigit('5');
+
+// Remember this is exclusive
+String s = "Hello";
+s.substring(1, 4); // prints "ell"
+
+String [] tokens = s.split(" ");
+
+int firstIndex = s.indexOf('e', 0);
+
+int lastIndex = s.lastIndexOf('e', str.length()-1);
+
+treeMap.floorKey(4);    // returns key that is closest to or equal to 4
+
+treeMap.ceilingKey(4);  // returns key that is closest to or equal to 4
+
+```
+
+### Tips
+
+* PriorityQueue allows dupes. If you want a list of unique things sorted by natural ordering, use a TreeSet or TreeMap.
+
+* PriorityQueue is only partially sorted, since it's a heap. If you need a collection that allows duplicates while keeping natural order, you'll just have to use Collections.sort().
+
+## Big O
+
+|         |              |
+| ------- | ------------ |
+| 1       | Constant     |
+| log n   | Logarithmic  |
+| n       | Linear       |
+| n log n | Linearithmic |
+| n^2     | Quadratic    |
+| 2^n     | Exponential  |
+| n!      | Factorial    |
+
+* If the algorithm is do this, and then do that, add the runtimes. If it is do this for every time you do that, multiply the runtimes.
+
+### Recursive runtimes
+
+* Often drawing out the call tree is the only way to confirm, but often reduce to ```O(branches^depth)```. Consider:
+
+```java
+int f(int n) {
+    if(n <=1) {
+        return 1;
+    }
+
+    return f(n-1) + f(n-1)
+}
+
+```
+
+You have a call tree like...
+
+```
+          f(4)
+        /     \
+      f(3)       f(3)
+     /   \       /    \
+    f(2)  f(2) f(2)   f(2)
+    
+    ...etc.
+```
+
+Total calls are 2^0 + 2^1...2^n-1. Recall that the sum of powers of 2 to determine that the total runtime is 2^n.
+
+* Another way to figure it out is to think about how many function calls you have, and how long each one runs for.
+
+```java
+
+void permutation(String str, String prefix) { 
+    if (str.length() == 0) { 
+       System.out.println(prefix); 
+    } else { 
+
+
+    for (int i= 0; i < str.length(); i++) {
+       String rem = str.substring(0, i) + str.substring(i + 1);
+        permutation(rem, prefix + str.charAt(i)); 
+    } 
+} 
+
+```
+
+We know what there will be n! permutations of a string (first we choose character 7, leaving 6 choices, then 5, etc.)
+
+So we know the base case will be called n! times. But how long do we run before we reach the base case? Well, we have to go through every char, so we run n times. We can imagine a call tree with n! nodes, and a length of n to get there. So we have (n*n!) nodes (function calls) in our tree.
+
+But how what about the time complexity at each node? Well, println will take n time. And taking the substring and creatng the new string will take n time. So each node takes n time.
+
+So in total we have n*(n*n!) time, or (n^2*n!) total.
+
+__Word Break__
+Some proofs and ideas:
+
+Let's abbreviate the function call, wordBreak, as wB(s, dict, i) where i is the end of the substring being imagined. Now, imagine a tree of function calls.
+wB(s, dict, 0) spawns wB(s, dict, 1), wB(s, dict, 2), ... wB(s, dict, n)
+wB(s, dict, 1) spawns wB(s, dict, 2), wB(s, dict, 3), ... wB(s, dict, n)
+wB(s, dict, 2) spawns wB(s, dict, 3), wB(s, dict, 4), ... wB(s, dict, n)
+and so on. 
+
+Since wB(s, dict, 0) is the root of our recursive call, we see that it spawns n - 1 + 1 = n subroutines. Each of these subroutines spawns at most n (so O(n) in Big-O notation) subroutines as well. So, wB is called recursively n times for each ending index, and each recursive call in turn is called, in the worst case, n times. Therefore, our running time complexity is n multiplied by itself n times => O(n^n). This is definitely a pessimistic estimate, but recall that Big-O notation is worst-case analysis. Hope this helps!
+
+Or slightly tighter bound:
+
+https://leetcode.com/problems/word-break/discuss/169383/The-Time-Complexity-of-The-Brute-Force-Method-Should-Be-O(2n)-and-Prove-It-Below
+
+__Robot Maze Search__
+Well, at each point the robot has 2 choices. And the total length he can go is the length of an entire row and column. So the runtime is 2^row+col. 
+
+__Word Search__
+When you think about word search, you have m * n cells in the grid, and each cell can make 4 choices for the length of the longest word, so I would guess the running time is m*n*4^L, where L is the length of the longest word.
 
 ## Maths
 
@@ -748,257 +1324,6 @@ log(2)8 = 3 because 2^3 = 8
 I.e., 2 to the power what makes 8.
 
 
-
-## Sorting
-
-| Sort          | Time                           | Space         | Stable?       | Notes                                                  |
-| ------------- | ------------------------------ | ------------- | ------------- | ------------------------------------------------------ |
-| Quicksort     | avg: n log n, worst: n^2       |     log n     | No            | Worst-case can be made very unlikely by shuffling data |
-| Mergesort     | n log n                        |     n         | Yes           |                                                        |
-| Heapsort      | n log n                        |     1         | No            | constant extra space if you use existing array, practically usually slower than QS due to operations  |
-| Insertion     | n^2                            |     1         | Yes           | Although typically bad, works well if elements are almost sorted, for example if k distance away, time becomes nk |
-| Counting sort | n + k                          |     n + k     | Yes           | Good when k is similar to n, giving n total time (k = size of radix -- the range of values) |
-| Radix sort    | nw                             |     n + w     | Yes           | w = size of words/keys being sorted                                                       |
-
-### Quicksort
-```java
-1. If left < right...
-1.1 Partition
-1.2 Sort(left, partitionIndex-1)
-1.3 Sort(partitionIndex+1, right)
-
-2. Partition(arr, left, right)
-2.1 Set pivot val = left (in practice there are better values)
-2.2 Set i = left+1, j = right
-2.3 While true...
-2.3.1 Increment i while < pivotVal && != right
-2.3.2 Decrement j while > pivotVal && != left
-2.3.3 if j > i, swap them, else break
-2.3.4 Swap left and j, then return j
-```
-
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/QuickSort.java)
-__Note__: The partition algorithm can algorithm can also be used for _QuickSelect_ (find the Kth smallest element). It gives n^2 worst case, but n time average case.
-
-### Mergesort
-```java
-1. If left < right...
-1.1  Get the mid
-1.2 Sort(left, mid)
-1.3 Sort(mid+1, right)
-1.4 Merge(arr, left, mid, right)
-
-2. Merge(arr, left, mid, right)
-2.1 Copy left and right into arrays
-2.2 Take the smaller elements
-2.3 Tidy up by taking left over elements
-
-```
-
-Unlike QuickSort, this is stable, but takes more memory.
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/MergeSort.java)
-
-### Heapsort
-```java
-
-Treat parent as (parentIndex*2)+1
-
-1. Create a max heap: Starting at the bottom of the heap, sink each node down
-2. Sink: swap the parent element with largest child, as long as a child is larger
-3. Now you have a max heap:
-3.1 Swap the last element with the first (largest element) -- the largest is now in the correct position
-3.2 Decrement the last element index
-3.3 Sink the new first element into the correct position
-3.4 Go to 3.1
-```
-
-Given an array, we can sort in-place. In practice, the operations often make this slower than QuickSort.
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/HeapSort.java)
-
-### Insertion sort
-
-```java
-Go through each element and swap it with preceding element, as long as it is smaller
-
-```
-Not usually useful, but can be helpful if data is usually sorted or k-sorted.
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/InsertionSort.java)
-
-### Counting sort
-
-```java
-1. Set up a count array the size of the radix + 1
-2. Iterate around value array, and increment count[val+1]
-
-[1, 3, 2, 2]
--->
- 0  1  2  3  4
-[0, 0, 1, 2, 1]
-
-3. Get the cumulative counts:
-[0, 0, 1, 3, 4]
-
-4. Copy the values from the original array into an auxiliary array using these counts, incrementing count each time
-[1, 2, 2, 3]
-
-5. Copy the values back into the main array
-
-```
-Useful if the radix is the same size as the digits, giving an O(n) algorithm.
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/KeyIndexCounting.java)
-
-### Radix sort
-
-```java
-
-(Basically counting sort but go through each letter of the string and use that as the value to count)
-
-```
-
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/
-RadixSort.java)
-
-## Graph Algorithms
-
-### Dijkstra
-Finds the shortest path from a vertex to all other vertices.
-
-```java
-1. Set up a distance array
-2. Set the distance to the source verex to 0
-3. Set the distance to the other vertices to +INF
-4. Add the vertex to the PriorityQueue
-5. While the queue isn't empty...
-6. Get the closest vertex (originally source)
-7. Relax every adjacent vertex and put them on the queue
-
-Relax(vertex current, vertex neighbours):
-1. If the distance to current + current's distance to neighbour < current distance to neighbour,
-   update neighbour's distance and update it's key in the queue if it's in the queue already
-2. Set edgeTo[neighbour] = current
-
-```
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/DijkstrasAlgorithm.java)
-
-Time: V+E(log V)
--- Assuming we use an adjacent list and PQ. We go through each vertex, and then for each edge, we add/remove it to the PQ.
-
-### Topological Sort
-
-Find an ordering in a list of dependencies
-
-```java
-
-1. For each node in the graph...
-2. If it hasn't been visited yet, perform a DFS on it...
-3. Popping the order stack will you give you an ordering
-
-DFS:
-1. Mark vertex visited and put on recursion stack (a set)
-2. For each adjacent vertex...
-3. If it's in the recursion stack, we have a loop -- break
-4. Otherwise, if it's not visited, visit it
-5. Finally, after having visited all adjacent vertices recursively, we remove this node from the recursion stack and add it to the order stack
-
-```
-
-Time: V+E
-
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/TopologicalSort.java)
-
-## Union-Find (Disjoint Set)
-
-Used to check if two components are connected together.
-
-```java
-
-1. Setup an array of size n, with values 0...n for each vertex.
-2. Union:
-2.1 Find the root of A and B
-2.2 Make the root of B = root of A
-
-3. Find:
-3.1 Check if A's root == B's root
-
-4. Get root:
-Recursively call getRoot with the vertex index, until the vertex index matches the value at that vertex.
-
-```
-
-Time: O(n) -- naive implementation. This turns into n^2 for n union or find operations. But we can be improved to log n (and even inverse Ackermann function) with path compression: e.g., when finding roots, you set the root to be grandparent, etc.
-Space: O(n)
-
-
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/UnionFind.java)
-
-## Minimum Spanning Tree
-The tree with the minimum weight that touches every vertex in a graph.
-If all weights are unique, then there will be 1 MST, otherwise there may be multiple.
-An MST must have vertices-1 edges.
-
-A few ways to build. Lazy Prim may be easiest...
-
-```java
-
-1. Put the initial vertex on a priority queue and visit it
-2. While the queue isn't empty/has vertices-1 edges...
-3. Get the minimum edge
-4. If both vertices have been visited, continue
-5. Else, add this edge to the MST and visit the vertices connected to this edge
-
-Visit:
-1. Mark the vertex as visited
-2. For each adjacent edge, if the vertex attached to this edge hasn't been visited...
-3. Add the edge to the PQ
-
-```
-Time: e log e
-Space e
-
-
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/datastructures/MinimumSpanningTreeLazyPrim.java)
-
-## Segment Tree
-Holds intervals in a tree structure.
-Can use used for range sum queries.
-
-Time: n to build, log n to query
-Space: n (I think it's 2-4n?)
-
-[Source](https://github.com/pekoto/PrincetonA/blob/bb669e55523b73b46f62b003adb196b392385901/PrincetonA/src/com/pekoto/challenges/RangeSumSegmentTree.java)
-
-## Binary Indexed Tree
-Like a segement tree. Used for quick range sum queries.
-
-Time: n log n to build, n to update, log n to query
-Space: n
-
-[Source](https://github.com/pekoto/PrincetonA/blob/57270f330468b49bd0570f911ba3ea0dc96f2aa0/PrincetonA/src/com/pekoto/datastructures/BinaryIndexedTree.java)
-
-## Finding a Missing Element
-Given an array, or two arrays, find the missing element.
-(Variations of this problem crop up a lot.)
-
-There are a number of ways to do this:
-
-1. Just sort the arrays and iterate through them with pointers
-2. If the numbers are sum of 1-n, then use ``` (n(n+1))/2 ``` to get the expected value, then substract actual value
-3. Likewise you can add both arrays and take the difference
-4. You can use a HashMap: go through the smaller array adding counts, then go through the larger array decrementing counts. If the count falls below 0, it is a missing element. (Useful when more than 1 element is missing.)
-5. You can also XOR everything together:
-
-```java
-// Using XOR to find missing:
-a1: 1, 2, 3
-a2: 1, 3
-
-01 ^ 10 = 11 (1^2 = 3)
-11 ^ 11 = 00 (3^3 = 0)
-00 ^ 01 = 01 (0^1 = 1)
-01 ^ 11 = 10 (1^3 = 2)
-
-```
-
 ## Bit Manipulation
 
 ### GetBit
@@ -1072,15 +1397,6 @@ E.g.,
 ### General tips
 * Left shifting will multiply by 2.
 * Right shifting will divide by 2
-
-## Sliding Window
-0. If required, set up a map, etc., that can be used to check if your condition is fulfilled. E.g., number of each char, etc.
-1. Set up start
-2. Set up a loop with end
-3. Set up a map to store counts
-4. Use end to update your count
-5. If your condition is violated, update start until it is valid again (e.g., have 0 unique character left, end-start matches len n, etc.)
-6. Now your condition is guaranteed to hold, so check if you have a new max, etc.
 
 ## Testing/Edge Cases
 
@@ -1167,92 +1483,6 @@ Test coupled objects individually. For example, if the code uses a random number
 ### Testing Big Data
 How would you verify test cases that are so large there is no previous known answer? E.g., count all A's in crawled internet index. Well you could use statistics -- estimate how common A's are, get avg. number of A's on a single page, then multiply by the number of pages scanned and see if your answer is close.
 
-## Calculator/Stack parsing
-When we need to parse an expression, we usually use a stack. Dijkstra suggests have a number and operator stack:
-
-1. When we have a number, put it on the number stack
-2. When we have an operator, put it on the operator stack
-3. When we hit a right parenthesis, pop 2 numbers and and operator, and put them back on the number stack.
-
-We can actually do this with only 1 stack:
-
-```java
-
-public int calculate(String s) {
-    int len;
-    if (s == null || (len = s.length()) == 0) {
-        return 0;
-     }
- 
-     Stack<Integer> stack = new Stack<Integer>();
-     int num = 0;
-     char sign = '+';
- 
-     for (int i = 0; i < len; i++) {
-     
-         if (Character.isDigit(s.charAt(i))) {
-             num = num * 10 + s.charAt(i) - '0';
-         }
- 
-         if ((!Character.isDigit(s.charAt(i)) && ' ' != s.charAt(i)) || i == len - 1) {
-              if (sign == '-') {
-                  stack.push(-num);
-              } else if (sign == '+') {
-                  stack.push(num);
-              } else if (sign == '*') {
-                  stack.push(stack.pop() * num);
-              } else if (sign == '/') {
-                  stack.push(stack.pop() / num);
-              }
-              sign = s.charAt(i);
-              num = 0;
-         }
-     }
-
-    int result = 0;
- 
-    // Add up all the numbers in the stack
-    for (int i : stack) {
-        result += i;
-     }
- 
-     return result;
-}
-
-```
-
-## String/Int/Char Manipulation
-
-Turn a char to/from its int value:
-
-```java 
-String str = "123";
-
-int n = str.charAt(0) - '0';   // from char to int
-char c = (char)(n+'0');   // from int to char value
-
-// n = 1, c = 1
-
-```
-Turn 'A' into index 0 (for example, to put into a len 26 array for counting):
-
-```java
-String str = "ABC";
-int n = str.charAt(0) - 'A';
-
-// n = 0
-```
-
-Get least significant digit:
-```java
-int i = 123;
-int lsd = i % 10;
-i /= 10;
-
-// lsd = 3, i = 23
-
-```
-
 ## SQL
 
 ### Wildcards
@@ -1334,238 +1564,6 @@ ON Tenants.TenantID = AptCount.TenantID
 
 
 ```
-
-## Java
-
-|               | Add                                              | Remove                                                                                                 | Get (n/obj)                                                                                                   | Contains                        | Get min/max                                                | Comment                                              |
-| ------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
-| PriorityQueue | log n  ```minHeap.add(1); ```                    | n ```minHeap.remove(1);```                                                                             | n/a                                                                                                           | n ```minHeap.contains(1);```    | log n/1 ```minHeap.poll()/minHeap.peak()```                |                                                      |
-| LinkedList    | 1  ```queue.add(1); // adds to end of queue ```  | 1 if first/last node, n is random node ```queue.pollFirst(), queue.pollLast(), queue.remove(1);```     | 1 if first/last node, n if random node ```queue.peekFirst(), queue.peekLast(), queue.get(1);```               | n ```queue.contains(1);```      | n/a                                                        | Can be used as a FIFO or deque                       |
-| Stack         | 1  ```stack.push(1); // adds to end of queue ``` | 1 if top node, n is random node ```stack.pop(), stack.remove(1);```                                    | n gets at index ```stack.get(1);```                                                                           | n ```stack.contains(1);```      | n/a                                                        |                                                      |
-
-|               | Add                                              | Remove                                                                                                 | Get (n/obj)                                                                                                   | Contains                        | Get min/max                                                | Comment                                              |
-| ------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
-| HashSet       | 1  ```set.add(1); ```                            | 1 ```set.remove(1);```                                                                                 | n/a                                                                                                           | 1 ```set.contains(1);```        | n/a                                                        |                                                      |
-| LinkedHashSet | 1  ```set.add(1); ```                            | 1 ```set.remove(1);```                                                                                 | n/a                                                                                                           | 1 ```set.contains(1);```        | n/a| Stores objects in the order they were added           |                                                      |
-| TreeSet       | log n  ```set.add(1); ```                        | log n ```set.remove(1);```                                                                             | n/a                                                                                                           | log n ```set.contains(1);```    | log n ```set.first() // min, set.last() // max```          | Stores elements according to natural ordering        |
-
-|               | Add                                              | Remove                                                                                                 | Get (n/obj)                                                                                                   | Contains                        | Get min/max                                                | Comment                                              |
-| ------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
-| HashMap       | 1  ```map.put(1, 1); ```                         | 1 ```map.remove(1);```                                                                                 | 1 ```map.get(1);```                                                                                           | 1 ```map.containsKey(1);```     | n/a                                                        | Operations could be n in worst case hash collisions  |
-| LinkedHashMap | 1  ```map.put(1, 1); ```                         | 1 ```map.remove(1);```                                                                                 | 1 ```map.get(1);```                                                                                           | 1 ```map.containsKey(1);```     | n/a                                                        | Operations could be n in worst case hash collisions  |
-| TreeMap       | 1  ```map.put(1, 1); ```                         | log n ```map.remove(1);```                                                                             | log n ```map.get(1);```                                                                                       | log n ```map.containsKey(1);``` | log n ```map.firstKey(), map.lastKey()```                  |                                                      |
-
-
-### Custom Comparator
-
-```java
-
-class MaxComparator implements Comparator<Integer> {
-
-    @Override
-    public int compare(Integer arg0, Integer arg1) {
-        return arg1-arg0;
-    }
-}
-
-PriorityQueue<Integer> maxHeap = new PriorityQueue<>(new MaxComparator());
-
-```
-
-### Implementing equals()
-
-(There are more thorough ways to implement this...)
-
-```java
-@Override
-public boolean equals(Object o) {
-    if (!(o instanceof Name))
-        return false;
-    Name n = (Name) o;
-    
-    return n.firstName.equals(firstName) && n.lastName.equals(lastName);
-}
-
-public int hashCode() {
-    return 31*firstName.hashCode() + lastName.hashCode();
-}
-
-```
-
-### Implementing Comparable
-
-```java
-public int compareTo(Name n) {
-    int lastCmp = lastName.compareTo(n.lastName);
-    return (lastCmp != 0 ? lastCmp : firstName.compareTo(n.firstName));
-}
-```
-
-### Implementing iterator
-
-Note: Iterators are the only safe way to modify a collection while iterating over it.
-
-```java
-public class StackWithArray<T> implements Iterable<T> {
-
-    private int nextElementIndex = 0;
-    // ...
-
-    // Iterable implementation
-    public Iterator<T> iterator() {
-        return new ArrayIterator();
-    }
-
-    private class ArrayIterator implements Iterator<T> {
-
-        private int nextElement = nextElementIndex;
-
-        public boolean hasNext() {
-            return nextElement > 0;
-        }
-
-        public T next() {
-            nextElement--;
-
-            return arr[nextElement];
-        }
-
-        public void remove() {
-            // Remove during iteration not supported here
-        }
-    }
-}
-
-Iterator iterator = collection.iterator();
-      
-while(iterator.hasNext()) {
-    Object element = iterator.next();
-    
-    if(element.getString().equals("yes") {
-        iterator.remove();
-    }
-}
-
-```
-
-### Common functions
-
-```java
-int i = Integer.parseInt("123");
-
-boolean b = Character.isDigit('5');
-
-// Remember this is exclusive
-String s = "Hello";
-s.substring(1, 4); // prints "ell"
-
-String [] tokens = s.split(" ");
-
-int firstIndex = s.indexOf('e', 0);
-
-int lastIndex = s.lastIndexOf('e', str.length()-1);
-
-treeMap.floorKey(4);    // returns key that is closest to or equal to 4
-
-treeMap.ceilingKey(4);  // returns key that is closest to or equal to 4
-
-```
-
-### Tips
-
-* PriorityQueue allows dupes. If you want a list of unique things sorted by natural ordering, use a TreeSet or TreeMap.
-
-* PriorityQueue is only partially sorted, since it's a heap. If you need a collection that allows duplicates while keeping natural order, you'll just have to use Collections.sort().
-
-## Big O
-
-|         |              |
-| ------- | ------------ |
-| 1       | Constant     |
-| log n   | Logarithmic  |
-| n       | Linear       |
-| n log n | Linearithmic |
-| n^2     | Quadratic    |
-| 2^n     | Exponential  |
-| n!      | Factorial    |
-
-* If the algorithm is do this, and then do that, add the runtimes. If it is do this for every time you do that, multiply the runtimes.
-
-### Recursive runtimes
-
-* Often drawing out the call tree is the only way to confirm, but often reduce to ```O(branches^depth)```. Consider:
-
-```java
-int f(int n) {
-    if(n <=1) {
-        return 1;
-    }
-
-    return f(n-1) + f(n-1)
-}
-
-```
-
-You have a call tree like...
-
-```
-          f(4)
-        /     \
-      f(3)       f(3)
-     /   \       /    \
-    f(2)  f(2) f(2)   f(2)
-    
-    ...etc.
-```
-
-Total calls are 2^0 + 2^1...2^n-1. Recall that the sum of powers of 2 to determine that the total runtime is 2^n.
-
-* Another way to figure it out is to think about how many function calls you have, and how long each one runs for.
-
-```java
-
-void permutation(String str, String prefix) { 
-    if (str.length() == 0) { 
-       System.out.println(prefix); 
-    } else { 
-
-
-    for (int i= 0; i < str.length(); i++) {
-       String rem = str.substring(0, i) + str.substring(i + 1);
-        permutation(rem, prefix + str.charAt(i)); 
-    } 
-} 
-
-```
-
-We know what there will be n! permutations of a string (first we choose character 7, leaving 6 choices, then 5, etc.)
-
-So we know the base case will be called n! times. But how long do we run before we reach the base case? Well, we have to go through every char, so we run n times. We can imagine a call tree with n! nodes, and a length of n to get there. So we have (n*n!) nodes (function calls) in our tree.
-
-But how what about the time complexity at each node? Well, println will take n time. And taking the substring and creatng the new string will take n time. So each node takes n time.
-
-So in total we have n*(n*n!) time, or (n^2*n!) total.
-
-__Word Break__
-Some proofs and ideas:
-
-Let's abbreviate the function call, wordBreak, as wB(s, dict, i) where i is the end of the substring being imagined. Now, imagine a tree of function calls.
-wB(s, dict, 0) spawns wB(s, dict, 1), wB(s, dict, 2), ... wB(s, dict, n)
-wB(s, dict, 1) spawns wB(s, dict, 2), wB(s, dict, 3), ... wB(s, dict, n)
-wB(s, dict, 2) spawns wB(s, dict, 3), wB(s, dict, 4), ... wB(s, dict, n)
-and so on. 
-
-Since wB(s, dict, 0) is the root of our recursive call, we see that it spawns n - 1 + 1 = n subroutines. Each of these subroutines spawns at most n (so O(n) in Big-O notation) subroutines as well. So, wB is called recursively n times for each ending index, and each recursive call in turn is called, in the worst case, n times. Therefore, our running time complexity is n multiplied by itself n times => O(n^n). This is definitely a pessimistic estimate, but recall that Big-O notation is worst-case analysis. Hope this helps!
-
-Or slightly tighter bound:
-
-https://leetcode.com/problems/word-break/discuss/169383/The-Time-Complexity-of-The-Brute-Force-Method-Should-Be-O(2n)-and-Prove-It-Below
-
-__Robot Maze Search__
-Well, at each point the robot has 2 choices. And the total length he can go is the length of an entire row and column. So the runtime is 2^row+col. 
-
-__Word Search__
-When you think about word search, you have m * n cells in the grid, and each cell can make 4 choices for the length of the longest word, so I would guess the running time is m*n*4^L, where L is the length of the longest word.
 
 ## Big Data
 
