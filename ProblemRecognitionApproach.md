@@ -103,6 +103,10 @@
 
 ### Basic Steps
 
+<details>
+<summary>
+ </summary> 
+ 
 __Pick out key details__
 * Is data sorted
 * Is algorithm going to be run many times (so could be precomputed or cached)
@@ -153,6 +157,7 @@ __When stuck__
 * Use a hash table
 * Start by solving small examples and build up to larger ones -- can you spot a pattern?
 * Draw pictures: Don't think in your head. Draw up some different test inputs and solve them by hand.
+</details>
 
 ### Misc. Tips
 
