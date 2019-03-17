@@ -1,38 +1,37 @@
 # Problem Recognition Patterns (in progress)
 
-## Steps
+## Basic Steps
 
 ### Pick out key details
 * Is data sorted
 * Is algorithm going to be run many times (so could be precomputed or cached)
-* Is there a memory limitation, etc.
+* Is there a memory limitation
+* Etc.
 
 ### Draw an example
 * Physically draw what the structure/data looks like
 * Make sure it’s big enough, and realistic enough (e.g., don’t draw a perfectly balanced tree if the data isn’t perfectly balanced, try to avoid special cases)
+* Work through the example by hand, determining what it should output
+
+### Think of cases
+* Think of the main possibilities. E.g., Checking for 1 edit distance part -- consider what happens for an edit, insertion, or deletion. For overlapping intervals, think of how they could overlap, etc.
+* If the problem seems to complex to reason about for the typical case, start reasoning from small cases
+* Can consider edge cases, but don't wase too much time on them -- want to get the main algorithm down
 
 ### Brute force algorithm
 * No matter how bad, it gives you a starting point and shows that you at least understand what needs to be done
-
-#### When stuck
-* Use a fresh example
-* Solve “incorrectly”, and then think about why the incorrect method doesn’t work/can be fixed
-* Make a time/space tradeoff
-* Precompute information (e.g., sort data)
-* Use a hash table
-* Start by solving small examples and build up to larger ones -- can you spot a pattern?
-* Mistakes are overlooked if you can recognize where you went wrong and fix it. Again, being present is key because I’m coaching you the whole way. If nerves take hold—pause, deep breath and pay attention to where I’m directing you. Concentrate on solving only the problem posed but be prepared to mentally pivot and sanity check along the way.
 
 ### Optimize
 * Use key details -- is the data sorted, etc.
 
 ### Walk through
 * Before implementation, soldify understanding by walking through your algorithm.
-* MAYBE write pseudocode -- but be quick with it (e.g, 1. Search array, 2. find biggest)
+* MAYBE write pseudocode
 
 ### Implementation
-* Avoid boilerplate. E.g., say you’ll call a method called “initIncrementalMatrix” instead of writing out the whole initialization code.
-* If you don’t have time to write error checks, add a TODO: Check for…
+* Make a TODO: Edge cases, bad input, etc. You'll fill this in later
+* Put in template methods for things you'll fill in later. E.g., MaxComparator, parseLine, etc.
+* Again, if you don’t have time to write error checks, add a TODO: Check for…. Confirm what you want to do in case of error (Exception, error code, null, etc.)
 * Use classes where appropriate (you can pretend the class exists, e.g., Point)
 * If you get confused (happens often), go back to your example and work through it again
 
@@ -45,27 +44,35 @@
 * Test edge cases (null values, single element values, extreme values)
 * Carefully analyze why bugs occur and ensure your fix doesn’t break anything else
 
+### When stuck
+* Use a fresh example
+* Solve “incorrectly”, and then think about why the incorrect method doesn’t work/can be fixed
+* Make a time/space tradeoff
+* Precompute information (e.g., sort data)
+* Use a hash table
+* Start by solving small examples and build up to larger ones -- can you spot a pattern?
+* Draw pictures: Don't think in your head. Draw up some different test inputs and solve them by hand.
 
 ## General Tips
 
-### 1. Brute force first
-Go for a brute force solution first, identify the bottleneck (largest big O), then think about how you could get rid of it (see __Optimization Techniques__ below).
+### Brute force first
+Go for a brute force solution first, identify the bottleneck (largest big O), then think about how you could get rid of it.
 
 If you are dealing with a recursive or backtracking problem, solve the problem first, and then think about memoization or dynamic programming.
 
-### 2. Algorithm first, then code.
+### Algorithm first, then code.
 Think about the algorithm first, and then think about what this would look like in code. Think about the general algorithm you, a human being, would use to solve the problem, and then think about what this would look like in code. Trying to do both at once can tangle you in knots for complex problems. If you at least demonstrate you understand the algorithm, you demonstrate you can solve problems.
 
-### 3. Data structure brainstorm
+### Data structure brainstorm
 Run through common data structures to see if they would help: maps, heaps, tries, trees, lists.
 
-### 4. Dealing with connected data
+### Dealing with connected data
 Do you need to count connected data in some way? (E.g., count 1s in a matrix). Use a breadth-first search or depth-first search. Rememeber that DFS is recursive, so could run out of stack memory.
 
-### 5. Dealing with related but unconnected data
+### Dealing with related but unconnected data
 Do you need to count related data in some way, but the data is not fully connected? (E.g., count name frequency given a list of pairs of different name spellings). Try connecting the data as a graph and then doing a depth-first search to count the connected components.
 
-### 6. Find permutations/paths
+### Find permutations/paths
 If you have to find some permutations, the problem is likely recursive. Remember the general algorithm:
 * Identify the base case (nowhere left to go/nothing left to process/target value found)
 * Pick a thing from your collection
@@ -76,41 +83,35 @@ If you have to find some permutations, the problem is likely recursive. Remember
 
 After you have come up with the general recursive algorithm, think about how you can cache some values in a map or array (memoization).
 
-### 7. Returning the next something...
+### Returning the next something...
 If you need to return the next something (.e.g, daily temperatures problem), consider using a stack since this will return the most recent thing you visited. What happens if you iterate backwards and put on the stack? -- you get the next.
 
 If you have to keep track of the lowest/highest something, and keep the data ordered (e.g., buy/sell stocks, 3-digit increasing substring), consider setting the element as the min/max, and then comparing to the next element. If you need three elements, you can set element 1 to the min, check if the next one is greater than min and less than current second highest, etc.
 
-### 8. Think small
+### Think small
 Usually a small example will be enough to prove an algorithm wrong. Also, picking small, simple examples that you can solve by hand will help you spot patterns to crack the algorithm. Likewise, if you're having trouble with a given example, try a simpler example: an array with 1 or 2 elements, etc.
 
-### 9. Think exhaustively
+### Think exhaustively
 What possible cases do you have? For example, if looking at overlapping intervals, there are only 3 ways 2 intervals can be:
 
 * Disjoint (one after another)
 * Overlapping (one starts before another ends, but after it start)
 * Nested (one starts after another starts, and ends before it ends)
 
-### 10. Model on existing
+### Model on existing
 Can you model your problem on some existing algorithm? What does it look like?
 
-### 11. Identify the pain point
+### Identify the pain point
 If you are doing some work repeatedly -- choosing the max or min, say -- can you find a data structure to make that more efficient?
 
-### 12. Relax some constraints
+### Relax some constraints
 For example, if it's hard to find the closest sum, could you instead try to find the exact sum?
 
-
 ### Sorting HashMaps
-If you need to sort a HashMap, there are two options:
-1. Simply read the key/value to a custom object with a custom comparator, and then use Collections.sort().
-2. Hold two HashMaps: One of keys to counts, and another to counts to keys. When incrementing, remove objects from the previous count:key map, and add it to the new count:key map.
-
-### If stuck, draw pictures
-Don't think in your head. Draw up some different test inputs and solve them by hand.
+If you need to sort a HashMap, read the key/value to a custom object with a custom comparator, and then use Collections.sort().
 
 ### Rearrange variables
-Don't be afraid to rearrange variables to make things easier. For example, make sure var1 always starts to the left of var2, etc.
+Don't be afraid to rearrange variables to make things easier. For example, make sure var1 always starts to the left of var2, or is the smaller string, etc.
 
 ```java
 if(arg2.x < arg1.x) {
@@ -121,16 +122,30 @@ if(arg2.x < arg1.x) {
 ### Don't forget empty checks
 Check data structures are not empty before peek/poll.
 
+### Mistakes are overlooked if you  spot/fix them
+Again, being present is key because I’m coaching you the whole way. If nerves take hold—pause, deep breath and pay attention to where I’m directing you. Concentrate on solving only the problem posed but be prepared to mentally pivot and sanity check along the way.
+
+### Try backwards
+Does traversing the data backwards make things easier?
+
+### Linked list problems
+What would happen if you used a two pointer approach?
+
+### When dealing with trees...
+...think recursion.
+
+### Tracking min/max
+Do you need to keep a running track of a minimum or maximum value? Think heaps. In Java, `PriorityQueue` doesn't support remove in log n time. Instead you can use a `TreeMap` (Red-black tree implementation), which will keep track of the min or max in log n time, and also allow for log n removals.
+
+### Implementing maths operations
+If you have to reimplement a mathematical operation without using operators, you will probably have to use bit manipulation. Break down the basics of the operation to work out what is going on with the numbers, and then think about how you would replicate that using bitwise operators.
+
+
 ## Optimization Techniques
-1. Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
-2. Do you need to use O(1) space? Does sorting the data help?
-3. Do you need an O(n) runtime and O(1) space? Then you probably need to mark the data in the original data structure somehow. For example, by setting it to negative. Remember, you can run through a data structure multiple times.
-4. Does traversing the data backwards make things easier?
-5. If it's a linked list problem, what would happen if you used a two pointer approach?
-6. If you're dealing with trees, think recursion.
-7. Do you need to keep a running track of a minimum or maximum value? Think heaps. In Java, `PriorityQueue` doesn't support remove in log n time. Instead you can use a `TreeMap` (Red-black tree implementation), which will keep track of the min or max in log n time, and also allow for log n removals.
-8. If you have to reimplement a mathematical operation without using operators, you will probably have to use bit manipulation. Break down the basics of the operation to work out what is going on with the numbers, and then think about how you would replicate that using bitwise operators.
-9. Are you dealing with a limited range of ints -- temperatures, numbers, etc.?
+* Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
+* Do you need to use O(1) space? Does sorting the data help?
+* Do you need an O(n) runtime and O(1) space? Then you probably need to mark the data in the original data structure somehow. For example, by setting it to negative. Remember, you can run through a data structure multiple times.
+* Are you dealing with a limited range of ints -- temperatures, numbers, etc.?
 Then you might be able to stick them in a fixed size array or map with counts or indexes. Then when you iterate that for each element you will still get a fixed-time runtime.
 
 ## String processing
@@ -201,37 +216,41 @@ public boolean contains(String word) {
 
 ```
 
-###
+### KMP (Knuth-Morris-Pratt)
 
 A string matching algorithm that works in O(n+m) time and O(m) space.
-Essentially useful because it doesn't backtrack along the main string -- meaning it can run on an infinite stream of text.
+Point: it doesn't backtrack along the main string -- meaning it can run on an infinite stream of text.
 
 Essentially we build a FSA from the substring, treating it like a pattern, working where we should jump back to if we hit a mismatch.
 
+```
 1. Build FSA:
 1.1 Set index = 0, i = 1
 1.2 If index == i, increment index, set arr[i] = index, i++
 1.3 Else, if index == 0, increment i, else index = arr[index-1] (jump back -- we matched this far, so see if we can restart the pattern from the previous point).
+```
 
 The actual pattern matching is then largely the same.
 
+```
 2. Pattern match:
 2.1 While strIndex < str && ptnIndex < ptn
 2.2 If strIndex == ptnIndex, increment both
 2.3 Else, if ptnIndex == 0, increment strIndex, else, ptnIndex = arr[ptnIndex-1] -- again, we matched this far, so see if we can restart the pattern from the previous point
+```
 
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/KmpSubstringMatching.java)
 
 ### Rabin-Karb
 This is a useful substring matching algorithm because it can be used for several other algorithm problems, such as finding the max subarray of length k, etc. It can also be extended to check for several patterns at once (e.g., plagiarism checking).
 
-To check for multiple substrings/patterns, simply put all of the hashes in a set, and then check if the string has is in that set.
+To check for multiple substrings/patterns, simply put all of the hashes in a set, and then check if the string hash is in that set.
 
 The idea is:
 1. Take the hash of the pattern you're looking for, say the pattern is length k
 2. Take a length k window of the search string.
 3. If the window has the same hash as the pattern, run through the strings to see if they match
-4. If they won't, update the window by subtracting the first letter from the hashed window value, and adding the next value
+4. If they don't, update the window by subtracting the first letter from the hashed window value, and adding the next value
 
 Average time: n+k
 Space: k
@@ -363,6 +382,7 @@ doSomething(node);
 ```
 
 ### Level-order traversal
+```
 Essentially this boils down a BFS.
 1. Put the root on a queue
 2. Get the size of the queue
@@ -370,7 +390,7 @@ Essentially this boils down a BFS.
 4. On each iteration of the loop, get a node from the tree and add its children to the queue
 5. Go to 1
 6. Break when the queue is empty
-
+```
 This can be used for various things: printing level-order, check if each level is symmetrical, "inverting" the children at each level, etc.
 
 ### Bottom-up recursion
@@ -456,13 +476,15 @@ The total nodes in a complete tree is (2^k)-1, where k is the height of the tree
 ### Tree Tips
 * We often recurse when doing tree problems -- e.g., when getting the height. Can we also do something else while in the recursive method? For example, if finding the max diameter, we are finding the height of the left and right subtrees anyway, so we could also check to see if we have a new max diameter (left + right height) at the same time.
 
-* It can often become confusing trying to pass some value (like ```java int max```) around. To make this easier for interview purposes, you can declare this value outside of the function.
+* It can often become confusing trying to pass some value (like ```java int max```) around in a recursive manner for both children. To make this easier for interview purposes, you can declare this value outside of the function.
 
-* Don't forget inorder, preorder, and postorder traversals. These can often be used to find brute force solutions. E.g., find the highest, get in order, compare if trees are equal, check if contains subtree, etc. (these are rarely optimum solutions though).
+* Don't forget inorder, preorder, and postorder traversals. These can often be used to find brute force solutions. E.g., find the highest, get in order, compare if trees are equal, check if contains subtree, etc. Just do a traversal and read the results into a list: now you have a list problem (though rarely an optimum solution though).
 
-## Permutation, Combination, and Subset Formulas
+## Maths
 
-### Permutations with repeats
+### Permutation, Combination, and Subset Formulas
+
+#### Permutations with repeats
 How many ways can you choose k elements from n elements.
 Example: How many 4 digit pin numbers are there?
 
@@ -472,7 +494,7 @@ Example:
 How many ways can we choose a 4 digit PIN using 0-9?
 10^4 = 10,000
 
-### Permutations without repeats
+#### Permutations without repeats
 How many permutations of k elements are there from a string containing n elements?
 
 ``` n!/(n-k)! ```
@@ -492,7 +514,7 @@ ABC! = 3! = 6
 
 ABC, ACB, BAC, BCA, CAB, CBA
 ```
-### Unique permutations from a string with repeats
+#### Unique permutations from a string with repeats
 Given a string with repeated elements, how many unique permutations are there?
 
 ```  n!/(repeat element 1 count)!*(repeat element 2 count)!... ```
@@ -514,7 +536,7 @@ For {1, 1, 2, 3}, we have 4 elements, and 1 is repeated twice, so:
 3,1,1,2
 3,2,1,1
 ```
-### Combinations without repeats
+#### Combinations without repeats
 How many ways can you choose k elements from n, if order doesn't matter?
 For example, how many ways can you choose 6 lottery numbers from 49.
 
@@ -522,7 +544,7 @@ For example, how many ways can you choose 6 lottery numbers from 49.
 
 49!/(49-6)!6! = 13,983,816
 
-### Subsets
+#### Subsets
 The number of subsets given some superset.
 ``` 2^n. ```
 
@@ -531,7 +553,7 @@ This is because for each element it can either be in the set or not.
 For example, {1, 2, 3} = 2^3 = 8.
 {}, {1}, {2}, {3}, {1, 2}, {1,3}, {2,3}, {1,2,3}
 
-## Generating Permutations
+### Generating Permutations
 This follows the basic recursive pattern:
 1. Pick a thing, add it one set and remove it from the other
 2. Recurse
@@ -567,7 +589,7 @@ If we want to generate unique permutations in an array with duplicate elements, 
 
 What is the running time of this? Well, we have n! permutations. The inner loop takes n time, giving us n * n!. But recall that ``` arr.clone() ``` takes n time. So in total we have: n * (n * n!).
 
-### String permutations
+#### String permutations
 String permutations (and recursive String functions generally) have a slight tweak. Since creating a new String creates a new object in memory, you don't have to unchoose.
 
 ```java
@@ -592,7 +614,7 @@ __Tip:__ If you are given the data in some other format, such as 2 arrays -- one
 1. Just modify these 2 lists to be one list. E.g., turn {a, b, c}, {2, 1, 3} into the list {a, a, b, c, c, c} or String aabccc.
 2. Alternatively, just use the same strategy -- to decide what to pick net you scan through the count array until you hit the first non-zero element starting from the current index.
 
-## Generating subsets
+### Generating subsets
 Although inefficient, generating subsets can often be used to find a brute force solution (e.g., find min/max/closest set of things).
 
 Essentially we use a recursive base case and build approach. When generating subsets, we take the empty set, add an element to it, and then add elements to those subsets, etc.
@@ -644,15 +666,96 @@ public List<List<Integer>> generateSubsets(int[] arr, int index) {
 
 Complexity: ``` O(n*2^n) ```
 
-## Sorting Summary
+### Powers of 2
+
+| x  | 2^x  | 
+| -- | ---- |
+| 0  | 1    | 
+| 1  | 2    | 
+| 2  | 4    | 
+| 3  | 8    | 
+| 4  | 16   | 
+| 5  | 32   |
+| 6  | 64   |
+| 7  | 128  |
+| 8  | 256  |
+| 9  | 512  |
+| 10 | 1024 |
+
+
+#### Estimating
+Recall (x^n)*(x^m) = x^n+m.
+E.g., 2^2 * 2*3 = 4 * 8 = 32 = 2^5 \[2^(2+3)]
+
+So, to estimate powers of 2, find the lower numbers and multiply them together.
+
+For example, 2^20 = ?
+2^10 ~= 1000 --> 10*2 = 20, so 1000*1000 = 1,000,000 (actual 1,048,576)
+
+#### Summing
+The sum of total powers of 2 is 2^(n+1)-1
+
+E.g., Sum of 2^3 = 2 + 4 + 8 = 15 = (2^4)-1.
+
+Note that this is the same as the nodes in a binary tree. Useful for calculating recursion call tree sizes.
+
+(What if we had 2^31 in an array of 2^31? It would be 2^62, so should fit in long).
+
+#### Notable Powers
+
+| 2^x          | Value              | Comment                               |
+| ------------ | ------------------ | ------------------------------------- |
+| 2^31-1 BITS  | Integer.MAX_VALUE  | About 2 billion                       |
+| 2^63-1 BITS  | Long.MAX_VALUE     | 9 quintillion something...            | 
+| 2^10         | KB                 | ~1,000 bytes)                         |
+| 2^20         | MB                 | ~1,000,000 bytes/~1000KB              |
+| 2^30         | GB                 | ~1,000,000,000 bytes/~1000MB          |
+| 2^40         | TB                 | ~1,000,000,000,000 bytes/~1000GB      |
+
+Using a Bit Array, we could store around 2^31 (about 2 billion values) true/false values in a single int.
+We could use an array of 10 values to store 2 billion * 10 true/false values, etc.
+Useful when tinking about system design.
+
+### Sum of 1...n
+
+``` 
+n(n+1)/2
+
+E.g., 1...4 
+= 1 + 2 + 3 + 4 = 10
+= 4(5)/2 = 20/2 = 2
+```
+
+This is useful because it reduces to n^2 when working out runtimes.
+
+```java
+for(int i = 0; i < n; i++) {
+    for(int j = 0; j < i; j++) {
+         ...
+    }
+}
+```
+
+How many times does j run? 0, 1, 2...n times. Therefore the time sums to an n^2 time.
+
+### Log
+The inverse power function.
+
+log(2)8 = 3 because 2^3 = 8
+
+I.e., 2 to the power what makes 8.
+
+
+
+## Sorting
 
 | Sort          | Time                           | Space         | Stable?       | Notes                                                  |
 | ------------- | ------------------------------ | ------------- | ------------- | ------------------------------------------------------ |
-| Quicksort     | avg: n log n, worst: n^2       | log n         | No            | Worst-case can be made very unlikely by shuffling data |
+| Quicksort     | avg: n log n, worst: n^2       |     log n     | No            | Worst-case can be made very unlikely by shuffling data |
 | Mergesort     | n log n                        |     n         | Yes           |                                                        |
-| Heapsort      | n log n                        |     1         | No            | constant extra space if you use existing array, practically usually slower than QS due to operations                                                       |
-| Insertion     | n^2                            |     1         | Yes           | Although typically bad, works well if elements are almost sorted, for example if k distance away, time becomes nk                                                       |
-| Counting sort | n + k                          |     n + k     | Yes           | Good when k is similar to n, giving n total time (k = size of radix -- the range of values)                                                       |
+| Heapsort      | n log n                        |     1         | No            | constant extra space if you use existing array, practically usually slower than QS due to operations  |
+| Insertion     | n^2                            |     1         | Yes           | Although typically bad, works well if elements are almost sorted, for example if k distance away, time becomes nk |
+| Counting sort | n + k                          |     n + k     | Yes           | Good when k is similar to n, giving n total time (k = size of radix -- the range of values) |
 | Radix sort    | nw                             |     n + w     | Yes           | w = size of words/keys being sorted                                                       |
 
 ### Quicksort
@@ -690,6 +793,7 @@ __Note__: The partition algorithm can algorithm can also be used for _QuickSelec
 
 ```
 
+Unlike QuickSort, this is stable, but takes more memory.
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/MergeSort.java)
 
 ### Heapsort
@@ -706,6 +810,7 @@ Treat parent as (parentIndex*2)+1
 3.4 Go to 3.1
 ```
 
+Given an array, we can sort in-place. In practice, the operations often make this slower than QuickSort.
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/HeapSort.java)
 
 ### Insertion sort
@@ -714,7 +819,7 @@ Treat parent as (parentIndex*2)+1
 Go through each element and swap it with preceding element, as long as it is smaller
 
 ```
-
+Not usually useful, but can be helpful if data is usually sorted or k-sorted.
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/InsertionSort.java)
 
 ### Counting sort
@@ -737,7 +842,7 @@ Go through each element and swap it with preceding element, as long as it is sma
 5. Copy the values back into the main array
 
 ```
-
+Useful if the radix is the same size as the digits, giving an O(n) algorithm.
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/KeyIndexCounting.java)
 
 ### Radix sort
@@ -748,12 +853,13 @@ Go through each element and swap it with preceding element, as long as it is sma
 
 ```
 
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/LsdRadixSort.java)
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/
+RadixSort.java)
 
 ## Graph Algorithms
 
 ### Dijkstra
-Finds the shorted path from a vertex to all other vertices.
+Finds the shortest path from a vertex to all other vertices.
 
 ```java
 1. Set up a distance array
@@ -867,18 +973,20 @@ Space: n
 
 [Source](https://github.com/pekoto/PrincetonA/blob/57270f330468b49bd0570f911ba3ea0dc96f2aa0/PrincetonA/src/com/pekoto/datastructures/BinaryIndexedTree.java)
 
-## Find Missing Element
+## Finding a Missing Element
 Given an array, or two arrays, find the missing element.
+(Variations of this problem crop up a lot.)
 
 There are a number of ways to do this:
 
 1. Just sort the arrays and iterate through them with pointers
 2. If the numbers are sum of 1-n, then use ``` (n(n+1))/2 ``` to get the expected value, then substract actual value
 3. Likewise you can add both arrays and take the difference
-4. You can use a HashMap: go through the smaller array adding counts, then go through the larger array decrementing counts. If the count falls below 0, it is a missing element.
+4. You can use a HashMap: go through the smaller array adding counts, then go through the larger array decrementing counts. If the count falls below 0, it is a missing element. (Useful when more than 1 element is missing.)
 5. You can also XOR everything together:
 
 ```java
+// Using XOR to find missing:
 a1: 1, 2, 3
 a2: 1, 3
 
@@ -889,11 +997,9 @@ a2: 1, 3
 
 ```
 
-If more than one element is missing, again consider using a HashMap with counts. 
+## Bit Manipulation
 
-## Bitshifting
-
-__GetBit__
+### GetBit
 
 ```java
 public boolean getBit(int n, int bit) {
@@ -906,7 +1012,7 @@ public boolean getBit(int n, int bit) {
 
 ```
 
-__SetBitZero__
+### SetBitZero
 
 ```java
 private int setBitToZero(int n, int bit) {
@@ -922,7 +1028,7 @@ private int setBitToZero(int n, int bit) {
 
 ```
 
-__SetBitOne__
+### SetBitOne
 
 ```java
 private int setBitToOne(int n, int bit) {
@@ -966,10 +1072,11 @@ E.g.,
 * Right shifting will divide by 2
 
 ## Sliding Window
+0. If required, set up a map, etc., that can be used to check if your condition is fulfilled. E.g., number of each char, etc.
 1. Set up start
 2. Set up a loop with end
 3. Set up a map to store counts
-4. Use end to update your counts
+4. Use end to update your count
 5. If your condition is violated, update start until it is valid again (e.g., have 0 unique character left, end-start matches len n, etc.)
 6. Now your condition is guaranteed to hold, so check if you have a new max, etc.
 
@@ -984,7 +1091,7 @@ E.g.,
 6. All characters same
 7. Whitespace
 8. If parsing, what if the token is contained as part of the element we wanted to parse out (e.g., string split by spaces, but name has a space in it)
-9. Last part not processed (e.g., imagine calculator app -- it ends in a number and no operator, do you still process this last number?)
+9. Last part not processed (e.g., imagine calculator app -- it ends in a number and no operator, did you remember to process this last number?)
 10. Creating a new string every time instead of using `StringBuffer`
 
 ### Numbers
@@ -992,9 +1099,9 @@ E.g.,
 2. Negatives
 3. MAX_VALUE (2^31-1 / 2^63-1)
 4. -MIN_VALUE
-5. If we have a max that is not MAX_VALUE, then max-1, max, max+1
+5. If we have a max that is not MAX_VALUE, then max-1, max, max+1. E.g, if max = 10, check 9, 10, 11.
 
-### Arrays/Collections or Streams
+### Arrays/Collections/Streams
 1. Null
 2. Empty
 3. Length 1
@@ -1022,8 +1129,8 @@ E.g.,
 2.1 Think about the return type -- is an int big enough to return what we want?
 
 #### 3. Start writing test cases
-(Test case format: No.) Input (expected output): T/F (passes or fails)
-E.g., 1. Banana (3): T (Test case 1, banana, should return 3, true -- does pass)
+(Test case format: No. Input (expected): T/F (actual)
+E.g., 1. Banana (3): T (Test case 1, banana, should return 3, true -- does return 3)
 
 ##### 3.1 Normal/most important cases
 3.1.1 True/false cases (eg., no A’s, 3 A’s)
@@ -1055,90 +1162,8 @@ E.g., 1. Banana (3): T (Test case 1, banana, should return 3, true -- does pass)
 ### Decouple Objects
 Test coupled objects individually. For example, if the code uses a random number generator, test the random number generator separately. For example, check that it gives a range of values, doesn't give consecutive sequences.
 
-### Big Data
-How would you verify test cases that are so large there is no previous known answer? E.g., count all A's in crawled internet index.
-You could use statistics -- estimate how common A's are, get avg. number of A's on a single page, then multiply by the number of pages scanned and see if your answer is close.
-
-## Powers of 2
-
-| x  | 2^x  | 
-| -- | ---- |
-| 0  | 1    | 
-| 1  | 2    | 
-| 2  | 4    | 
-| 3  | 8    | 
-| 4  | 16   | 
-| 5  | 32   |
-| 6  | 64   |
-| 7  | 128  |
-| 8  | 256  |
-| 9  | 512  |
-| 10 | 1024 |
-
-
-### Estimating
-Recall (x^n)*(x^m) = x^n+m.
-E.g., 2^2 * 2*3 = 4 * 8 = 32 = 2^5
-
-So, to estimate powers of 2, find the lower numbers and multiple them together.
-
-For example, 2^20 = ?
-2^10 ~= 1000 > 10*2 = 20, so 1000*1000 = 1,000,000 (actual 1,048,576)
-
-### Summing
-The sum of total powers of 2 is 2^(n+1)-1
-
-E.g., Sum of 2^3 = 2 + 4 + 8 = 15 = (2^4)-1.
-
-Note that this is the same as the nodes in a binary tree. Useful for calculating recursion call sizes.
-
-(What if we had 2^31 in an array of 2^31? It would be 2^62, so should fit in long).
-
-### Notable Numbers
-
-| 2^x          | Value              | Comment                               |
-| ------------ | ------------------ | ------------------------------------- |
-| 2^31-1 BITS  | Integer.MAX_VALUE  | About 2 billion                       |
-| 2^63-1 BITS  | Long.MAX_VALUE     | 9 quintillion something...            | 
-| 2^10         | KB                 | ~1,000 bytes)                         |
-| 2^20         | MB                 | ~1,000,000 bytes/~1000KB              |
-| 2^30         | GB                 | ~1,000,000,000 bytes/~1000MB          |
-| 2^40         | TB                 | ~1,000,000,000,000 bytes/~1000GB      |
-
-Using a Bit Array, we could store around 2^31 (about 2 billion values) true/false values in a single int.
-We could use an array of 10 values to store 2 billion * 10 true/false values, etc.
-Useful when tinking about system design.
-
-## Misc
-
-### Sum of 1...n
-
-``` 
-n(n+1)/2
-
-E.g., 1...4 
-= 1 + 2 + 3 + 4 = 10
-= 4(5)/2 = 20/2 = 2
-```
-
-This is useful because it reduces to n^2 when working out runtimes.
-
-```java
-for(int i = 0; i < n; i++) {
-    for(int j = 0; j < i; j++) {
-         ...
-    }
-}
-```
-
-How many times does j run? 0, 1, 2...n times. Therefore the time sums to an n^2 time.
-
-### Log
-The inverse power function.
-
-log(2)8 = 3 because 2^3 = 8
-
-I.e., 2 to the power what makes 8.
+### Testing Big Data
+How would you verify test cases that are so large there is no previous known answer? E.g., count all A's in crawled internet index. Well you could use statistics -- estimate how common A's are, get avg. number of A's on a single page, then multiply by the number of pages scanned and see if your answer is close.
 
 ## Calculator/Stack parsing
 When we need to parse an expression, we usually use a stack. Dijkstra suggests have a number and operator stack:
