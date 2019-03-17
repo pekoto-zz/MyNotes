@@ -1,7 +1,5 @@
 # Problem Recognition Patterns (in progress)
 
-## TOC
-
 - [Approaching Problems](#approaching-problems)
   * [Basic Steps](#basic-steps)
   * [Misc. Tips](#misc-tips)
