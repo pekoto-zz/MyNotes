@@ -1,6 +1,7 @@
 # Problem Recognition Patterns (in progress)
 
 ## TOC
+
 - [Approaching Problems](#approaching-problems)
   * [Basic Steps](#basic-steps)
   * [Misc. Tips](#misc-tips)
@@ -32,10 +33,10 @@
 - [Graph Algorithms](#graph-algorithms)
   * [Dijkstra](#dijkstra)
   * [Topological Sort](#topological-sort)
-- [Union-Find (Disjoint Set)](#union-find--disjoint-set-)
-- [Minimum Spanning Tree](#minimum-spanning-tree)
-- [Segment Tree](#segment-tree)
-- [Binary Indexed Tree](#binary-indexed-tree)
+  * [Union-Find (Disjoint Set)](#union-find--disjoint-set-)
+  * [Minimum Spanning Tree](#minimum-spanning-tree)
+  * [Segment Tree](#segment-tree)
+  * [Binary Indexed Tree](#binary-indexed-tree)
 - [Algorithm Patterns](#algorithm-patterns)
   * [Finding a Missing Element](#finding-a-missing-element)
   * [Sliding Window](#sliding-window)
@@ -755,7 +756,7 @@ Time: V+E
 
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/TopologicalSort.java)
 
-## Union-Find (Disjoint Set)
+### Union-Find (Disjoint Set)
 
 Used to check if two components are connected together.
 
@@ -780,7 +781,7 @@ Space: O(n)
 
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/UnionFind.java)
 
-## Minimum Spanning Tree
+### Minimum Spanning Tree
 The tree with the minimum weight that touches every vertex in a graph.
 If all weights are unique, then there will be 1 MST, otherwise there may be multiple.
 An MST must have vertices-1 edges.
@@ -807,7 +808,7 @@ Space e
 
 [Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/datastructures/MinimumSpanningTreeLazyPrim.java)
 
-## Segment Tree
+### Segment Tree
 Holds intervals in a tree structure.
 Can use used for range sum queries.
 
@@ -816,7 +817,7 @@ Space: n (I think it's 2-4n?)
 
 [Source](https://github.com/pekoto/PrincetonA/blob/bb669e55523b73b46f62b003adb196b392385901/PrincetonA/src/com/pekoto/challenges/RangeSumSegmentTree.java)
 
-## Binary Indexed Tree
+### Binary Indexed Tree
 Like a segement tree. Used for quick range sum queries.
 
 Time: n log n to build, n to update, log n to query
