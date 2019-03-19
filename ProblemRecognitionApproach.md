@@ -267,6 +267,10 @@ __Implementing maths operations__
 
 If you have to reimplement a mathematical operation without using operators, you will probably have to use bit manipulation. Break down the basics of the operation to work out what is going on with the numbers, and then think about how you would replicate that using bitwise operators.
 
+__Consider pivot/merge__
+
+Can you use the pivot selection algorithm from Quicksort of the merge algorithm from merge sort? For example, consider Quickselect and Squares of sorted array problems.
+
 ### Optimization Techniques
 * Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
 * Do you need to use O(1) space? Does sorting the data help?
