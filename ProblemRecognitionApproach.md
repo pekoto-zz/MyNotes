@@ -274,6 +274,9 @@ Can you use the pivot selection algorithm from Quicksort of the merge algorithm 
 __DFSing through a matrix__
 When DFSing through a matrix, remember to mark cells visited to stop from revisiting them.
 
+__Searching for sums in arrays__
+Does it help to take a cumulative sum and then subtract indices?
+
 ### Optimization Techniques
 * Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
 * Do you need to use O(1) space? Does sorting the data help?
