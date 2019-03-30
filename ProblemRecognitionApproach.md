@@ -448,8 +448,7 @@ Useful if the radix is the same size as the digits, giving an O(n) algorithm.
 
 ```
 
-[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/
-RadixSort.java)
+[Source](https://github.com/pekoto/PrincetonA/blob/master/PrincetonA/src/com/pekoto/algorithms/RadixSort.java)
 
 ## String processing
 
