@@ -289,6 +289,10 @@ __DFSing from target__
 
 When DFSing through every cell in a matrix, instead of checking if every cell can reach the target, can you DFS from the target instead? For example, the Pacific-Atlantic Water Flow problem, you can DFS from the top and sides, giving you an O((n\*m)(n+m)) runtime.
 
+__Is it a graph problem?__
+
+Or can it be modelled as a graph problem?
+
 ### Optimization Techniques
 * Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
 * Do you need to use O(1) space? Does sorting the data help?
