@@ -291,7 +291,7 @@ When DFSing through every cell in a matrix, instead of checking if every cell ca
 
 __Is it a graph problem?__
 
-Or can it be modelled as a graph problem?
+Or can it be modelled as a graph problem? If it contains dependencies, a (topological) ordering, relationships, or if you're searching for cycles, the answer may be yes.
 
 ### Optimization Techniques
 * Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
