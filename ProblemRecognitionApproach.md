@@ -443,6 +443,8 @@ Not usually useful, but can be helpful if data is usually sorted or k-sorted.
 
 ```
 
+Counting sort could also be used to find the k most frequent elements. For example, set up an array of buckets that represent the frequency. Then count all of your elements. Add each number to its frequency bucket. If you were counting numbers in an array, this could give you an O(n) algorithm -- just set up the buckets (n space), count (n) time, and then check the buckets (n).
+
 </details>
 
 Useful if the radix is the same size as the digits, giving an O(n) algorithm.
