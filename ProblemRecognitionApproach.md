@@ -285,6 +285,10 @@ When DFSing through every cell in a matrix, you will end up with an O(m\*n)^2 ru
 
 You _might_ also be able to do one for notValid, but be careful -- the conditions may not be commutitive.
 
+__DFSing from target__
+
+When DFSing through every cell in a matrix, instead of checking if every cell can reach the target, can you DFS from the target instead? For example, the Pacific-Atlantic Water Flow problem, you can DFS from the top and sides, giving you an O((n\*m)(n+m)) runtime.
+
 ### Optimization Techniques
 * Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
 * Do you need to use O(1) space? Does sorting the data help?
