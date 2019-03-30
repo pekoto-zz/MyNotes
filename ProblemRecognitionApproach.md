@@ -277,6 +277,11 @@ When DFSing through a matrix, remember to mark cells visited to stop from revisi
 __Searching for sums in arrays__
 Does it help to take a cumulative sum and then subtract indices?
 
+__DFSing from every cell in a matrix__
+When DFSing through every cell in a matrix, you will end up with an O(m\*n)^2 runtime. A potential saving is to a use a cache like boolean[][] isValid for each cell. Once searched, if the conditions hold, set `isValid[row][col] = true;`. Then, on subsequent DFSs, you if you reach this cell, you can return immediately. (Be careful where you put the check in the DFS -- it must be after your other conditions hold: row and col are valid, etc.)
+
+You _might_ also be able to do one for notValid, but be careful -- the conditions may not be commutitive.
+
 ### Optimization Techniques
 * Do you need an O(n) runtime? Forget about sorting. Can you store data in a map instead?
 * Do you need to use O(1) space? Does sorting the data help?
